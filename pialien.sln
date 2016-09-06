@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pialien.CSharp.Plugins", "pialien.CSharp.Plugins.csproj", "{45DA21DD-B608-7114-EEA7-37756C1708F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pialien.CSharp", "pialien.CSharp.csproj", "{419BE519-7B57-0321-E465-E57862311E0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pialien.CSharp.Editor", "pialien.CSharp.Editor.csproj", "{B4CE9DE5-7345-DB7E-77B0-1AEFDF70C42E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{45DA21DD-B608-7114-EEA7-37756C1708F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45DA21DD-B608-7114-EEA7-37756C1708F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45DA21DD-B608-7114-EEA7-37756C1708F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45DA21DD-B608-7114-EEA7-37756C1708F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{419BE519-7B57-0321-E465-E57862311E0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{419BE519-7B57-0321-E465-E57862311E0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{419BE519-7B57-0321-E465-E57862311E0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{419BE519-7B57-0321-E465-E57862311E0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4CE9DE5-7345-DB7E-77B0-1AEFDF70C42E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4CE9DE5-7345-DB7E-77B0-1AEFDF70C42E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4CE9DE5-7345-DB7E-77B0-1AEFDF70C42E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4CE9DE5-7345-DB7E-77B0-1AEFDF70C42E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
