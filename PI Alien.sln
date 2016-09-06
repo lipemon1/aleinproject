@@ -1,0 +1,35 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{8D99740D-D32C-5013-6CC2-AEF5D7E753A0}") = "PI Alien", "Assembly-CSharp-firstpass.csproj", "{D03969CB-99D0-36F3-6783-3CD6369AD827}"
+EndProject
+Project("{8D99740D-D32C-5013-6CC2-AEF5D7E753A0}") = "PI Alien", "Assembly-CSharp.csproj", "{ED0CCAB3-B8FC-7C8E-CF51-1C61E65AE411}"
+EndProject
+Project("{8D99740D-D32C-5013-6CC2-AEF5D7E753A0}") = "PI Alien", "Assembly-CSharp-Editor.csproj", "{AF887D6F-A482-8B51-E7F2-8C71B13D8258}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D03969CB-99D0-36F3-6783-3CD6369AD827}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D03969CB-99D0-36F3-6783-3CD6369AD827}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D03969CB-99D0-36F3-6783-3CD6369AD827}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D03969CB-99D0-36F3-6783-3CD6369AD827}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED0CCAB3-B8FC-7C8E-CF51-1C61E65AE411}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED0CCAB3-B8FC-7C8E-CF51-1C61E65AE411}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED0CCAB3-B8FC-7C8E-CF51-1C61E65AE411}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED0CCAB3-B8FC-7C8E-CF51-1C61E65AE411}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF887D6F-A482-8B51-E7F2-8C71B13D8258}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF887D6F-A482-8B51-E7F2-8C71B13D8258}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF887D6F-A482-8B51-E7F2-8C71B13D8258}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF887D6F-A482-8B51-E7F2-8C71B13D8258}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
