@@ -45,7 +45,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\ClickableObject.cs" />
+     <Compile Include="Assets\Scripts\ClickableObjectsManager.cs" />
+     <Compile Include="Assets\Scripts\GameController.cs" />
+     <Compile Include="Assets\Scripts\Inventory.cs" />
+     <Compile Include="Assets\Scripts\InventoryItens.cs" />
      <Compile Include="Assets\Scripts\PlayerBehaviour.cs" />
+     <Compile Include="Assets\Scripts\SpriteOutline.cs" />
+     <None Include="Assets\Standard Assets\Sprite-Outline.shader" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
