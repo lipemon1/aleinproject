@@ -61,9 +61,6 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.Cecil">
-      <HintPath>Library\UnityAssemblies\Mono.Cecil.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="pialien.CSharp.Plugins.csproj">
@@ -72,10 +69,19 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AI Pack\Scripts\DoctorAI.cs" />
+    <Compile Include="Assets\AI Pack\Scripts\SoldierAI.cs" />
+    <Compile Include="Assets\Scripts\ClickableObject.cs" />
+    <Compile Include="Assets\Scripts\ClickableObjectsManager.cs" />
+    <Compile Include="Assets\Scripts\GameController.cs" />
+    <Compile Include="Assets\Scripts\Inventory.cs" />
+    <Compile Include="Assets\Scripts\InventoryItens.cs" />
     <Compile Include="Assets\Scripts\PlayerBehaviour.cs" />
+    <Compile Include="Assets\Scripts\SpriteOutline.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
+    <None Include="Assets\Standard Assets\Sprite-Outline.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
