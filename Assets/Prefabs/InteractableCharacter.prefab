@@ -23,6 +23,7 @@ GameObject:
   - 114: {fileID: 114000011238955282}
   - 114: {fileID: 114000010030965638}
   - 61: {fileID: 61000010443921308}
+  - 114: {fileID: 114000013696586392}
   m_Layer: 0
   m_Name: InteractableCharacter
   m_TagString: Eric
@@ -84,6 +85,69 @@ MonoBehaviour:
   actualDialog: []
   actualBlock: 0
   linhaAtual: 0
+  Blocos:
+  - linhas: []
+    temOpcoesResposta: 0
+    Respostas: []
+    respostaEscolhida: 0
+    justListen: 0
+  - linhas: []
+    temOpcoesResposta: 0
+    Respostas: []
+    respostaEscolhida: 0
+    justListen: 0
+  - linhas: []
+    temOpcoesResposta: 0
+    Respostas: []
+    respostaEscolhida: 0
+    justListen: 0
+  - linhas: []
+    temOpcoesResposta: 0
+    Respostas: []
+    respostaEscolhida: 0
+    justListen: 0
+  - linhas: []
+    temOpcoesResposta: 0
+    Respostas: []
+    respostaEscolhida: 0
+    justListen: 0
+  - linhas: []
+    temOpcoesResposta: 0
+    Respostas: []
+    respostaEscolhida: 0
+    justListen: 0
+  - linhas: []
+    temOpcoesResposta: 0
+    Respostas: []
+    respostaEscolhida: 0
+    justListen: 0
+  - linhas: []
+    temOpcoesResposta: 0
+    Respostas: []
+    respostaEscolhida: 0
+    justListen: 0
+  - linhas: []
+    temOpcoesResposta: 0
+    Respostas: []
+    respostaEscolhida: 0
+    justListen: 0
+  - linhas: []
+    temOpcoesResposta: 0
+    Respostas: []
+    respostaEscolhida: 0
+    justListen: 0
+--- !u!114 &114000013696586392
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012949456242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b30f640b10486b4ea73f57fc97c4758, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myDescription: Meu nome
 --- !u!212 &212000010246193560
 SpriteRenderer:
   m_ObjectHideFlags: 1

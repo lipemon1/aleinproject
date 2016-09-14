@@ -91,9 +91,12 @@
     <Compile Include="Assets\Scripts\Inventory.cs" />
     <Compile Include="Assets\Scripts\InventoryItens.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
-    <Compile Include="Assets\Scripts\PlayerBehaviour.cs" />
-    <Compile Include="Assets\Scripts\SphereGizmos.cs" />
-    <Compile Include="Assets\Scripts\SpriteOutline.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Util\MouseOverController.cs" />
+    <Compile Include="Assets\Scripts\Util\MyText.cs" />
+    <Compile Include="Assets\Scripts\Util\PositionRelativeToCursor.cs" />
+    <Compile Include="Assets\Scripts\Util\SphereGizmos.cs" />
+    <Compile Include="Assets\Scripts\Util\SpriteOutline.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />

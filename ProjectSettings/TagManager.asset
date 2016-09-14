@@ -9,6 +9,7 @@ TagManager:
   - DialogManager
   - Eric
   - Mulher
+  - Mouse Over Text
   layers:
   - Default
   - TransparentFX

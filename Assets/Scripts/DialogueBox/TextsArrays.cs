@@ -1,12 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class TextsArrays : MonoBehaviour
 {
+    [System.Serializable]
+    public class BlocoFalas
+    {
+        public string[] linhas;// linhas de dialogo do bloco de falas
+        public bool temOpcoesResposta; // se esse bloco de falas apresenta opcoes de resposta
+        public string[] Respostas;  // oções de resposta
+        //public int linhaAtual;        // linha atual das falas
+        public int respostaEscolhida; // qual foi a resposta escolhida pelo jogador 
+        public bool justListen; // bloco onde o jogador só ouve, não fala nada
+        public BlocoFalas()
+        {
+            justListen = true;
+            temOpcoesResposta = false;
+        }
+
+    }
 
     public string[] actualDialog;
     public int actualBlock = 0; // o sistema de dialogos contera 'blocos' de textos para cada personagem, sendo alterados dependendo do momento do dialogo no jogo
     public int linhaAtual = 0;
+
+    public BlocoFalas[] Blocos = new BlocoFalas[10];
 
     int idPersonagem; // id do personagem a qual as falas pertencem
 
@@ -15,11 +34,25 @@ public class TextsArrays : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if(gameObject.tag == "Player")
+        UpdateCharacter();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    /// <summary>
+    /// Seta as falas corretas para o personagem a qual esse script esta atribuido, atravez da tag
+    /// </summary>
+    void UpdateCharacter()
+    {
+        if (gameObject.tag == "Player")
         {
-            idPersonagem = Characters.player.id;            
+            idPersonagem = Characters.player.id;
         }
-        else if(gameObject.tag == "Eric")
+        else if (gameObject.tag == "Eric")
         {
             idPersonagem = Characters.eric.id;
         }
@@ -32,14 +65,94 @@ public class TextsArrays : MonoBehaviour
             idPersonagem = Characters.filha.id;
         }
 
+        switch (idPersonagem)
+        {
+            case (int)Characters.Ids.Player:
+                DialogosPlayer();
+                break;
+            case (int)Characters.Ids.Eric:
+                DialogosEric();
+                break;
+            case (int)Characters.Ids.Mulher:
+                DialogosMulher();
+                break;
+            case (int)Characters.Ids.Filha:
+                DialogosFilha();
+                break;
+        }
 
-        UpdateCharacter();
     }
 
-    // Update is called once per frame
-    void Update()
+    #region Init Dialogos Diferentes Personagens
+    void DialogosPlayer()
     {
-        
+        Blocos[0].linhas = new string[]
+        {
+            "O que estou fazendo aqui?",
+            "Me tira desse jogo por favor"
+        };
+        Blocos[0].justListen = true;
+
+        Blocos[1].linhas = new string[]
+        {
+            "Não olha pra mim não! não sei o que fazer"
+        };
+        Blocos[1].justListen = false;
+        AtualizarBlocoAtual();
+    }
+
+    void DialogosEric()
+    {
+        Blocos[0].linhas = new string[]
+        {
+            "Lindo Dia não é?",
+            "Como estás?",
+            "Poderia me fazer um favor?",
+            "Vem aqui pra eu esmagar sua cabeça!"
+        };
+        Blocos[0].justListen = true;
+
+        Blocos[1].linhas = new string[]
+        {
+            "Tira esse canudinho do buraco da gaveta e vem aqui"
+        };
+        Blocos[1].justListen = false;
+
+        AtualizarBlocoAtual();
+    }
+    void DialogosFilha()
+    {
+
+    }
+    void DialogosMulher()
+    {
+        Blocos[0].linhas = new string[]
+         {
+            "CHEIRA MEU CABELO",
+            
+            
+
+         };
+        Blocos[0].justListen = true;
+        AtualizarBlocoAtual();
+    }
+
+    #endregion
+
+    #region Getters and Setters
+
+    void AtualizarBlocoAtual()
+    {
+
+        switch (actualBlock)
+        {
+            case 0:
+                setActualText(Blocos[0].linhas);
+                break;
+            case 1:
+                setActualText(Blocos[1].linhas);
+                break;
+        }
     }
     /// <summary>
     /// Pega a frase atual do bloco de dialogos para ser mostrada na tela
@@ -52,6 +165,7 @@ public class TextsArrays : MonoBehaviour
     public void setDialogBlock(int value)
     {
         actualBlock = value;
+        AtualizarBlocoAtual();
     }
 
     void setActualText(string[] newStrings)
@@ -72,7 +186,7 @@ public class TextsArrays : MonoBehaviour
 
     public bool GetEndTalking()
     {
-        if(linhaAtual == actualDialog.Length - 1)
+        if (linhaAtual == actualDialog.Length - 1)
         {
             return true;
         }
@@ -81,124 +195,5 @@ public class TextsArrays : MonoBehaviour
             return false;
         }
     }
-
-    void UpdateCharacter()
-    {        
-        switch (idPersonagem)
-        {
-            case (int)Characters.Ids.Player:
-                DialogosPlayer();
-                break;
-            case (int)Characters.Ids.Eric:
-                DialogosEric();
-                break;
-            case (int)Characters.Ids.Mulher:
-                DialogosMulher();
-                break;
-            case (int)Characters.Ids.Filha:
-                DialogosFilha();
-                break;
-        }
-        
-    }
-    void DialogosPlayer()
-    {
-       
-        
-        switch (actualBlock)
-        {
-            
-            case 0:
-                texts = new string[]
-                {
-                    "O que eu faço aqui?",
-                    "Me tira desse jogo por favor."
-                };
-                setActualText(texts);
-                break;
-
-            case 1:
-                texts = new string[]
-                {
-                    "Não olha pra mim não, da um jeito nisso."
-                };
-                setActualText(texts);
-                break;
-            case 2:
-                texts = new string[]
-                {
-                    "Ia Ia Ôoooooo..."
-                };
-                setActualText(texts);
-                break;
-
-            default:
-                texts = new string[]
-                {
-                "Hey, Não olher pra mim, dê um jeito de resolver sozinho"
-                };
-                setActualText(texts);
-                break;
-        }
-    }
-    void DialogosEric()
-    {
-        string[] texts;
-        switch (actualBlock)
-        {
-            case 0:
-                texts = new string[]
-                {
-                    "Lindo Dia não é?",
-                    "Como estás?",                    
-                    "Poderia me fazer um favor?",
-                    "Vem aqui pra eu esmagar sua cabeça!"
-                };
-                setActualText(texts);
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-
-
-            default:
-                break;
-        }
-    }
-    void DialogosFilha()
-    {
-
-    }
-    void DialogosMulher()
-    {
-        switch (actualBlock)
-        {
-
-            case 0:
-                texts = new string[]
-                {
-                    "Amor, pega um copo de água na cozinha pra mim, por favor?"
-                };
-                setActualText(texts);
-                break;
-
-            case 1:
-                texts = new string[]
-                {
-                    "Não olha pra mim não, da um jeito nisso."
-                };
-                setActualText(texts);
-                break;
-
-        }
-    }
+    #endregion
 }

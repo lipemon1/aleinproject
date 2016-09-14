@@ -86,10 +86,11 @@ public class DialogueBoxManager : MonoBehaviour
 
                 case (int)Speakers.Player: // player
                     texts = Player.GetComponent<TextsArrays>();
-                    texts.setDialogBlock(Random.Range(0, 2));
+                                                            
                     actualText = texts.GetActualPhrase();
                     textTyper.StartToSpeak();
                     break;
+
                 case (int)Speakers.Other: // outro personagem
 
                     texts = otherCharacterDialog.textsArrays;
@@ -100,6 +101,7 @@ public class DialogueBoxManager : MonoBehaviour
                     }
                     else
                     {
+                        
                         actualText = texts.GetActualPhrase();
                         textTyper.StartToSpeak();
                     }
