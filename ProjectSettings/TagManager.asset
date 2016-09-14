@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Fire
   - clickable
+  - DialogManager
+  - Eric
+  - Mulher
   layers:
   - Default
   - TransparentFX

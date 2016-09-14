@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{ED0CCAB3-B8FC-7C8E-CF51-1C61E65AE411}</ProjectGuid>
+    <ProjectGuid>{EA1EC775-FA51-FED0-D538-50D8C3E026D2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -49,6 +49,10 @@
      <Compile Include="Assets\AI Pack\Scripts\SoldierAI.cs" />
      <Compile Include="Assets\Scripts\ClickableObject.cs" />
      <Compile Include="Assets\Scripts\ClickableObjectsManager.cs" />
+     <Compile Include="Assets\Scripts\DialogueBox\DialogueBoxInfo.cs" />
+     <Compile Include="Assets\Scripts\DialogueBox\DialogueBoxManager.cs" />
+     <Compile Include="Assets\Scripts\DialogueBox\TextTyper.cs" />
+     <Compile Include="Assets\Scripts\DialogueBox\TextsArrays.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\Inventory.cs" />
      <Compile Include="Assets\Scripts\InventoryItens.cs" />
@@ -67,7 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{D03969CB-99D0-36F3-6783-3CD6369AD827}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+      <Project>{CDB7F92C-AABA-D786-6393-7B40CFBE35FD}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

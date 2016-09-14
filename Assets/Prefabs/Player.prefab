@@ -39,6 +39,7 @@ GameObject:
   - 4: {fileID: 4000012697389016}
   - 50: {fileID: 50000013454199326}
   - 114: {fileID: 114000012523501140}
+  - 114: {fileID: 114000014100605824}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -142,6 +143,19 @@ MonoBehaviour:
   walking: 0
   PlayerMesh: {fileID: 1000010502724252}
   facingRight: 0
+--- !u!114 &114000014100605824
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013783199706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb5918cf711b8844a9b6e2b741ec8047, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: Viktor
+  characterImg: {fileID: 0}
 --- !u!212 &212000013069739268
 SpriteRenderer:
   m_ObjectHideFlags: 1

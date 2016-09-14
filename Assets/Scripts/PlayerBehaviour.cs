@@ -33,6 +33,7 @@ public class PlayerBehaviour : MonoBehaviour {
     void Start () {
 
         gControllerScript = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+
         onMobile = gControllerScript.GetOnMobile();
 
         walking = true;
@@ -47,11 +48,10 @@ public class PlayerBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 
-
-
         // Condição para verificar se estamos jogando no pc ou no celular
         //Caso estejamos no pc o jogo recebe input do teclado
         //se estiver no mobile, receberá input do joystick na tela
+        
         if (!onMobile) {
             directionX = Input.GetAxis("Horizontal"); //input do teclado
         }
@@ -63,7 +63,7 @@ public class PlayerBehaviour : MonoBehaviour {
         //Código para pegar quando o jogador apertar shift esquerdo para correr
         if(Input.GetKeyDown(KeyCode.LeftShift))
         {
-            //ToggleRun(); //função de correr
+            //ToggleRun(); //função de correr            
             running = true;
             PlayerAnimator.SetBool("Running", true);
             actualSpeed *= runMultiplier;
@@ -118,8 +118,7 @@ public class PlayerBehaviour : MonoBehaviour {
     }
 
     public void Flip()
-    {
-        
+    {        
         facingRight = !facingRight;
         PlayerMesh.GetComponent<SpriteRenderer>().flipX = !facingRight;
     }
