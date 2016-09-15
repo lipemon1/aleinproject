@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5f9fe3274c4d304f9f51e5728895219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  letterPause: 0.1
+  letterPause: 0.03
   dialogText: {fileID: 114000013170382340}
 --- !u!114 &114000010879740440
 MonoBehaviour:
@@ -198,11 +198,12 @@ MonoBehaviour:
   playerDialog:
     name: 
     characterIcon: {fileID: 0}
+    textsArrays: {fileID: 0}
   otherCharacterDialog:
     name: 
     characterIcon: {fileID: 0}
-  otherCharacterTextsArray: {fileID: 0}
-  actualSpeaker: 0
+    textsArrays: {fileID: 0}
+  actualSpeaker: 1
 --- !u!114 &114000011227663468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -224,7 +225,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 39407911c6033044daddf99a32e74a85, type: 3}
-    m_FontSize: 22
+    m_FontSize: 26
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -290,7 +291,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 39407911c6033044daddf99a32e74a85, type: 3}
-    m_FontSize: 21
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -494,8 +495,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 82, y: 74}
-  m_SizeDelta: {x: 163, y: 134}
+  m_AnchoredPosition: {x: 82, y: 88.299995}
+  m_SizeDelta: {x: 163, y: 162.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000011394089816
 RectTransform:
@@ -567,8 +568,8 @@ RectTransform:
   m_RootOrder: 3
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -51.7, y: 24.8}
-  m_SizeDelta: {x: 93.2, y: 44.3}
+  m_AnchoredPosition: {x: -64.9, y: 31.1}
+  m_SizeDelta: {x: 119.6, y: 56.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000013280301872
 RectTransform:
@@ -585,8 +586,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 81, y: -67.9}
-  m_SizeDelta: {x: 150.8, y: 123}
+  m_AnchoredPosition: {x: 81, y: -77}
+  m_SizeDelta: {x: 151, y: 142}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000013711940976
 RectTransform:
@@ -607,8 +608,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 475, y: 76}
-  m_SizeDelta: {x: 779, y: 146}
+  m_AnchoredPosition: {x: 475, y: 90}
+  m_SizeDelta: {x: 779, y: 175}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &225000012648045758
 CanvasGroup:

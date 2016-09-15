@@ -17,19 +17,16 @@ public class TextTyper : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-
-    }
     /// <summary>
     /// Função que dirá para o script começar a escrever o texto na caixa de dialogo
     /// </summary>
     public void StartToSpeak()
     {
+        StopCoroutine("TypeText");
         dialogText.text = "";
         StartCoroutine(TypeText());
+        
 
     }
 

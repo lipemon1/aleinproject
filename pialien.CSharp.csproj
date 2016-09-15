@@ -87,13 +87,16 @@
     <Compile Include="Assets\Scripts\DialogueBox\DialogueBoxManager.cs" />
     <Compile Include="Assets\Scripts\DialogueBox\TextTyper.cs" />
     <Compile Include="Assets\Scripts\DialogueBox\TextsArrays.cs" />
+    <Compile Include="Assets\Scripts\DoorBehaviour.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\Inventory.cs" />
     <Compile Include="Assets\Scripts\InventoryItens.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Util\DontDestroyOnLoadScript.cs" />
     <Compile Include="Assets\Scripts\Util\MouseOverController.cs" />
     <Compile Include="Assets\Scripts\Util\MyText.cs" />
+    <Compile Include="Assets\Scripts\Util\OutlineWhenCloseToPlayer.cs" />
     <Compile Include="Assets\Scripts\Util\PositionRelativeToCursor.cs" />
     <Compile Include="Assets\Scripts\Util\SphereGizmos.cs" />
     <Compile Include="Assets\Scripts\Util\SpriteOutline.cs" />

@@ -20,9 +20,7 @@ public class MouseOverController : MonoBehaviour {
             Debug.LogWarning("falta objeto Canvas Follow Mouse na cena");
             textDescription = GameObject.FindGameObjectWithTag("Mouse Over Text").GetComponent<Text>();
             textDescription.text = "";
-        }
-
-        
+        }        
 	}
 
     public void UpdateText(string newText)

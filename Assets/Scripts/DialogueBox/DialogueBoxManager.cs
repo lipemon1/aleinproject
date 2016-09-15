@@ -9,7 +9,7 @@ public class DialogueBoxManager : MonoBehaviour
     {
         public string name;
         public Sprite characterIcon;
-        public TextsArrays textsArrays;        
+        public TextsArrays textsArrays;
     }
 
     [System.Serializable]
@@ -21,7 +21,8 @@ public class DialogueBoxManager : MonoBehaviour
         public Image characterSprite;
     }
 
-    public enum Speakers{
+    public enum Speakers
+    {
         Player,
         Other
     }
@@ -41,15 +42,21 @@ public class DialogueBoxManager : MonoBehaviour
 
     public DialogObjects dialogObjects;
     public DialogPersonas playerDialog;
-    public DialogPersonas otherCharacterDialog;    
+    public DialogPersonas otherCharacterDialog;
 
     public int actualSpeaker = 1; // 'index' de quem esta falando no momento, 0 para o jogador, 1 para o outro personagem
 
-    private TextTyper textTyper;    
+    private TextTyper textTyper;
+
+    public bool isComentary = false;
 
     // Use this for initialization
     void Start()
     {
+        if (gameObject.active == false)
+        {
+            gameObject.SetActive(true);
+        }
         if (gameObject.tag != "DialogManager") // seta a tag se ainda nao possuir
         {
             gameObject.tag = "DialogManager";
@@ -66,7 +73,7 @@ public class DialogueBoxManager : MonoBehaviour
             playerDialog.name = Player.GetComponent<DialogueBoxInfo>().characterName;
             playerDialog.characterIcon = Player.GetComponent<DialogueBoxInfo>().characterImg;
             playerDialog.textsArrays = Player.GetComponent<TextsArrays>();
-        }        
+        }
 
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 
@@ -81,34 +88,53 @@ public class DialogueBoxManager : MonoBehaviour
             startTalk = false;
             Debug.LogWarning("Start to talk asshole");
             TextsArrays texts;
-            switch (actualSpeaker)
+            if (isComentary)
             {
 
-                case (int)Speakers.Player: // player
-                    texts = Player.GetComponent<TextsArrays>();
-                                                            
-                    actualText = texts.GetActualPhrase();
-                    textTyper.StartToSpeak();
-                    break;
+            }
+            else
+            {
+                switch (actualSpeaker)
+                {
 
-                case (int)Speakers.Other: // outro personagem
+                    case (int)Speakers.Player: // player
+                        texts = Player.GetComponent<TextsArrays>();
 
-                    texts = otherCharacterDialog.textsArrays;
-
-                    if (texts.GetEndTalking() == true && finishTalk) // se o personagem ja esta na ultima frase e ja acabou de falar
-                    {
-                        Debug.Log("Não há mais frases");
-                    }
-                    else
-                    {
-                        
                         actualText = texts.GetActualPhrase();
                         textTyper.StartToSpeak();
-                    }
-                    break;
+                        break;
 
+                    case (int)Speakers.Other: // outro personagem
+
+                        texts = otherCharacterDialog.textsArrays;
+
+                        if (texts.GetEndTalking() == true && finishTalk) // se o personagem ja esta na ultima frase e ja acabou de falar
+                        {
+                            Debug.Log("Não há mais frases");
+                        }
+                        else
+                        {
+                            actualText = texts.GetActualPhrase();
+                            textTyper.StartToSpeak();
+                        }
+                        break;
+
+                }
             }
         }
+    }
+
+    public void MakeComentary(string texto)
+    {
+        dialogObjects.characterSprite.sprite = playerDialog.characterIcon;
+        dialogObjects.CharacterNameText.text = playerDialog.name;
+
+        textTyper.dialogText.text = "";
+        startTalk = true;
+        inTalk = true; // fala para o dialog manager que está em um dialogo
+        actualText = texto;
+        textTyper.StartToSpeak();
+        Debug.LogWarning("MakeComentary()");
     }
 
     void ManagerTalkVariables()
@@ -135,33 +161,44 @@ public class DialogueBoxManager : MonoBehaviour
         }
     }
 
-    public void OkButtonPressed() 
+    public void OkButtonPressed()
     {
         Debug.LogWarning("OK PRESSED");
         startTalk = true;
-        if (actualSpeaker == (int)Speakers.Player)
+
+        if (isComentary)
         {
-            if(playerDialog.textsArrays.GetEndTalking() == false)
+            isComentary = false;
+            gameController.SetOnDialogue(false);
+            finishTalk = false;
+            Hide();
+        }
+        else
+        {
+            if (actualSpeaker == (int)Speakers.Player)
             {
-                playerDialog.textsArrays.NextLine();
-                finishTalk = false;
+                if (playerDialog.textsArrays.GetEndTalking() == false)
+                {
+                    playerDialog.textsArrays.NextLine();
+                    finishTalk = false;
+                }
+            }
+            else if (actualSpeaker == (int)Speakers.Other)
+            {
+                if (otherCharacterDialog.textsArrays.GetEndTalking() == false)
+                {
+                    otherCharacterDialog.textsArrays.NextLine();
+                    finishTalk = false;
+                }
+                else
+                {
+                    Hide();
+                    gameController.SetOnDialogue(false);
+                }
             }
         }
-        else if(actualSpeaker == (int)Speakers.Other)
-        {
-            if (otherCharacterDialog.textsArrays.GetEndTalking() == false)
-            {
-                otherCharacterDialog.textsArrays.NextLine();
-                finishTalk = false;
-            }
-            else
-            {
-                Hide();
-                gameController.SetOnDialogue(false);
-            }
-        }
-        
-        
+
+
     }
 
     void Hide()

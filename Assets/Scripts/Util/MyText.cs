@@ -6,6 +6,13 @@ public class MyText : MonoBehaviour {
     public string myDescription;
     private MouseOverController textController;
 
+    public bool TemComentarioPlayer = false;
+
+    public string[] Comentarios = new string[]
+    {
+        "Não preciso fazer nada la em cima"
+    };
+
 	// Use this for initialization
 	void Start () {
         //textController = GameObject.FindGameObjectWithTag("Text Controller").GetComponent<MouseOverController>();
@@ -20,6 +27,14 @@ public class MyText : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    void OnMouseDown()
+    {
+        if(TemComentarioPlayer == true)
+        {
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().FazerComentario(Comentarios[0]);
+        }
+    }
 
     void OnMouseEnter()
     {

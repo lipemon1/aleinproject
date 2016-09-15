@@ -1,7 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
+
+    enum Cenas
+    {
+        ChegaEmCasa,
+        SalaDeCasa,
+        Cozinha,
+        UpStairs,
+        QuartoDaFilha
+    }
 
     [Tooltip("Indica se esta rodando no Android ")]
     public bool onMobile;
@@ -11,6 +22,12 @@ public class GameController : MonoBehaviour {
     public bool ShowDescriptionByMouse = true;
 
     public GameObject mobileHud;
+
+    public float timeToFade;
+    public GameObject FadePanel;
+
+    public int cenaAtual;
+    PlayerBehaviour playerBehav;
 
     void Awake()
     {
@@ -22,6 +39,8 @@ public class GameController : MonoBehaviour {
 
         if (gameObject.tag != "GameController")
             gameObject.tag = "GameController";
+
+        playerBehav = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehaviour>();
 
         if(!onMobile && ShowDescriptionByMouse)
         {
@@ -38,6 +57,10 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        if(cenaAtual == (int)Cenas.ChegaEmCasa)
+        {
+            FazerComentario("Finalmente em casa...");
+        }
         if (onMobile)
         {
             ShowMobileHud();
@@ -46,19 +69,109 @@ public class GameController : MonoBehaviour {
             HideMobileHud();
             
         }
-
-
+        UpdateInfoScenes();
     }
-	
-	// Update is called once per frame
-	void Update () {
-        if (onMobile) {
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (onMobile)
+        {
             if (onDialogue)
                 HideMobileHud();
             else
                 ShowMobileHud();
         }
+        UpdateInfoScenes();
+
+        ManageScenes();
+        
     }
+
+    public void FazerComentario(string texto)
+    {
+        DialogueBoxManager dialogManager = GameObject.FindGameObjectWithTag("DialogManager").GetComponent<DialogueBoxManager>();
+        dialogManager.dialogObjects.DialogText.text = "";
+        dialogManager.actualText = "";
+        dialogManager.isComentary = true;
+        dialogManager.MakeComentary(texto);
+    }
+
+    void ManageScenes()
+    {
+        switch (cenaAtual)
+        {
+            case (int)Cenas.ChegaEmCasa:
+
+                break;
+            case (int)Cenas.SalaDeCasa:
+                break;
+            case (int)Cenas.Cozinha:
+                break;
+            case (int)Cenas.UpStairs:
+                break;
+            case (int)Cenas.QuartoDaFilha:
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Deve ser chamada toda vez que o jogador entra em outra cena para que os valores das variaveis sejam alterados
+    /// </summary>
+    void UpdateInfoScenes()
+    {
+        if(SceneManager.GetActiveScene().name == "Cena1 - ChegadaEmCasa")
+        {
+            cenaAtual = (int)Cenas.ChegaEmCasa;
+        }
+        else if(SceneManager.GetActiveScene().name == "Cena2-DentroDeCasa")
+        {
+            cenaAtual = (int)Cenas.SalaDeCasa;
+        }
+
+        if(cenaAtual == (int)Cenas.ChegaEmCasa ||
+           cenaAtual == (int)Cenas.SalaDeCasa || 
+           cenaAtual == (int)Cenas.Cozinha || 
+           cenaAtual == (int)Cenas.UpStairs ||
+           cenaAtual == (int)Cenas.QuartoDaFilha)
+        {
+            playerBehav.SetCanRun(false);
+            playerBehav.SetCanSneak(false);
+            playerBehav.SetCanAttack(false);
+        }
+
+
+    }
+
+    public void ChangeToScene(string sceneName)
+    {
+        FadePanel.GetComponent<CanvasGroup>().blocksRaycasts = false; //this prevents the UI element to receive input events
+        //FadePanel.GetComponent<CanvasGroup>().alpha = 0;
+
+        StartCoroutine(FadeTo(1.0f, timeToFade));
+
+        StartCoroutine(GotToScene(sceneName));
+
+    }
+    IEnumerator GotToScene(string name)
+    {
+        yield return new WaitForSeconds(timeToFade);
+
+        SceneManager.LoadScene(name);
+    }
+
+    IEnumerator FadeTo(float aValue, float aTime)
+    {
+        
+        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
+        {
+            Color newColor = new Color(0, 0, 0, Mathf.Lerp(0, aValue, t));
+            FadePanel.GetComponent<Image>().color = newColor;
+            yield return null;
+        }
+    }
+
+    
 
     public void SetOnDialogue(bool value)
     {

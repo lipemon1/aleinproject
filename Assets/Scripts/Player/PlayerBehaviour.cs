@@ -29,6 +29,10 @@ public class PlayerBehaviour : MonoBehaviour {
 
     public bool facingRight;
 
+    public bool canRun;
+    public bool canSneak;
+    public bool canAttack;
+
     // Use this for initialization
     void Start () {
 
@@ -121,6 +125,19 @@ public class PlayerBehaviour : MonoBehaviour {
     {        
         facingRight = !facingRight;
         PlayerMesh.GetComponent<SpriteRenderer>().flipX = !facingRight;
+    }
+
+    public void SetCanRun(bool value)
+    {
+        canRun = value;
+    }
+    public void SetCanSneak(bool value)
+    {
+        canSneak = value;
+    }
+    public void SetCanAttack(bool value)
+    {
+        canAttack = value;
     }
 
     /// <summary>

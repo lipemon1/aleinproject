@@ -8,6 +8,7 @@ public class DialogueBoxInfo : MonoBehaviour {
 	public Sprite characterImg;
 	private DialogueBoxManager dialogManager;
 
+
 	// Use this for initialization
 	void Start () {
 		dialogManager = GameObject.FindGameObjectWithTag ("DialogManager").GetComponent<DialogueBoxManager> ();	
@@ -21,6 +22,8 @@ public class DialogueBoxInfo : MonoBehaviour {
 	{
 		Debug.Log("Clicado");
 
+        dialogManager.dialogObjects.DialogText.text = "";
+        dialogManager.actualText = "";
         dialogManager.startTalk = true;
 		dialogManager.SetInTalk (true); // fala para o dialog manager que está em um dialogo
         dialogManager.SetDialogueInfo(this); // passa a referencia desse script

@@ -95,9 +95,20 @@ public class TextsArrays : MonoBehaviour
 
         Blocos[1].linhas = new string[]
         {
-            "Não olha pra mim não! não sei o que fazer"
+            "Finalmente em casa."
         };
         Blocos[1].justListen = false;
+        
+        Blocos[2].linhas = new string[]
+        {
+            "Olá Meninas!"
+        };
+
+        Blocos[3].linhas = new string[]
+        {
+            "Não preciso fazer nada la em cima."
+        };
+
         AtualizarBlocoAtual();
     }
 
@@ -128,9 +139,7 @@ public class TextsArrays : MonoBehaviour
     {
         Blocos[0].linhas = new string[]
          {
-            "CHEIRA MEU CABELO",
-            
-            
+            "CHEIRA MEU CABELO"
 
          };
         Blocos[0].justListen = true;
