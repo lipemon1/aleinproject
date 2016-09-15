@@ -31,6 +31,7 @@ public class DialogueBoxManager : MonoBehaviour
     public bool finishTalk;
     public bool startTalk;
     public bool justListen; // para dialogos onde o jogador nao precisará responder nada, só "ouvir" o que o outro personagem tem a dizer
+    public bool isComentary = false;
 
     public string actualText;
 
@@ -48,7 +49,7 @@ public class DialogueBoxManager : MonoBehaviour
 
     private TextTyper textTyper;
 
-    public bool isComentary = false;
+    
 
     // Use this for initialization
     void Start()
@@ -83,10 +84,15 @@ public class DialogueBoxManager : MonoBehaviour
     void Update()
     {
         ManagerTalkVariables();
+        HandleSpeak();
+    }
+
+    void HandleSpeak()
+    {
         if (startTalk)
         {
             startTalk = false;
-            Debug.LogWarning("Start to talk asshole");
+
             TextsArrays texts;
             if (isComentary)
             {
@@ -94,6 +100,7 @@ public class DialogueBoxManager : MonoBehaviour
             }
             else
             {
+                Debug.LogWarning("Entrei no else");
                 switch (actualSpeaker)
                 {
 
@@ -124,17 +131,32 @@ public class DialogueBoxManager : MonoBehaviour
         }
     }
 
+
     public void MakeComentary(string texto)
     {
         dialogObjects.characterSprite.sprite = playerDialog.characterIcon;
         dialogObjects.CharacterNameText.text = playerDialog.name;
 
+        actualText = "";
+        isComentary = true;
+        finishTalk = false;
+        dialogObjects.DialogText.text = "";
         textTyper.dialogText.text = "";
         startTalk = true;
         inTalk = true; // fala para o dialog manager que está em um dialogo
         actualText = texto;
         textTyper.StartToSpeak();
         Debug.LogWarning("MakeComentary()");
+    }
+
+    public void CharacterSpeak(DialogueBoxInfo infoCharacter)
+    {
+        dialogObjects.DialogText.text = "";
+        actualText = "";
+        startTalk = true;
+        isComentary = false;
+        SetInTalk(true); // fala para o dialog manager que está em um dialogo
+        SetDialogueInfo(infoCharacter);
     }
 
     void ManagerTalkVariables()
@@ -163,8 +185,7 @@ public class DialogueBoxManager : MonoBehaviour
 
     public void OkButtonPressed()
     {
-        Debug.LogWarning("OK PRESSED");
-        startTalk = true;
+
 
         if (isComentary)
         {
@@ -181,6 +202,12 @@ public class DialogueBoxManager : MonoBehaviour
                 {
                     playerDialog.textsArrays.NextLine();
                     finishTalk = false;
+                    startTalk = true;
+                }
+                else
+                {
+                    //Hide();
+                    //gameController.SetOnDialogue(false);
                 }
             }
             else if (actualSpeaker == (int)Speakers.Other)
@@ -189,6 +216,7 @@ public class DialogueBoxManager : MonoBehaviour
                 {
                     otherCharacterDialog.textsArrays.NextLine();
                     finishTalk = false;
+                    startTalk = true;
                 }
                 else
                 {

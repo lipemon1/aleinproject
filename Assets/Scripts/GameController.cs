@@ -3,9 +3,10 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class GameController : MonoBehaviour {
+public class GameController : MonoBehaviour
+{
 
-    enum Cenas
+    public enum Cenas
     {
         ChegaEmCasa,
         SalaDeCasa,
@@ -32,42 +33,46 @@ public class GameController : MonoBehaviour {
     void Awake()
     {
 
-//#if UNITY_ANDROID
-//        onMobile = true;
-//        ShowDescriptionByMouse = false;
-//#endif
+        //#if UNITY_ANDROID
+        //        onMobile = true;
+        //        ShowDescriptionByMouse = false;
+        //#endif
 
         if (gameObject.tag != "GameController")
             gameObject.tag = "GameController";
 
         playerBehav = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehaviour>();
 
-        if(!onMobile && ShowDescriptionByMouse)
+        if (!onMobile && ShowDescriptionByMouse)
         {
             if (Camera.main.GetComponent<MouseOverController>() == false)
             {
                 Camera.main.gameObject.AddComponent<MouseOverController>();
             }
         }
-        else if(onMobile)
+        else if (onMobile)
         {
             ShowDescriptionByMouse = false;
         }
     }
 
-	// Use this for initialization
-	void Start () {
-        if(cenaAtual == (int)Cenas.ChegaEmCasa)
+    // Use this for initialization
+    void Start()
+    {
+
+        if (mobileHud == null)
         {
-            FazerComentario("Finalmente em casa...");
+            mobileHud = GameObject.FindGameObjectWithTag("MobileControll");
         }
+
         if (onMobile)
         {
             ShowMobileHud();
         }
-        else { 
+        else
+        {
             HideMobileHud();
-            
+
         }
         UpdateInfoScenes();
     }
@@ -85,15 +90,13 @@ public class GameController : MonoBehaviour {
         UpdateInfoScenes();
 
         ManageScenes();
-        
+
     }
 
     public void FazerComentario(string texto)
     {
         DialogueBoxManager dialogManager = GameObject.FindGameObjectWithTag("DialogManager").GetComponent<DialogueBoxManager>();
-        dialogManager.dialogObjects.DialogText.text = "";
-        dialogManager.actualText = "";
-        dialogManager.isComentary = true;
+
         dialogManager.MakeComentary(texto);
     }
 
@@ -120,18 +123,18 @@ public class GameController : MonoBehaviour {
     /// </summary>
     void UpdateInfoScenes()
     {
-        if(SceneManager.GetActiveScene().name == "Cena1 - ChegadaEmCasa")
+        if (SceneManager.GetActiveScene().name == "Cena1 - ChegadaEmCasa")
         {
             cenaAtual = (int)Cenas.ChegaEmCasa;
         }
-        else if(SceneManager.GetActiveScene().name == "Cena2-DentroDeCasa")
+        else if (SceneManager.GetActiveScene().name == "Cena2-DentroDeCasa")
         {
             cenaAtual = (int)Cenas.SalaDeCasa;
         }
 
-        if(cenaAtual == (int)Cenas.ChegaEmCasa ||
-           cenaAtual == (int)Cenas.SalaDeCasa || 
-           cenaAtual == (int)Cenas.Cozinha || 
+        if (cenaAtual == (int)Cenas.ChegaEmCasa ||
+           cenaAtual == (int)Cenas.SalaDeCasa ||
+           cenaAtual == (int)Cenas.Cozinha ||
            cenaAtual == (int)Cenas.UpStairs ||
            cenaAtual == (int)Cenas.QuartoDaFilha)
         {
@@ -162,7 +165,7 @@ public class GameController : MonoBehaviour {
 
     IEnumerator FadeTo(float aValue, float aTime)
     {
-        
+
         for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
         {
             Color newColor = new Color(0, 0, 0, Mathf.Lerp(0, aValue, t));
@@ -171,7 +174,7 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    
+
 
     public void SetOnDialogue(bool value)
     {

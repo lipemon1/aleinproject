@@ -20,13 +20,10 @@ public class DialogueBoxInfo : MonoBehaviour {
 
 	void OnMouseDown() // Teste para chamar o dialogo quando clicar nesse personagem
 	{
-		Debug.Log("Clicado");
+		Debug.Log("Clicou em personagem");
 
-        dialogManager.dialogObjects.DialogText.text = "";
-        dialogManager.actualText = "";
-        dialogManager.startTalk = true;
-		dialogManager.SetInTalk (true); // fala para o dialog manager que está em um dialogo
-        dialogManager.SetDialogueInfo(this); // passa a referencia desse script
+        dialogManager.CharacterSpeak(this);
+        
         GetComponent<TextsArrays>().ResetLine();
 	}
 }

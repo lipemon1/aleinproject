@@ -26,7 +26,7 @@ public class TextTyper : MonoBehaviour
         StopCoroutine("TypeText");
         dialogText.text = "";
         StartCoroutine(TypeText());
-        
+        dialogManager.SetInTalk(true);
 
     }
 

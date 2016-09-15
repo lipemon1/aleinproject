@@ -10,6 +10,10 @@ TagManager:
   - Eric
   - Mulher
   - Mouse Over Text
+  - Triggers/Comentarios/EntrouEmCasa
+  - Triggers/Comentarios/ChegandoEmCasa
+  - Triggers/Comentarios/Chegou
+  - MobileControll
   layers:
   - Default
   - TransparentFX

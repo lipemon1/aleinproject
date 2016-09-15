@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="Assets\AI Pack\Scripts\DoctorAI.cs" />
     <Compile Include="Assets\AI Pack\Scripts\SoldierAI.cs" />
+    <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Characters.cs" />
     <Compile Include="Assets\Scripts\ClickableObject.cs" />
     <Compile Include="Assets\Scripts\ClickableObjectsManager.cs" />
@@ -93,6 +94,8 @@
     <Compile Include="Assets\Scripts\InventoryItens.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerBehaviour.cs" />
+    <Compile Include="Assets\Scripts\TriggerBehaviour.cs" />
+    <Compile Include="Assets\Scripts\TriggersComentarios.cs" />
     <Compile Include="Assets\Scripts\Util\DontDestroyOnLoadScript.cs" />
     <Compile Include="Assets\Scripts\Util\MouseOverController.cs" />
     <Compile Include="Assets\Scripts\Util\MyText.cs" />

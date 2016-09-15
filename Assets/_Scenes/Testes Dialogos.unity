@@ -244,7 +244,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b30f640b10486b4ea73f57fc97c4758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myDescription: Garrafa
+  myDescription: Arma
+  TemComentarioPlayer: 1
+  Comentarios:
+  - Bela arma...
 --- !u!1 &762642161 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 9529ecc3d479da5499993355e6c2cb4f, type: 2}

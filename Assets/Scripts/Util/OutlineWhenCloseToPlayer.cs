@@ -33,9 +33,7 @@ public class OutlineWhenCloseToPlayer : MonoBehaviour {
         }
         else
         {
-
             UpdateOutline(false);
-
         }
 	}
     void OnEnable()

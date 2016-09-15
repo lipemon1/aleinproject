@@ -38,6 +38,12 @@ public class PlayerBehaviour : MonoBehaviour {
 
         gControllerScript = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 
+        // adiciona o script TriggeerComentarios ao player caso ja nao o tenha
+        if(GetComponent<TriggersComentarios>() == null)
+        {
+            gameObject.AddComponent<TriggersComentarios>();
+        }
+
         onMobile = gControllerScript.GetOnMobile();
 
         walking = true;
