@@ -14,6 +14,7 @@ TagManager:
   - Triggers/Comentarios/ChegandoEmCasa
   - Triggers/Comentarios/Chegou
   - MobileControll
+  - FadePanel
   layers:
   - Default
   - TransparentFX

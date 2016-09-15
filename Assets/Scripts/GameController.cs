@@ -12,7 +12,9 @@ public class GameController : MonoBehaviour
         SalaDeCasa,
         Cozinha,
         UpStairs,
-        QuartoDaFilha
+        QuartoDaFilha,
+        Cratera, // tela onde o ovni caiu
+        Quarentena
     }
 
     [Tooltip("Indica se esta rodando no Android ")]
@@ -28,7 +30,7 @@ public class GameController : MonoBehaviour
     public GameObject FadePanel;
 
     public int cenaAtual;
-    PlayerBehaviour playerBehav;
+    PlayerBehaviour playerBehav;    
 
     void Awake()
     {
@@ -40,6 +42,10 @@ public class GameController : MonoBehaviour
 
         if (gameObject.tag != "GameController")
             gameObject.tag = "GameController";
+        if(FadePanel == null)
+        {
+            FadePanel = GameObject.FindGameObjectWithTag("FadePanel");
+        }
 
         playerBehav = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehaviour>();
 
@@ -59,7 +65,7 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        StartCoroutine(FadeIn(0.0f, timeToFade));
         if (mobileHud == null)
         {
             mobileHud = GameObject.FindGameObjectWithTag("MobileControll");
@@ -151,7 +157,7 @@ public class GameController : MonoBehaviour
         FadePanel.GetComponent<CanvasGroup>().blocksRaycasts = false; //this prevents the UI element to receive input events
         //FadePanel.GetComponent<CanvasGroup>().alpha = 0;
 
-        StartCoroutine(FadeTo(1.0f, timeToFade));
+        StartCoroutine(FadeOut(1.0f, timeToFade));
 
         StartCoroutine(GotToScene(sceneName));
 
@@ -163,7 +169,7 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene(name);
     }
 
-    IEnumerator FadeTo(float aValue, float aTime)
+    IEnumerator FadeOut(float aValue, float aTime)
     {
 
         for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
@@ -173,9 +179,15 @@ public class GameController : MonoBehaviour
             yield return null;
         }
     }
-
-
-
+    IEnumerator FadeIn(float aValue, float aTime)
+    {
+        for (float t = 0.0f; t < 1f; t += Time.deltaTime / aTime)
+        {
+            Color newColor = new Color(0, 0, 0, Mathf.Lerp(1, aValue, t));
+            FadePanel.GetComponent<Image>().color = newColor;
+            yield return null;
+        }
+    }
     public void SetOnDialogue(bool value)
     {
         onDialogue = value;

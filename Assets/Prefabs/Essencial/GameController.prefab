@@ -81,5 +81,6 @@ MonoBehaviour:
   onDialogue: 0
   ShowDescriptionByMouse: 1
   mobileHud: {fileID: 100000, guid: 13c0a0469077d8e4b824e2e0f7527d70, type: 2}
-  timeToFade: 0
+  timeToFade: 1
   FadePanel: {fileID: 0}
+  cenaAtual: 0

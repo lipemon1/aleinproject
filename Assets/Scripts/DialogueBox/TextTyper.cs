@@ -10,6 +10,10 @@ public class TextTyper : MonoBehaviour
     public Text dialogText;
     private DialogueBoxManager dialogManager;
 
+    public bool onLoop = false;
+    public bool clicouDnv = false;
+
+
     // Use this for initialization
     void Start()
     {
@@ -23,23 +27,55 @@ public class TextTyper : MonoBehaviour
     /// </summary>
     public void StartToSpeak()
     {
-        StopCoroutine("TypeText");
+        if (clicouDnv == false && onLoop == true)
+        {
+            clicouDnv = true;
+            StopCoroutine(TypeText());
+
+        }
+
         dialogText.text = "";
         StartCoroutine(TypeText());
         dialogManager.SetInTalk(true);
 
+        Debug.LogWarning("asdasds");
     }
 
     IEnumerator TypeText()
     {
         //dialogManager.startTalk = false;
+
         foreach (char letter in dialogManager.actualText.ToCharArray())
         {
-            dialogText.text += letter;
+            if (onLoop == false)
+            {
+                onLoop = true;
+            }
+
+
+            
+                dialogText.text += letter;
+            
+
 
             yield return 0;
+
             yield return new WaitForSeconds(letterPause);
+
+            // quebra a thread caso ja esteja rodando e precise falar outra coisa
+
+            if (clicouDnv == true)
+            {
+                clicouDnv = false;
+                //StopCoroutine(TypeText());
+
+                onLoop = false;
+                yield break;
+                break;
+            }
         }
+
         dialogManager.finishTalk = true;
+        onLoop = false;
     }
 }
