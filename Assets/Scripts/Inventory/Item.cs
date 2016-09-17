@@ -22,8 +22,7 @@ public class Item : MonoBehaviour {
     private Inventory inventory;
 
     void Start()
-    {        
-
+    {
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
     }

@@ -21,19 +21,19 @@ public class DialogueBoxManager : MonoBehaviour
         public Image characterSprite;
     }
 
+    public enum Speakers
+    {
+        Player,
+        Other
+    }
     [System.Serializable]
-    public class CharacterInfo
+    public class CharactersInfo
     {
         public string name;
         public Sprite icon;
     }
 
-    [System.Serializable]
-    public class Fala
-    {
-        public string texto;
-        public string nome;        
-    }
+    
 
     public bool inTalk;
     public bool finishTalk;
@@ -53,21 +53,11 @@ public class DialogueBoxManager : MonoBehaviour
     public DialogPersonas playerDialog;
     public DialogPersonas otherCharacterDialog;
 
-    public CharacterInfo Viktor;
-    public CharacterInfo Esposa;
-    public CharacterInfo Filha;
-    public CharacterInfo Eric;
-
     public int actualSpeaker = 1; // 'index' de quem esta falando no momento, 0 para o jogador, 1 para o outro personagem
-    public int quantidadeFalasBloco = 1;
 
-    public int indexBlocoFala = 0;
-    public int indexBlocoConversas = 0;
     private TextTyper textTyper;
 
-    public Fala[] falas;
-
-    public bool isConversa;
+    
 
     // Use this for initialization
     void Start()
@@ -96,136 +86,58 @@ public class DialogueBoxManager : MonoBehaviour
 
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 
-        //falas = new Fala[3];
-
-        //for (int i = 0; i < falas.Length; i++)
-        //{
-        //    falas[i] = new Fala();
-        //}
-        
-
-        //customComentary(falas);
-        //customComentary("Fala Vagabunda", Viktor.name);
-        //customComentary("Falei seu cuzudo", Esposa.name);
-
     }
 
-    public void SetQuantidadeFalas(int quantidadeFalas)
-    {
-        falas = new Fala[quantidadeFalas];
-        indexBlocoConversas = 0;
-        for (int i = 0; i < falas.Length; i++)
-        {
-            falas[i] = new Fala();
-        }
-    }
-
-    public void AdicionarFala(string nome, string texto)
-    {
-        falas[indexBlocoConversas].nome = nome;
-        falas[indexBlocoConversas].texto = texto;
-        indexBlocoConversas++;
-    }
-
-    public void RealizarConversa()
-    {
-        indexBlocoConversas = 0;
-        customComentary(falas);
-    }
-    
     // Update is called once per frame
     void Update()
     {
         ManagerTalkVariables();
-        //HandleSpeak();
+        HandleSpeak();
     }
+
     void HandleSpeak()
     {
-        //if (startTalk)
-        //{
-        //    startTalk = false;
+        if (startTalk)
+        {
+            startTalk = false;
 
-        //    TextsArrays texts;
-        //    if (isComentary)
-        //    {
+            TextsArrays texts;
+            if (isComentary)
+            {
 
-        //    }
-        //    else
-        //    {
-        //        Debug.LogWarning("Entrei no else");
-        //        switch (actualSpeaker)
-        //        {
+            }
+            else
+            {
+                Debug.LogWarning("Entrei no else");
+                switch (actualSpeaker)
+                {
 
-        //            case (int)Speakers.Player: // player
-        //                texts = Player.GetComponent<TextsArrays>();
+                    case (int)Speakers.Player: // player
+                        texts = Player.GetComponent<TextsArrays>();
 
-        //                actualText = texts.GetActualPhrase();
-        //                textTyper.StartToSpeak();
-        //                break;
+                        actualText = texts.GetActualPhrase();
+                        textTyper.StartToSpeak();
+                        break;
 
-        //            case (int)Speakers.Other: // outro personagem
+                    case (int)Speakers.Other: // outro personagem
 
-        //                texts = otherCharacterDialog.textsArrays;
+                        texts = otherCharacterDialog.textsArrays;
 
-        //                if (texts.GetEndTalking() == true && finishTalk) // se o personagem ja esta na ultima frase e ja acabou de falar
-        //                {
-        //                    Debug.Log("Não há mais frases");
-        //                }
-        //                else
-        //                {
-        //                    actualText = texts.GetActualPhrase();
-        //                    textTyper.StartToSpeak();
-        //                }
-        //                break;
-        //        }
-        //    }
-        //}
+                        if (texts.GetEndTalking() == true && finishTalk) // se o personagem ja esta na ultima frase e ja acabou de falar
+                        {
+                            Debug.Log("Não há mais frases");
+                        }
+                        else
+                        {
+                            actualText = texts.GetActualPhrase();
+                            textTyper.StartToSpeak();
+                        }
+                        break;
+                }
+            }
+        }
     }
 
-
-    public void customComentary(Fala[] falas)
-    {
-        actualText = "";
-        //isComentary = true;
-        finishTalk = false;
-        dialogObjects.DialogText.text = "";
-        textTyper.dialogText.text = "";
-        startTalk = true;
-        isConversa = true;
-        inTalk = true; // fala para o dialog manager que está em um dialogo
-        
-        if (falas[indexBlocoConversas].nome == Viktor.name)
-        {
-            dialogObjects.characterSprite.sprite = Viktor.icon;
-            dialogObjects.CharacterNameText.text = Viktor.name;
-        }
-        else if (falas[indexBlocoConversas].nome == Esposa.name)
-        {
-            dialogObjects.characterSprite.sprite = Esposa.icon;
-            dialogObjects.CharacterNameText.text = Esposa.name;
-        }
-        else if (falas[indexBlocoConversas].nome == Filha.name)
-        {
-            dialogObjects.characterSprite.sprite = Filha.icon;
-            dialogObjects.CharacterNameText.text = Filha.name;
-        }
-        else if (falas[indexBlocoConversas].nome == Eric.name)
-        {
-            dialogObjects.characterSprite.sprite = Eric.icon;
-            dialogObjects.CharacterNameText.text = Eric.name;
-        }
-
-        actualText = falas[indexBlocoConversas].texto;
-
-
-        textTyper.StartToSpeak();
-        Debug.LogWarning("MakeCUSTOMComentary()");       
-    }
-
-    public void ChangeInfo()
-    {
-
-    }
 
     public void MakeComentary(string texto)
     {
@@ -282,6 +194,8 @@ public class DialogueBoxManager : MonoBehaviour
 
     public void OkButtonPressed()
     {
+
+
         if (isComentary)
         {
             isComentary = false;
@@ -289,55 +203,37 @@ public class DialogueBoxManager : MonoBehaviour
             finishTalk = false;
             Hide();
         }
-        else if (isConversa == true)
+        else
         {
-            if(indexBlocoConversas != falas.Length - 1) { 
-                
-                indexBlocoConversas++;
-                startTalk = true;
-                //textTyper.StartToSpeak();
-                customComentary(falas);
-
-            }
-            else
+            if (actualSpeaker == (int)Speakers.Player)
             {
-                isComentary = false;
-                gameController.SetOnDialogue(false);
-                finishTalk = false;
-                Hide();
+                if (playerDialog.textsArrays.GetEndTalking() == false)
+                {
+                    playerDialog.textsArrays.NextLine();
+                    finishTalk = false;
+                    startTalk = true;
+                }
+                else
+                {
+                    //Hide();
+                    //gameController.SetOnDialogue(false);
+                }
+            }
+            else if (actualSpeaker == (int)Speakers.Other)
+            {
+                if (otherCharacterDialog.textsArrays.GetEndTalking() == false)
+                {
+                    otherCharacterDialog.textsArrays.NextLine();
+                    finishTalk = false;
+                    startTalk = true;
+                }
+                else
+                {
+                    Hide();
+                    gameController.SetOnDialogue(false);
+                }
             }
         }
-        //else
-        //{
-        //    if (actualSpeaker == (int)Speakers.Player)
-        //    {
-        //        if (playerDialog.textsArrays.GetEndTalking() == false)
-        //        {
-        //            playerDialog.textsArrays.NextLine();
-        //            finishTalk = false;
-        //            startTalk = true;
-        //        }
-        //        else
-        //        {
-        //            //Hide();
-        //            //gameController.SetOnDialogue(false);
-        //        }
-        //    }
-        //    else if (actualSpeaker == (int)Speakers.Other)
-        //    {
-        //        if (otherCharacterDialog.textsArrays.GetEndTalking() == false)
-        //        {
-        //            otherCharacterDialog.textsArrays.NextLine();
-        //            finishTalk = false;
-        //            startTalk = true;
-        //        }
-        //        else
-        //        {
-        //            Hide();
-        //            gameController.SetOnDialogue(false);
-        //        }
-        //    }
-        //}
 
 
     }

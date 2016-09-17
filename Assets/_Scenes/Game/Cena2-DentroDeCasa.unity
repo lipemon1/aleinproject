@@ -1538,11 +1538,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 340749898}
     m_Modifications:
-    - target: {fileID: 114000011482759526, guid: 1d2a9d7d9da1bf04e9f7283996688790,
-        type: 2}
-      propertyPath: falas.Array.size
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 4000012808900456, guid: 1d2a9d7d9da1bf04e9f7283996688790, type: 2}
       propertyPath: m_LocalPosition.x
       value: -5.65
@@ -1579,25 +1574,14 @@ Prefab:
       propertyPath: m_Name
       value: EntrouEmCasa
       objectReference: {fileID: 0}
-    - target: {fileID: 114000011482759526, guid: 1d2a9d7d9da1bf04e9f7283996688790,
-        type: 2}
-      propertyPath: falas.Array.data[2].personagem
-      value: 3
+    - target: {fileID: 1000010030075452, guid: 1d2a9d7d9da1bf04e9f7283996688790, type: 2}
+      propertyPath: m_TagString
+      value: Triggers/Comentarios/EntrouEmCasa
       objectReference: {fileID: 0}
     - target: {fileID: 114000011482759526, guid: 1d2a9d7d9da1bf04e9f7283996688790,
         type: 2}
-      propertyPath: falas.Array.data[2].Texto
-      value: Vou te matar
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011482759526, guid: 1d2a9d7d9da1bf04e9f7283996688790,
-        type: 2}
-      propertyPath: falas.Array.data[3].personagem
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011482759526, guid: 1d2a9d7d9da1bf04e9f7283996688790,
-        type: 2}
-      propertyPath: falas.Array.data[3].Texto
-      value: Amorzao
+      propertyPath: comentario
+      value: "Ol\xE1 Meninas!!"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1d2a9d7d9da1bf04e9f7283996688790, type: 2}
@@ -1616,7 +1600,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000012697389016, guid: aa24a1db027d3004b840197967764b1f, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -1.87
+      value: 13.44
       objectReference: {fileID: 0}
     - target: {fileID: 4000012697389016, guid: aa24a1db027d3004b840197967764b1f, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1866,11 +1850,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114000013692646636, guid: fa1fea9396932a14083bf06942fcb59f,
-        type: 2}
-      propertyPath: falasBloco.Array.size
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 224000013147311568, guid: fa1fea9396932a14083bf06942fcb59f,
         type: 2}
       propertyPath: m_LocalPosition.x

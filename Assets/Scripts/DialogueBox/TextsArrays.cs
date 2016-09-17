@@ -18,6 +18,7 @@ public class TextsArrays : MonoBehaviour
             justListen = true;
             temOpcoesResposta = false;
         }
+
     }
 
     public string[] actualDialog;
@@ -33,7 +34,7 @@ public class TextsArrays : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //UpdateCharacter();
+        UpdateCharacter();
     }
 
     // Update is called once per frame
@@ -81,8 +82,6 @@ public class TextsArrays : MonoBehaviour
         }
 
     }
-
-    
 
     #region Init Dialogos Diferentes Personagens
     void DialogosPlayer()
