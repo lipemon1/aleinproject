@@ -90,8 +90,11 @@
     <Compile Include="Assets\Scripts\DialogueBox\TextsArrays.cs" />
     <Compile Include="Assets\Scripts\DoorBehaviour.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
-    <Compile Include="Assets\Scripts\Inventory.cs" />
-    <Compile Include="Assets\Scripts\InventoryItens.cs" />
+    <Compile Include="Assets\Scripts\Inventory\HandleCanvas.cs" />
+    <Compile Include="Assets\Scripts\Inventory\InteractionsController.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Item.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Slot.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerBehaviour.cs" />
     <Compile Include="Assets\Scripts\TriggerBehaviour.cs" />

@@ -38,7 +38,7 @@ public class TextTyper : MonoBehaviour
         StartCoroutine(TypeText());
         dialogManager.SetInTalk(true);
 
-        Debug.LogWarning("asdasds");
+        //Debug.LogWarning("asdasds");
     }
 
     IEnumerator TypeText()

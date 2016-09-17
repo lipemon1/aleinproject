@@ -81,7 +81,7 @@ public class ClickableObject : MonoBehaviour {
 
         if(clicado == true && objetoInventario == true)
         {
-            GameObject.FindGameObjectWithTag("GameController").GetComponent<Inventory>().AddToInventory(gameObject);
+            
             Destroy(gameObject);
         }
     }

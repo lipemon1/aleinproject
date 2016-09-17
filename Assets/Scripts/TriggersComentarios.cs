@@ -18,6 +18,7 @@ public class TriggersComentarios : MonoBehaviour {
     // Adicionar novos blocos com nome da tag aqui
     public BlocoTrigger T_entrouEmCasa = new BlocoTrigger("Triggers/Comentarios/EntrouEmCasa");
     public BlocoTrigger T_ChegandoEmCasa = new BlocoTrigger("Triggers/Comentarios/ChegandoEmCasa");
+    public BlocoTrigger T_FicandoPesada = new BlocoTrigger("Triggers/Comentarios/ElaEstaFicandoPesada");
 
     // Use this for initialization
     void Start () {
@@ -33,8 +34,9 @@ public class TriggersComentarios : MonoBehaviour {
     {        
         // Adicionar outras chamadas da função aqui com o nome da variavel criada
         TriggerComentario_UsoUnico(T_entrouEmCasa, other);
-        TriggerComentario_UsoUnico(T_ChegandoEmCasa, other);        
-
+        TriggerComentario_UsoUnico(T_ChegandoEmCasa, other);
+        TriggerComentario_UsoUnico(T_FicandoPesada, other);
+        
     }
     /// <summary>
     /// Quando entra em contato com a trigger, muda seu estado para que ja foi ativado e faz o comentário do personagem

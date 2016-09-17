@@ -2,7 +2,22 @@
 using System.Collections;
 using UnityStandardAssets.CrossPlatformInput;
 
-public class PlayerBehaviour : MonoBehaviour {
+public class PlayerBehaviour : MonoBehaviour
+{
+
+    public bool canMove;
+    public bool CanMove
+    {
+        get
+        {
+            return canMove;
+        }
+
+        set
+        {
+            canMove = value;
+        }
+    }
 
     [Header("Testando no Celular?")]
     private bool onMobile; //para saber se estamos no mobile, controle manual
@@ -22,7 +37,7 @@ public class PlayerBehaviour : MonoBehaviour {
     public bool walking; //controle para sabe se esta andando ou ano
 
     private float directionX; //valor do input do jogador
-    private GameController gControllerScript;
+    private GameController gameController;
 
     public GameObject PlayerMesh;
     private Animator PlayerAnimator;
@@ -33,18 +48,32 @@ public class PlayerBehaviour : MonoBehaviour {
     public bool canSneak;
     public bool canAttack;
 
-    // Use this for initialization
-    void Start () {
+    private bool readyToInteract;
+    Vector2 clickedPosition;
+    RaycastHit2D hit;
+    private string clickedObjectName;
+    private bool interacted;
+    private bool interact;
+    private bool clickedToMove = false;
+    public GameObject clickedObject;
 
-        gControllerScript = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+
+
+    // Use this for initialization
+    void Start()
+    {
+        canMove = true;
+
+
+        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 
         // adiciona o script TriggeerComentarios ao player caso ja nao o tenha
-        if(GetComponent<TriggersComentarios>() == null)
+        if (GetComponent<TriggersComentarios>() == null)
         {
             gameObject.AddComponent<TriggersComentarios>();
         }
 
-        onMobile = gControllerScript.GetOnMobile();
+        onMobile = gameController.GetOnMobile();
 
         walking = true;
         sneaking = false;
@@ -53,25 +82,41 @@ public class PlayerBehaviour : MonoBehaviour {
 
         PlayerAnimator = PlayerMesh.GetComponent<Animator>();
 
-	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+    }
 
+    void Update()
+    {
+        HandleMouseClick();
+        InteractionTime();
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+
+        if (canMove == true)
+        {
+            PlayerMovement();
+        }
+    }
+
+    void PlayerMovement()
+    {
         // Condição para verificar se estamos jogando no pc ou no celular
         //Caso estejamos no pc o jogo recebe input do teclado
         //se estiver no mobile, receberá input do joystick na tela
-        
-        if (!onMobile) {
+
+        if (!onMobile)
+        {
             directionX = Input.GetAxis("Horizontal"); //input do teclado
         }
         else
         {
             directionX = CrossPlatformInputManager.GetAxis("Horizontal"); //input do joystick
         }
-        
+
         //Código para pegar quando o jogador apertar shift esquerdo para correr
-        if(Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             //ToggleRun(); //função de correr            
             running = true;
@@ -86,18 +131,18 @@ public class PlayerBehaviour : MonoBehaviour {
             ToggleSneaking(); //função para sneakar
         }
 
-        if(facingRight && directionX < 0)
+        if (facingRight && directionX < 0)
         {
             Flip();
         }
-        else if(!facingRight && directionX > 0)
+        else if (!facingRight && directionX > 0)
         {
             Flip();
         }
 
         //velocidade utilizada na movimentação recebe a 
         //velocidade de andar por padrao
-        actualSpeed = walkingSpeed; 
+        actualSpeed = walkingSpeed;
         walking = true; //jogador sempre está andando?
 
         //Para utilizar os botoões de trigger descomenta a linha abaixo
@@ -111,15 +156,19 @@ public class PlayerBehaviour : MonoBehaviour {
             actualSpeed *= runMultiplier;
             running = true;
         }
-        else { 
+        else
+        {
             PlayerAnimator.SetBool("Running", false);
             running = false;
         }
 
         //linha que movimento o jogador
-        transform.Translate(new Vector3(directionX * actualSpeed * Time.deltaTime, 0f, 0f));
+        
+        
+            transform.Translate(new Vector3(directionX * actualSpeed * Time.deltaTime, 0f, 0f));
+        
 
-        if(directionX != 0)
+        if (directionX != 0)
         {
             PlayerAnimator.SetBool("Walking", true);
         }
@@ -128,10 +177,30 @@ public class PlayerBehaviour : MonoBehaviour {
     }
 
     public void Flip()
-    {        
+    {
         facingRight = !facingRight;
         PlayerMesh.GetComponent<SpriteRenderer>().flipX = !facingRight;
     }
+    /// <summary>
+    /// Função que modifica a velocidade de acordo com o toggle que esta ativo
+    /// </summary>
+    void changeSpeed()
+    {
+        if (running)
+        {
+            actualSpeed = runningSpeed;
+        }
+        else if (sneaking)
+        {
+            actualSpeed = sneakingSpeed;
+        }
+        else if (walking)
+        {
+            actualSpeed = walkingSpeed;
+        }
+    }
+
+    #region Gets and Sets
 
     public void SetCanRun(bool value)
     {
@@ -146,24 +215,6 @@ public class PlayerBehaviour : MonoBehaviour {
         canAttack = value;
     }
 
-    /// <summary>
-    /// Função que modifica a velocidade de acordo com o toggle que esta ativo
-    /// </summary>
-    void changeSpeed()
-    {
-        if(running)
-        {
-            actualSpeed = runningSpeed;
-        }
-        else if (sneaking)
-        {
-            actualSpeed = sneakingSpeed;
-        }
-        else if(walking)
-        {
-            actualSpeed = walkingSpeed;
-        }        
-    }
 
     /// <summary>
     /// Ativa o modo de correr
@@ -194,5 +245,76 @@ public class PlayerBehaviour : MonoBehaviour {
         sneaking = !sneaking;
         running = false;
         walking = false;
+    }
+    #endregion
+
+    // lida com tudo o que acontece ao clicar
+    private void HandleMouseClick()
+    {
+        // verificar se foi pressionado o botão esquerdo do mouse:
+        //if (Input.GetMouseButtonDown(0))
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("Cliquei");
+            if (!gameController.GetMouseOverUI() && !gameController.onDialogue)
+            {
+                HandleClickOnObjects();
+            }
+        }
+    }
+
+
+    // verifica se clicou em objeto interativo
+    private void HandleClickOnObjects()
+    {
+        clickedPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        hit = Physics2D.Raycast(clickedPosition, Vector2.zero);
+        //Debug.Log("handle mouse on object");
+        if (hit != null && hit.collider != null)
+        {
+            //if (hit.collider.gameObject.transform.tag == "Interactive")
+            //{
+            //    clickedObject = hit.collider.gameObject;
+            //    clickedObjectName = hit.collider.gameObject.name;
+            //    Debug.Log("Cliquei em " + clickedObjectName);
+            //    readyToInteract = false;
+            //    interacted = false;
+            //    interact = true;
+            //}
+
+            clickedObject = hit.collider.gameObject;
+            if (clickedObject.tag == "Interactive")
+            {
+                clickedObjectName = hit.collider.gameObject.name;
+                Debug.Log("Cliquei em " + clickedObjectName);
+                readyToInteract = false;
+                interacted = false;
+                interact = true;
+            }
+        }
+    }
+
+    // chamada quando o jogador para de andar e se clicou em um objeto interativo
+    private void InteractionTime()
+    {
+        if (interact /*&& readyToInteract*/)
+        {
+
+            if (!interacted)
+            {
+                // Debug.Log("Entrou em InteractionTime");
+                CallInteraction(clickedObject, clickedObjectName);
+                interacted = true;
+                readyToInteract = false;
+                interact = false;
+            }
+        }
+    }
+    // informa ao game controller qual foi o objeto clicado
+    private void CallInteraction(GameObject clickedObject, string clicked_object_name)
+    {
+        // Debug.Log("Entrou em Player.CallInteraction");
+        gameController.Interaction(clickedObject, clicked_object_name);
     }
 }

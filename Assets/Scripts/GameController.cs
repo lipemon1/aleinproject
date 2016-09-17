@@ -30,7 +30,53 @@ public class GameController : MonoBehaviour
     public GameObject FadePanel;
 
     public int cenaAtual;
-    PlayerBehaviour playerBehav;    
+    PlayerBehaviour playerBehav;
+    public string activeItem = "";
+    public bool mouseOverUI;
+
+    [Header("Objetos Interação")]
+    #region CONTROLE OBJETOS INTERAÇÃO
+    public bool temCopo;
+    public bool TemCopo
+    {
+        get
+        {
+            return temCopo;
+        }
+
+        set
+        {
+            temCopo = value;
+        }
+    }
+    public bool mulherPediuAgua;
+    public bool MulherPediuAgua
+    {
+        get
+        {
+            return mulherPediuAgua;
+        }
+
+        set
+        {
+            mulherPediuAgua = value;
+        }
+    }
+    public bool jaEntregouAgua;
+    public bool JaEntregouAgua
+    {
+        get
+        {
+            return jaEntregouAgua;
+        }
+
+        set
+        {
+            jaEntregouAgua = value;
+        }
+    }
+   
+    #endregion
 
     void Awake()
     {
@@ -97,6 +143,8 @@ public class GameController : MonoBehaviour
 
         ManageScenes();
 
+        //Debug.LogWarning("Active Item: " + GetActiveItem());
+
     }
 
     public void FazerComentario(string texto)
@@ -111,9 +159,10 @@ public class GameController : MonoBehaviour
         switch (cenaAtual)
         {
             case (int)Cenas.ChegaEmCasa:
-
+                
                 break;
             case (int)Cenas.SalaDeCasa:
+                mulherPediuAgua = true;
                 break;
             case (int)Cenas.Cozinha:
                 break;
@@ -148,8 +197,6 @@ public class GameController : MonoBehaviour
             playerBehav.SetCanSneak(false);
             playerBehav.SetCanAttack(false);
         }
-
-
     }
 
     public void ChangeToScene(string sceneName)
@@ -210,4 +257,36 @@ public class GameController : MonoBehaviour
         mobileHud.GetComponent<CanvasGroup>().blocksRaycasts = true; //this prevents the UI element to receive input events
     }
 
+    public void SetActiveItem(string item)
+    {
+        activeItem = item;
+     //   Debug.Log(activeItem.ToString());
+    }
+
+    public string GetActiveItem()
+    {
+        return (activeItem.ToString());
+    }
+
+    public void SetMouseOverUI(bool state)
+    {
+        // Debug.Log("SetMouseOverUI: " + mouseOverUI);
+        mouseOverUI = state;
+    }
+    public bool GetMouseOverUI()
+    {
+        // Debug.Log("SetMouseOverUI: " + mouseOverUI);
+        return (mouseOverUI);
+    }
+
+    // pede ao gerenciador de interaçoes pra executar a interação do objeto clicado
+    public void Interaction(GameObject clickedObject, string clicked_object_name)
+    {
+        Debug.Log("Entrou em GameController.Interaction");
+        //Debug.LogWarning("Nome do ClickedObject: " + clickedObject.name);
+
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<InteractionsController>().
+            ExecuteInteraction(clickedObject, clicked_object_name);
+        //InteractionsController.ExecuteInteraction(clickedObject, clicked_object_name);
+    }
 }

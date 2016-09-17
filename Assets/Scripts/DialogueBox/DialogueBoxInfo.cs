@@ -26,4 +26,9 @@ public class DialogueBoxInfo : MonoBehaviour {
         
         GetComponent<TextsArrays>().ResetLine();
 	}
+
+    public void FazerComentario()
+    {
+
+    }
 }

@@ -26,6 +26,14 @@ public class DialogueBoxManager : MonoBehaviour
         Player,
         Other
     }
+    [System.Serializable]
+    public class CharactersInfo
+    {
+        public string name;
+        public Sprite icon;
+    }
+
+    
 
     public bool inTalk;
     public bool finishTalk;
@@ -125,7 +133,6 @@ public class DialogueBoxManager : MonoBehaviour
                             textTyper.StartToSpeak();
                         }
                         break;
-
                 }
             }
         }
@@ -136,6 +143,8 @@ public class DialogueBoxManager : MonoBehaviour
     {
         dialogObjects.characterSprite.sprite = playerDialog.characterIcon;
         dialogObjects.CharacterNameText.text = playerDialog.name;
+        //dialogObjects.characterSprite.sprite = iconPersonagem;
+        //dialogObjects.CharacterNameText.text = namePersonagem;
 
         actualText = "";
         isComentary = true;
