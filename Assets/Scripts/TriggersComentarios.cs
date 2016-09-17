@@ -48,9 +48,16 @@ public class TriggersComentarios : MonoBehaviour {
         TriggerBehaviour triggerBehav = other.gameObject.GetComponent<TriggerBehaviour>();
         if (other.gameObject.tag == infoTrigger.tagName && triggerBehav.GetFoiAtivado() == false)
         {            
-            Debug.LogWarning(triggerBehav.comentario);
-            gameController.FazerComentario(triggerBehav.comentario);
-            triggerBehav.SetFoiAtivado(true);
+            if(triggerBehav.isComentario == true) { 
+                Debug.LogWarning(triggerBehav.comentario);
+                gameController.FazerComentario(triggerBehav.comentario);
+                triggerBehav.SetFoiAtivado(true);
+            }
+            else if(triggerBehav.geraDialogo == true)
+            {
+                triggerBehav.AtivarDialogo();
+                triggerBehav.SetFoiAtivado(true);
+            }
         }
     }
 }

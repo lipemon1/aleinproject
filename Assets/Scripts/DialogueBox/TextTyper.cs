@@ -52,12 +52,7 @@ public class TextTyper : MonoBehaviour
                 onLoop = true;
             }
 
-
-            
-                dialogText.text += letter;
-            
-
-
+            dialogText.text += letter;
             yield return 0;
 
             yield return new WaitForSeconds(letterPause);

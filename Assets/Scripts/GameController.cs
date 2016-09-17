@@ -75,8 +75,10 @@ public class GameController : MonoBehaviour
             jaEntregouAgua = value;
         }
     }
-   
+
     #endregion
+
+    public DialogueBoxManager dialogManager;
 
     void Awake()
     {
@@ -111,6 +113,9 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
+        dialogManager = GameObject.FindGameObjectWithTag("DialogManager").GetComponent<DialogueBoxManager>();
+        
         StartCoroutine(FadeIn(0.0f, timeToFade));
         if (mobileHud == null)
         {
@@ -143,16 +148,29 @@ public class GameController : MonoBehaviour
 
         ManageScenes();
 
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            dialogManager.SetQuantidadeFalas(2);
+            dialogManager.AdicionarFala(dialogManager.Viktor.name, "Ola Meninas");
+            dialogManager.AdicionarFala(dialogManager.Filha.name, "PAPAIII");
+            dialogManager.RealizarConversa();
+        }
+
         //Debug.LogWarning("Active Item: " + GetActiveItem());
 
     }
 
     public void FazerComentario(string texto)
-    {
-        DialogueBoxManager dialogManager = GameObject.FindGameObjectWithTag("DialogManager").GetComponent<DialogueBoxManager>();
-
+    {        
         dialogManager.MakeComentary(texto);
+
+        
     }
+
+    
+
+
+
 
     void ManageScenes()
     {
