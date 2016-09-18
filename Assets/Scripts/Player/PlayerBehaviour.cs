@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.UI;
+
 
 public class PlayerBehaviour : MonoBehaviour
 {
@@ -57,16 +59,32 @@ public class PlayerBehaviour : MonoBehaviour
     private bool clickedToMove = false;
     public GameObject clickedObject;
 
+    public float Life;
+    public GameObject sliderLife;
+    public Text textLife;
+
+
     [Header("Flipar No Início")]
     public bool flipOneMoreTime = false;
 
     // Use this for initialization
     void Start()
     {
+
+
         canMove = true;
 
 
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+
+        if (sliderLife == null)
+        {
+            sliderLife = GameObject.FindGameObjectWithTag("LifeSlider");
+        }
+        if (textLife == null)
+        {
+            textLife = GameObject.FindGameObjectWithTag("LifeText").GetComponent<Text>();
+        }
 
         // adiciona o script TriggeerComentarios ao player caso ja nao o tenha
         if (GetComponent<TriggersComentarios>() == null)
@@ -75,7 +93,8 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
         onMobile = gameController.GetOnMobile();
-
+        Life = 100;
+        
         walking = true;
         sneaking = false;
         running = false;
@@ -93,6 +112,16 @@ public class PlayerBehaviour : MonoBehaviour
     {
         HandleMouseClick();
         InteractionTime();
+
+        if(Input.GetKeyDown(KeyCode.X))
+        {
+            AplicarDano(10);
+        }
+        if(Life <= 0)
+        {
+            Life = 0;
+            gameController.GameOver();
+        }
     }
 
     // Update is called once per frame
@@ -103,6 +132,13 @@ public class PlayerBehaviour : MonoBehaviour
         {
             PlayerMovement();
         }
+    }
+
+    public void AplicarDano(float value)
+    {
+        Life -= value;
+        sliderLife.GetComponent<Slider>().value = Life;
+        textLife.text = "" + Life;
     }
 
     void PlayerMovement()

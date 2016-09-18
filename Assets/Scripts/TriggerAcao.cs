@@ -28,12 +28,16 @@ public class TriggerAcao : MonoBehaviour
         Debug.LogWarning("Trigger enter 2d");
         if (acao == Acoes.OVNICAINDO)
         {
-            if (GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().ColocouFilhaNaCama == true)
+            GameController gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+            if (gm.ColocouFilhaNaCama == true)
             {
-                if (jaFoiAtivado == false)
+                if (gm.ovniCaiu == false)
                 {
-                    jaFoiAtivado = true;
-                    GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().DerrubarOvni();
+                    if (jaFoiAtivado == false)
+                    {
+                        jaFoiAtivado = true;
+                        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().DerrubarOvni();
+                    }
                 }
 
             }

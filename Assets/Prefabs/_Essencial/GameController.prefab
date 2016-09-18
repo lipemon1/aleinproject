@@ -55,6 +55,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   copoCheioPrefab: {fileID: 0}
   inventory: {fileID: 0}
+  dialogManager: {fileID: 0}
 --- !u!114 &114000011721011244
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -80,12 +81,34 @@ MonoBehaviour:
   onMobile: 0
   onDialogue: 0
   ShowDescriptionByMouse: 1
+  cenaAtual: 3
   mobileHud: {fileID: 0}
   timeToFade: 1
   FadePanel: {fileID: 0}
-  cenaAtual: 0
+  fadeDone: 0
   activeItem: 
   mouseOverUI: 0
+  OvniCaindoShake:
+    shakeQuantidade: 0.05
+    shakeTempo: 5
+  OvniAtingiuChaoShake:
+    shakeQuantidade: 0.8
+    shakeTempo: 1.3
+  porradaTentaculoShake:
+    shakeQuantidade: 0.1
+    shakeTempo: 0.2
+  porradaViktorShake:
+    shakeQuantidade: 0.1
+    shakeTempo: 0.2
+  dialogoInicialDentroCasa: 0
   temCopo: 0
   mulherPediuAgua: 0
   jaEntregouAgua: 0
+  devePegarFilha: 0
+  estaComFilha: 0
+  subiuEscadas: 0
+  colocouFilhaNaCama: 0
+  ovniCaiu: 1
+  pegouLanterna: 0
+  dialogoInicialQuarentena: 0
+  dialogManager: {fileID: 0}

@@ -16,6 +16,14 @@ public class GameController : MonoBehaviour
         Cratera, // tela onde o ovni caiu
         Quarentena
     }
+    [System.Serializable]
+    public class ScreenShake
+    {        
+        public float shakeQuantidade = 0.3f;
+        public float shakeTempo = 0.5f;
+        [HideInInspector]
+        public Hashtable ht;
+    }
 
     [Tooltip("Indica se esta rodando no Android ")]
     public bool onMobile;
@@ -31,16 +39,23 @@ public class GameController : MonoBehaviour
     public float timeToFade;
     public GameObject FadePanel;
     public bool fadeDone;
-
+    private Camera camera;
 
     PlayerBehaviour playerBehav;
     public string activeItem = "";
     public bool mouseOverUI;
 
+    [Header("Screen Shakes")]
+    public ScreenShake OvniCaindoShake;
+    public ScreenShake OvniAtingiuChaoShake;
+    public ScreenShake porradaTentaculoShake;
+    public ScreenShake porradaViktorShake;
+
     [Header("Objetos Interação")]
     #region CONTROLE OBJETOS INTERAÇÃO
+    [Header("Casa/Terreno")]
     public bool dialogoInicialDentroCasa;
-    public bool dialogoInicialQuarentena;
+    
     public bool DialogoInicialDentroCasa
     {
         get
@@ -191,6 +206,9 @@ public class GameController : MonoBehaviour
     public bool ovniCaiu;
     public bool pegouLanterna;
 
+    [Header("Quarentena")]
+    public bool dialogoInicialQuarentena;
+
 
     #endregion
 
@@ -246,7 +264,41 @@ public class GameController : MonoBehaviour
 
         UpdateInfoControll();
 
-        
+        camera = Camera.main;
+
+
+
+        #region Atribuições Shake Screen
+        OvniCaindoShake.ht = new Hashtable();
+        porradaTentaculoShake.ht = new Hashtable();
+        porradaViktorShake.ht = new Hashtable();
+        OvniAtingiuChaoShake.ht = new Hashtable();
+
+
+        //Ovni caiu
+        OvniCaindoShake.ht.Add("x", OvniCaindoShake.shakeQuantidade);
+        OvniCaindoShake.ht.Add("y", OvniCaindoShake.shakeQuantidade);
+        OvniCaindoShake.ht.Add("time", OvniCaindoShake.shakeTempo);
+        //Porradas Tentaculo
+        porradaTentaculoShake.ht.Add("x", porradaTentaculoShake.shakeQuantidade);
+        porradaTentaculoShake.ht.Add("y", porradaTentaculoShake.shakeQuantidade);
+        porradaTentaculoShake.ht.Add("time", porradaTentaculoShake.shakeTempo);
+        // Porradas Viktor
+        porradaViktorShake.ht.Add("x", porradaViktorShake.shakeQuantidade);
+        porradaViktorShake.ht.Add("y", porradaViktorShake.shakeQuantidade);
+        porradaViktorShake.ht.Add("time", porradaViktorShake.shakeTempo);
+        // Ovni atingiu o chao
+        OvniAtingiuChaoShake.ht.Add("x", OvniAtingiuChaoShake.shakeQuantidade);
+        OvniAtingiuChaoShake.ht.Add("y", OvniAtingiuChaoShake.shakeQuantidade);
+        OvniAtingiuChaoShake.ht.Add("time", OvniAtingiuChaoShake.shakeTempo);        
+        #endregion
+
+
+    }
+
+    public void GameOver()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     void UpdateInfoControll()
@@ -256,7 +308,8 @@ public class GameController : MonoBehaviour
             ovniCaiu = true;
         }
 
-            if (cenaAtual == Cenas.UpStairs)
+        #region Cena Upstairs
+        if (cenaAtual == Cenas.UpStairs)
         {
             if (ovniCaiu)
             {
@@ -269,7 +322,9 @@ public class GameController : MonoBehaviour
                 playerBehav.gameObject.transform.position = new Vector3(6.36f, -1.79f, playerBehav.gameObject.transform.position.z);
             }
         }
-        if (cenaAtual == Cenas.SalaDeCasa)
+        #endregion
+        #region Cena Sala Casa
+        else if (cenaAtual == Cenas.SalaDeCasa)
         {
             if (ovniCaiu)
             {
@@ -281,7 +336,10 @@ public class GameController : MonoBehaviour
                 playerBehav.gameObject.transform.position = new Vector3(-6.62f, -1.08f, playerBehav.gameObject.transform.position.z);
             }
         }
-        if (cenaAtual == Cenas.ChegaEmCasa)
+        #endregion
+
+        #region Cena Chega em Casa
+        else if (cenaAtual == Cenas.ChegaEmCasa)
         {
             if (ovniCaiu)
             {
@@ -290,13 +348,13 @@ public class GameController : MonoBehaviour
             }
             else
             {
-                
-                playerBehav.gameObject.transform.position = new Vector3(1.47f, -1.95f, playerBehav.gameObject.transform.position.z);
 
+                playerBehav.gameObject.transform.position = new Vector3(1.47f, -1.95f, playerBehav.gameObject.transform.position.z);
+                playerBehav.Flip();
             }
             
         }
-
+        #endregion
         if (cenaAtual != Cenas.UpStairs && cenaAtual != Cenas.QuartoDaFilha && cenaAtual != Cenas.SalaDeCasa)
         {
             PlayerPrefs.SetInt(PlayerPrefsKeys.ovniCaiu, 0);
@@ -306,6 +364,23 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            iTween.ShakePosition(camera.gameObject, OvniCaindoShake.ht);
+        }
+        else if (Input.GetKeyDown(KeyCode.Y))
+        {
+            iTween.ShakePosition(camera.gameObject, porradaTentaculoShake.ht);
+        }
+        else if(Input.GetKeyDown(KeyCode.U))
+        {
+            iTween.ShakePosition(camera.gameObject, porradaViktorShake.ht);
+        }
+        else if(Input.GetKeyDown(KeyCode.I))
+        {
+            iTween.ShakePosition(camera.gameObject, OvniAtingiuChaoShake.ht);
+        }
+
         if (onMobile)
         {
             if (onDialogue)
@@ -347,7 +422,7 @@ public class GameController : MonoBehaviour
 
                 break;
             case Cenas.SalaDeCasa:
-
+                playerBehav.FicarParado();
                 if (fadeDone == true && DialogoInicialDentroCasa == false)
                 {
                     DialogoInicialDentroCasa = true;
@@ -434,8 +509,7 @@ public class GameController : MonoBehaviour
             cenaAtual = Cenas.UpStairs;
         }
 
-        if (cenaAtual == Cenas.ChegaEmCasa ||
-           cenaAtual == Cenas.SalaDeCasa ||
+        if (cenaAtual == Cenas.SalaDeCasa ||
            cenaAtual == Cenas.Cozinha ||
            cenaAtual == Cenas.UpStairs ||
            cenaAtual == Cenas.QuartoDaFilha)
@@ -444,13 +518,30 @@ public class GameController : MonoBehaviour
             playerBehav.SetCanSneak(false);
             playerBehav.SetCanAttack(false);
         }
+        if(cenaAtual == Cenas.ChegaEmCasa)
+        {
+            if(OvniCaiu == false)
+                playerBehav.SetCanRun(false);
+            else
+            {
+                playerBehav.SetCanRun(true);
+            }
+        }
+        
     }
 
     public void DerrubarOvni()
     {
         playerBehav.FicarParado();
+        iTween.ShakePosition(camera.gameObject, OvniCaindoShake.ht);
+        float tempo = 3f;
 
-        Invoke("OvniAtingiuOChao", 3f);
+        Invoke("TremerOvni", tempo - 0.5f);
+        Invoke("OvniAtingiuOChao", tempo);
+    }
+    public void TremerOvni()
+    {
+        iTween.ShakePosition(camera.gameObject, OvniAtingiuChaoShake.ht);
     }
 
     public void OvniAtingiuOChao()
