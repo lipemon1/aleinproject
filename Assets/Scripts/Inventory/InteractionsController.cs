@@ -29,6 +29,8 @@ public class InteractionsController : MonoBehaviour
     public Inventory inventory;
 
     private string nextScene;
+    public DialogueBoxManager dialogManager;
+
 
     // Use this for initialization
     void Start()
@@ -36,205 +38,13 @@ public class InteractionsController : MonoBehaviour
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 
         inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
+        dialogManager = GameObject.FindGameObjectWithTag("DialogManager").GetComponent<DialogueBoxManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //switch(gameController.GetCurrentScene())
-        //   {
-        //       case "Banheiro":
-        //           #region Persistencia do Banheiro
-        //           #region Cabine Direita
-        //           if (cabineDireitaObject == null)
-        //           {
-        //               cabineDireitaObject = GameObject.Find("Cabine Direita");
-        //           }
 
-        //           // se ja abriu a porta
-        //           if (gameController.GetOpenedBox())
-        //           {
-        //               if (cabineDireitaObject != null)
-        //               {
-        //                   Destroy(cabineDireitaObject);
-        //               }
-        //           }
-        //           #endregion
-
-        //           #region Arame
-        //           // se ainda nao pegou o arame
-        //           if (!gameController.GetWire())
-        //           {
-        //               if (wireObject == null)
-        //               {
-        //                   wireObject = GameObject.Find("Arame");
-        //                   wire = wireObject.GetComponent<Transform>();
-        //               }
-        //               else
-        //               {   
-        //                   // se o arame ja caiu
-        //                   if(gameController.GetWireFallen())
-        //                   {
-        //                       if (!gameController.GetSearchedTrash())
-        //                       {
-        //                           wire.transform.position = new Vector3(4.582485f, 0.14f, 7);
-        //                       }
-        //                       else
-        //                       {
-        //                           wire.transform.position = new Vector3(4.582485f, -0.6f, 5);
-        //                       }
-        //                   }
-        //               }
-        //           }
-        //           // se ja pegou o arame
-        //           else
-        //           {
-        //               wireObject = GameObject.Find("Arame");
-        //               if (wireObject != null)
-        //               {
-        //                   Destroy(wireObject);
-        //               }
-        //           }
-        //           #endregion
-
-        //           #region Tesoura
-        //           // se ainda nao pegou a tesoura
-        //           if (!gameController.GetScissor())
-        //           {
-        //               if(scissorObject == null)
-        //               { 
-        //                   scissorObject = GameObject.Find("Tesoura");
-        //               }
-        //               else
-        //               {
-        //                   if(gameController.GetUsedWireOnFlush())
-        //                   {
-        //                       scissorObject.transform.position = new Vector3(scissorObject.transform.position.x, -0.6f, 3);
-        //                   }
-        //               }
-        //           }
-        //           // se ja pegou a tesoura
-        //           else
-        //           {
-        //               if (scissorObject == null)
-        //               {
-        //                   scissorObject = GameObject.Find("Tesoura");
-        //               }
-        //                   Destroy(scissorObject);
-        //           }
-        //           #endregion
-        //           #endregion
-        //           break;
-
-        //       case "Externa":
-        //           #region Persistencia da Externa
-        //           #region Carteira escolar
-        //           if(deskObject == null)
-        //           {
-        //               deskObject = GameObject.Find("Carteira");
-        //               // desk = deskObject.GetComponent<Transform>();
-        //           }
-
-        //           // se ja clicou nas carteiras
-        //           if(gameController.GetClickedOnDesks())
-        //           {
-        //               // se nao pegou a carteira
-        //               if(!gameController.GetDesk())
-        //               {
-        //                   deskObject.transform.position = new Vector3(deskObject.transform.localPosition.x, -0.45f, 4);
-        //                   deskObject.transform.rotation = Quaternion.Euler(0, 0, 0);
-        //               }
-        //               // se ja pegou a carteira
-        //               else
-        //               {
-        //                   Destroy(deskObject);
-        //               }
-        //           }
-        //           #endregion
-        //           #endregion
-        //           break;
-
-        //       case "Quadra":
-        //           #region Persistencia da Quadra
-        //           if(faixaObject == null)
-        //           {
-        //               faixaObject = GameObject.Find("Faixa");
-        //           }
-
-        //           // se ja colocou a faixa no chao
-        //           if(gameController.IsFaixaOnFloor)
-        //           {
-        //               Destroy(faixaObject);
-
-        //               // se nao comecou a festa
-        //               if (!gameController.PartyHasStarted)
-        //               {
-        //                   if(faixaPrefabObject == null)
-        //                   {
-        //                       faixaPrefabObject = GameObject.Find("FaixaEmCena(Clone)");
-
-        //                       if(faixaPrefabObject == null)
-        //                       { 
-        //                           Instantiate(faixaPrefab, new Vector3(-13.0f, -0.33f, 3f), Quaternion.identity);
-        //                           faixaPrefabObject = GameObject.Find("FaixaEmCena(Clone)");
-        //                       }
-        //                   }
-
-        //                   faixaPrefabObject.transform.position = new Vector3(-13.0f, -0.33f, 3f);
-        //               }
-        //               else
-        //               {
-        //                   if (faixaPrefabObject != null)
-        //                   {
-        //                       Destroy(faixaPrefabObject);
-        //                   }
-        //                   else
-        //                   {
-        //                       faixaPrefabObject = GameObject.Find("FaixaEmCena(Clone)");
-        //                       Destroy(faixaPrefabObject);
-        //                   }
-        //               }
-        //           }
-        //           else
-        //           {
-        //               if(gameController.HasFaixa)
-        //               {
-        //                   Destroy(faixaObject);
-        //               }
-        //           }
-
-        //           if(gameController.IsDeskOnFloor)
-        //           {
-        //               if(!gameController.PartyHasStarted)
-        //               {
-        //                   if (deskPrefabObject == null)
-        //                   {
-        //                       deskPrefabObject = GameObject.Find("CarteiraEmCena(Clone)");
-        //                       if(deskPrefabObject == null)
-        //                       { 
-        //                           Instantiate(deskPrefab, new Vector3(-9.12f, -0.33f, 3f), Quaternion.identity);
-        //                           deskPrefabObject = GameObject.Find("CarteiraEmCena(Clone)");
-        //                       }
-        //                   }
-
-        //                   faixaPrefabObject.transform.position = new Vector3(-9.12f, -0.33f, 3f);
-        //               }
-        //               else
-        //               {
-        //                   if (deskPrefabObject != null)
-        //                   {
-        //                       Destroy(deskPrefabObject);
-        //                   }
-        //                   else
-        //                   {
-        //                       deskPrefabObject = GameObject.Find("CarteiraEmCena(Clone)");
-        //                       Destroy(deskPrefabObject);
-        //                   }
-        //               }
-        //           }
-        //           #endregion
-        //           break;
-        //   }
     }
 
     private void ModeloParaCase()
@@ -258,6 +68,8 @@ public class InteractionsController : MonoBehaviour
 
     public void ExecuteInteraction(GameObject clickedObject, string object_name)
     {
+        Item itemScript = clickedObject.GetComponent<Item>();
+
         // Debug.Log("Entrou em ExecuteInteraction");
         switch (object_name)
         {
@@ -280,10 +92,15 @@ public class InteractionsController : MonoBehaviour
             case "Pia":
                 if (gameController.GetActiveItem() == "Copo")
                 {
+                    dialogManager.SetQuantidadeFalas(1);
+                    dialogManager.AdicionarFala(dialogManager.Viktor.name, "Alguma hora preciso arrumar essa torneira, está horrivel.");
+                    dialogManager.RealizarConversa();
+
+
                     inventory.ClearInventorySlot();
                     inventory.AddItem(copoCheioPrefab.GetComponent<Item>());
                     gameController.TemCopo = false;
-                    gameController.FazerComentario("Cheinho...");
+
                     Debug.LogWarning("Encher Copo!!!!!!!!!!!");
                 }
                 else if (gameController.MulherPediuAgua == true)
@@ -296,21 +113,37 @@ public class InteractionsController : MonoBehaviour
                 }
                 break;
             #endregion
-
+            #region Sala
             case "Escada":
-                //    Fazer Subir Escada
+                if (gameController.DevePegarFilha == true && gameController.EstaComFilha == true)
+                {
+                    Debug.LogWarning("Escadas");
+                    gameController.ChangeToScene("Cena3-Upstairs");
+                    gameController.SubiuEscadas = true;
+                }
+                else
+                {
+                    gameController.FazerComentario("Não preciso fazer nada lá em cima agora...");
+                }
                 break;
-
+            #endregion
             #region Personagens
             case "Esposa":
                 //   Fazer a mulher falar
                 if (gameController.MulherPediuAgua == true && gameController.JaEntregouAgua == false &&
                     gameController.GetActiveItem() == "Copo Cheio")
                 {
-                    gameController.FazerComentario("Agua Entregue");
+                    dialogManager.SetQuantidadeFalas(3);
+                    dialogManager.AdicionarFala(dialogManager.Viktor.name, "Aqui está querida.");
+                    dialogManager.AdicionarFala(dialogManager.Esposa.name, "Obrigado amor. Agora leve a Emily para o quarto por favor.");
+                    dialogManager.AdicionarFala(dialogManager.Viktor.name, "Vamos para a cama sua bagunceira.");
+
+                    dialogManager.RealizarConversa();
+
                     gameController.JaEntregouAgua = true;
                     inventory.ClearInventorySlot();
                 }
+
                 else if (gameController.MulherPediuAgua == true && gameController.JaEntregouAgua == false)
                 {
                     gameController.FazerComentario(clickedObject.GetComponent<MyText>().GetOneComentary());
@@ -322,6 +155,57 @@ public class InteractionsController : MonoBehaviour
                 }
 
                 break;
+
+            case "Filha":
+                if (gameController.DevePegarFilha == true && gameController.EstaComFilha == false)
+                {
+                    gameController.EstaComFilha = true;
+                }
+                break;
+            #endregion
+            #endregion
+
+            #region UpStairs
+            #region Corredor
+            case "Porta Quarto Filha":
+                if(gameController.EstaComFilha == true && gameController.ColocouFilhaNaCama == false)
+                {
+                    gameController.ChangeToScene("Cena4-QuartoFilha");
+                    
+                }
+                if(gameController.ColocouFilhaNaCama == true && gameController.OvniCaiu == true)
+                {
+                    gameController.ChangeToScene("Cena3-Upstairs");
+                }
+                break;
+            #endregion
+            #region Quarto Filha
+            case "Cama Filha":
+                Debug.LogWarning("Cliquei na cama da filha");
+                if(gameController.EstaComFilha == true && gameController.ColocouFilhaNaCama == false)
+                {
+                    
+                    gameController.EstaComFilha = false;
+                    dialogManager.SetQuantidadeFalas(11);
+                    dialogManager.AdicionarFala(dialogManager.Viktor.name, "Como foi hoje na escola filha?");
+
+                    dialogManager.AdicionarFala(dialogManager.Filha.name, "Foi legal, hoje aprendemos um pouco sobre flores.");
+                    dialogManager.AdicionarFala(dialogManager.Filha.name, "O dia só começou a ficar esquisito quando estava voltando pra casa.");
+                    dialogManager.AdicionarFala(dialogManager.Filha.name, "Vi várias luzes no céu, elas estavam girando muito rápido, depois de um tempo sumiram.");
+                    dialogManager.AdicionarFala(dialogManager.Filha.name, "Fiquei com medo e vim correndo para casa. Contei à mamãe mas ela não acreditou em mim...");
+
+                    dialogManager.AdicionarFala(dialogManager.Viktor.name, "Não se preocupe querida, deviam ser apenas aviões ou algo parecido.");
+                    dialogManager.AdicionarFala(dialogManager.Viktor.name, "Agora deite-se e durma bem. Amanhã precisamos acordar cedo para buscar algumas ferramentas na casa do seu tio");
+                    
+
+                    dialogManager.AdicionarFala(dialogManager.Filha.name, "Papai, estou com medo de ficar sozinha. E se as luzes voltarem a aparecer?");
+                    dialogManager.AdicionarFala(dialogManager.Filha.name, "E se elas me pegarem? Estou com um mau pressentimento!");
+
+                    dialogManager.AdicionarFala(dialogManager.Viktor.name, "Não se preocupe Emily.");
+                    dialogManager.AdicionarFala(dialogManager.Viktor.name, "Papai vai deixar a porta aberta para que se qualquer coisa acontecer você avisar a mim e sua mãe.");
+                    dialogManager.RealizarConversa();
+                }
+                break;
             #endregion
             #endregion
 
@@ -330,6 +214,17 @@ public class InteractionsController : MonoBehaviour
                 break;
         }
 
+    }
+
+    public void OkPressionado()
+    {
+        if(gameController.GetSceneName() == "Cena4-QuartoFilha")
+        {
+            if(gameController.EstaComFilha == false && gameController.ColocouFilhaNaCama == false && gameController.OvniCaiu == false)
+            {
+                gameController.ColocouFilhaNaCama = true;
+            }
+        }
     }
 
     public void UpdateInteractionText(string text, int timer)

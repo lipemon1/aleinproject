@@ -176,6 +176,14 @@ public class PlayerBehaviour : MonoBehaviour
             PlayerAnimator.SetBool("Walking", false);
     }
 
+    public void FicarParado()
+    {
+        canMove = false;
+        PlayerAnimator.SetBool("Walking", false);
+        PlayerAnimator.SetBool("Running", false);
+    }
+
+
     public void Flip()
     {
         facingRight = !facingRight;
@@ -286,7 +294,7 @@ public class PlayerBehaviour : MonoBehaviour
             clickedObject = hit.collider.gameObject;
             if (clickedObject.tag == "Interactive")
             {
-                clickedObjectName = hit.collider.gameObject.name;
+                clickedObjectName = hit.collider.gameObject.GetComponent<Item>().item;
                 Debug.Log("Cliquei em " + clickedObjectName);
                 readyToInteract = false;
                 interacted = false;

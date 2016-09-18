@@ -24,18 +24,34 @@ public class GameController : MonoBehaviour
     [Tooltip("Se ativado, apresenta o texto com a descrição do objeto proximo ao mouse ao passa-lo sob o objeto(objeto precisa ter a classe myText)\nÉ preciso ter o objeto Canvas Follow Mouse na cena")]
     public bool ShowDescriptionByMouse = true;
 
+    public Cenas cenaAtual;
+
     public GameObject mobileHud;
 
     public float timeToFade;
     public GameObject FadePanel;
+    public bool fadeDone;
 
-    public int cenaAtual;
+
     PlayerBehaviour playerBehav;
     public string activeItem = "";
     public bool mouseOverUI;
 
     [Header("Objetos Interação")]
     #region CONTROLE OBJETOS INTERAÇÃO
+    public bool dialogoInicialDentroCasa;
+    public bool DialogoInicialDentroCasa
+    {
+        get
+        {
+            return dialogoInicialDentroCasa;
+        }
+
+        set
+        {
+            dialogoInicialDentroCasa = value;
+        }
+    }
     public bool temCopo;
     public bool TemCopo
     {
@@ -76,6 +92,78 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public bool DevePegarFilha
+    {
+        get
+        {
+            return devePegarFilha;
+        }
+
+        set
+        {
+            devePegarFilha = value;
+        }
+    }
+
+    public bool EstaComFilha
+    {
+        get
+        {
+            return estaComFilha;
+        }
+
+        set
+        {
+            estaComFilha = value;
+        }
+    }
+
+    public bool SubiuEscadas
+    {
+        get
+        {
+            return subiuEscadas;
+        }
+
+        set
+        {
+            subiuEscadas = value;
+        }
+    }
+
+    public bool ColocouFilhaNaCama
+    {
+        get
+        {
+            return colocouFilhaNaCama;
+        }
+
+        set
+        {
+            colocouFilhaNaCama = value;
+        }
+    }
+
+    public bool OvniCaiu
+    {
+        get
+        {
+            return ovniCaiu;
+        }
+
+        set
+        {
+            ovniCaiu = value;
+        }
+    }
+
+    public bool devePegarFilha;
+    public bool estaComFilha;
+    public bool subiuEscadas;
+    public bool colocouFilhaNaCama;
+    public bool ovniCaiu;
+
+
     #endregion
 
     public DialogueBoxManager dialogManager;
@@ -90,7 +178,7 @@ public class GameController : MonoBehaviour
 
         if (gameObject.tag != "GameController")
             gameObject.tag = "GameController";
-        if(FadePanel == null)
+        if (FadePanel == null)
         {
             FadePanel = GameObject.FindGameObjectWithTag("FadePanel");
         }
@@ -115,7 +203,7 @@ public class GameController : MonoBehaviour
     {
 
         dialogManager = GameObject.FindGameObjectWithTag("DialogManager").GetComponent<DialogueBoxManager>();
-        
+
         StartCoroutine(FadeIn(0.0f, timeToFade));
         if (mobileHud == null)
         {
@@ -132,6 +220,24 @@ public class GameController : MonoBehaviour
 
         }
         UpdateInfoScenes();
+
+        if (cenaAtual == Cenas.UpStairs)
+        {
+            if (PlayerPrefs.GetInt(PlayerPrefsKeys.ovniCaiu) == 1)
+            {
+                ovniCaiu = true;
+                playerBehav.gameObject.transform.position = new Vector3(-12.74f, -1.79f, playerBehav.gameObject.transform.position.z);
+            }
+            else
+            {
+                playerBehav.Flip();
+                playerBehav.gameObject.transform.position = new Vector3(6.36f, -1.79f, playerBehav.gameObject.transform.position.z);
+            }
+        }
+        if (cenaAtual != Cenas.UpStairs && cenaAtual != Cenas.QuartoDaFilha)
+        {
+            PlayerPrefs.SetInt(PlayerPrefsKeys.ovniCaiu, 0);
+        }
     }
 
     // Update is called once per frame
@@ -148,46 +254,72 @@ public class GameController : MonoBehaviour
 
         ManageScenes();
 
-        if(Input.GetKeyDown(KeyCode.O))
-        {
-            dialogManager.SetQuantidadeFalas(2);
-            dialogManager.AdicionarFala(dialogManager.Viktor.name, "Ola Meninas");
-            dialogManager.AdicionarFala(dialogManager.Filha.name, "PAPAIII");
-            dialogManager.RealizarConversa();
-        }
+        //if(Input.GetKeyDown(KeyCode.O))
+        //{
+        //    dialogManager.SetQuantidadeFalas(2);
+        //    dialogManager.AdicionarFala(dialogManager.Viktor.name, "Ola Meninas");
+        //    dialogManager.AdicionarFala(dialogManager.Filha.name, "PAPAIII");
+        //    dialogManager.RealizarConversa();
+        //}
 
         //Debug.LogWarning("Active Item: " + GetActiveItem());
 
     }
 
     public void FazerComentario(string texto)
-    {        
+    {
         dialogManager.MakeComentary(texto);
-
-        
     }
 
-    
-
-
-
+    public string GetSceneName()
+    {
+        return SceneManager.GetActiveScene().name;
+    }
 
     void ManageScenes()
     {
         switch (cenaAtual)
         {
-            case (int)Cenas.ChegaEmCasa:
-                
+            case Cenas.ChegaEmCasa:
+
                 break;
-            case (int)Cenas.SalaDeCasa:
-                mulherPediuAgua = true;
+            case Cenas.SalaDeCasa:
+
+                if (fadeDone == true && DialogoInicialDentroCasa == false)
+                {
+                    DialogoInicialDentroCasa = true;
+                    dialogManager.SetQuantidadeFalas(8);
+                    dialogManager.AdicionarFala(dialogManager.Filha.name, "PAPAI!");
+                    dialogManager.AdicionarFala(dialogManager.Viktor.name, "Hahaha, boa noite filha, não deveria estar na sua cama?");
+                    dialogManager.AdicionarFala(dialogManager.Filha.name, "Estávamos esperando você papai.");
+                    dialogManager.AdicionarFala(dialogManager.Esposa.name, "Oi querido. Foi tudo bem no trabalho?.");
+                    dialogManager.AdicionarFala(dialogManager.Viktor.name, "Olá, foi sim, mas, não precisavam me esperar até tão tarde.");
+                    dialogManager.AdicionarFala(dialogManager.Esposa.name, "Tudo bem, a Emily queria te ver antes de dormir.");
+                    dialogManager.AdicionarFala(dialogManager.Esposa.name, "Leve ela pra cama mas antes traga um copo d’água pra mim amor. Estou com sede.");
+                    dialogManager.AdicionarFala(dialogManager.Viktor.name, "Claro querida, só um minuto.");
+
+                    dialogManager.RealizarConversa();
+                    DialogoInicialDentroCasa = true;
+                }
                 break;
-            case (int)Cenas.Cozinha:
+            case Cenas.Cozinha:
                 break;
-            case (int)Cenas.UpStairs:
+            case Cenas.UpStairs:
                 break;
-            case (int)Cenas.QuartoDaFilha:
+            case Cenas.QuartoDaFilha:
                 break;
+        }
+    }
+
+    public void BotaoOk()
+    {
+        if (dialogoInicialDentroCasa == true && mulherPediuAgua == false)
+        {
+            mulherPediuAgua = true;
+        }
+        else if (JaEntregouAgua == true && DevePegarFilha == false)
+        {
+            DevePegarFilha = true;
         }
     }
 
@@ -198,18 +330,22 @@ public class GameController : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Cena1 - ChegadaEmCasa")
         {
-            cenaAtual = (int)Cenas.ChegaEmCasa;
+            cenaAtual = Cenas.ChegaEmCasa;
         }
         else if (SceneManager.GetActiveScene().name == "Cena2-DentroDeCasa")
         {
-            cenaAtual = (int)Cenas.SalaDeCasa;
+            cenaAtual = Cenas.SalaDeCasa;
+        }
+        else if (SceneManager.GetActiveScene().name == "Cena3-Upstairs")
+        {
+            cenaAtual = Cenas.UpStairs;
         }
 
-        if (cenaAtual == (int)Cenas.ChegaEmCasa ||
-           cenaAtual == (int)Cenas.SalaDeCasa ||
-           cenaAtual == (int)Cenas.Cozinha ||
-           cenaAtual == (int)Cenas.UpStairs ||
-           cenaAtual == (int)Cenas.QuartoDaFilha)
+        if (cenaAtual == Cenas.ChegaEmCasa ||
+           cenaAtual == Cenas.SalaDeCasa ||
+           cenaAtual == Cenas.Cozinha ||
+           cenaAtual == Cenas.UpStairs ||
+           cenaAtual == Cenas.QuartoDaFilha)
         {
             playerBehav.SetCanRun(false);
             playerBehav.SetCanSneak(false);
@@ -217,8 +353,27 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void DerrubarOvni()
+    {
+        playerBehav.FicarParado();
+
+        Invoke("OvniAtingiuOChao", 3f);
+    }
+
+    public void OvniAtingiuOChao()
+    {
+        OvniCaiu = true;
+        dialogManager.SetQuantidadeFalas(3);
+        dialogManager.AdicionarFala(dialogManager.Filha.name, "PAPAAAAAAAI!!");
+        dialogManager.AdicionarFala(dialogManager.Viktor.name, "Fiquem aqui dentro, vou lá fora ver o que houve");
+        dialogManager.AdicionarFala(dialogManager.Viktor.name, "Se acontecer alguma coisa gritem que eu volto correndo!");
+        dialogManager.RealizarConversa();
+        PlayerPrefs.SetInt(PlayerPrefsKeys.ovniCaiu, 1);
+    }
+
     public void ChangeToScene(string sceneName)
     {
+        fadeDone = false;
         FadePanel.GetComponent<CanvasGroup>().blocksRaycasts = false; //this prevents the UI element to receive input events
         //FadePanel.GetComponent<CanvasGroup>().alpha = 0;
 
@@ -243,6 +398,7 @@ public class GameController : MonoBehaviour
             FadePanel.GetComponent<Image>().color = newColor;
             yield return null;
         }
+        fadeDone = true;
     }
     IEnumerator FadeIn(float aValue, float aTime)
     {
@@ -252,6 +408,7 @@ public class GameController : MonoBehaviour
             FadePanel.GetComponent<Image>().color = newColor;
             yield return null;
         }
+        fadeDone = true;
     }
     public void SetOnDialogue(bool value)
     {
@@ -278,7 +435,7 @@ public class GameController : MonoBehaviour
     public void SetActiveItem(string item)
     {
         activeItem = item;
-     //   Debug.Log(activeItem.ToString());
+        //   Debug.Log(activeItem.ToString());
     }
 
     public string GetActiveItem()

@@ -3,16 +3,17 @@ using System.Collections;
 
 public enum Personagem { VIKTOR, ESPOSA, FILHA, ERIC }
 
+
 public class TriggerBehaviour : MonoBehaviour
 {
 
     public bool jaFoiAtivado = false;
 
     public bool isComentario;
-
     public string comentario;
-
     public bool geraDialogo;
+
+    
 
     [System.Serializable]
     public class Fala
@@ -59,12 +60,7 @@ public class TriggerBehaviour : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    
 
     public void SetFoiAtivado(bool value)
     {

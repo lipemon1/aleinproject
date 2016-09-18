@@ -3,11 +3,12 @@ using System.Collections;
 
 // script para todos os items do jogo
 
-public enum ItemType {COPO, PIA};
+    
+public enum ItemType {COPO, PIA, ESPOSA, FILHA, ESCADA};
 
 public class Item : MonoBehaviour {
 
-    public ItemType type;
+    private ItemType type;
 
     public string item;
 
@@ -21,25 +22,29 @@ public class Item : MonoBehaviour {
 
     private Inventory inventory;
 
+    public ItemType Type
+    {
+        get
+        {
+            return type;
+        }
+
+        set
+        {
+            type = value;
+        }
+    }
+
     void Start()
     {        
-
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
     }
 
-    // aqui está o que acontece quando clica pra usar cada item do inventário
+    
     public void Use()
     {
-        Debug.Log("Usei " + item);
-
-        switch (type)
-        {
-            //case ItemType.ARAME:
-            //    inventory.ClearInventorySlot();
-            //break;
-
-        }
+ 
     }
 
     public void Activate()

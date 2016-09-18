@@ -19,6 +19,7 @@ TagManager:
   - Interactive
   - Item
   - Canvas/Inventario
+  - Triggers/Acao/DerrubarOvni
   layers:
   - Default
   - TransparentFX

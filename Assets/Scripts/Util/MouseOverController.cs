@@ -25,6 +25,6 @@ public class MouseOverController : MonoBehaviour {
 
     public void UpdateText(string newText)
     {
-        //textDescription.text = newText;
+        textDescription.text = newText;
     }
 }

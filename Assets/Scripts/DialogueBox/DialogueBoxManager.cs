@@ -4,6 +4,14 @@ using UnityEngine.UI;
 
 public class DialogueBoxManager : MonoBehaviour
 {
+
+    /*
+     * 
+     * 
+     * COLOCAR ISSO COMO  COMPONENTE DO PAINEL DE DIALOGO
+     * 
+     * 
+     * */
     [System.Serializable]
     public class DialogPersonas
     {
@@ -13,6 +21,7 @@ public class DialogueBoxManager : MonoBehaviour
     }
 
     [System.Serializable]
+    // RECEBE OS COMPONENTES DO PAINEL DE DIALOGO
     public class DialogObjects
     {
         public GameObject OkButton;
@@ -22,6 +31,7 @@ public class DialogueBoxManager : MonoBehaviour
     }
 
     [System.Serializable]
+    // NOME E icone de todos os personagens que falam
     public class CharacterInfo
     {
         public string name;
@@ -29,10 +39,11 @@ public class DialogueBoxManager : MonoBehaviour
     }
 
     [System.Serializable]
+    //Array desse tipo recebera o nome e a fala do personagem
     public class Fala
     {
         public string texto;
-        public string nome;        
+        public string nome;
     }
 
     public bool inTalk;
@@ -51,15 +62,15 @@ public class DialogueBoxManager : MonoBehaviour
 
     public DialogObjects dialogObjects;
     public DialogPersonas playerDialog;
-    public DialogPersonas otherCharacterDialog;
+    //public DialogPersonas otherCharacterDialog;
 
     public CharacterInfo Viktor;
     public CharacterInfo Esposa;
     public CharacterInfo Filha;
     public CharacterInfo Eric;
 
-    public int actualSpeaker = 1; // 'index' de quem esta falando no momento, 0 para o jogador, 1 para o outro personagem
-    public int quantidadeFalasBloco = 1;
+    //public int actualSpeaker = 1; // 'index' de quem esta falando no momento, 0 para o jogador, 1 para o outro personagem
+    // public int quantidadeFalasBloco = 1;
 
     public int indexBlocoFala = 0;
     public int indexBlocoConversas = 0;
@@ -102,7 +113,7 @@ public class DialogueBoxManager : MonoBehaviour
         //{
         //    falas[i] = new Fala();
         //}
-        
+
 
         //customComentary(falas);
         //customComentary("Fala Vagabunda", Viktor.name);
@@ -110,6 +121,12 @@ public class DialogueBoxManager : MonoBehaviour
 
     }
 
+    #region Gerar Falas
+    /// QUANDO FOR CHAMAR ESSAS 3 FUNCOES PARA FALAR, CHAMAR NESSA ORDEM
+    /// <summary>
+    /// Seta a quantidade de falas que vai ter no dialogo
+    /// </summary>
+    /// <param name="quantidadeFalas"></param>
     public void SetQuantidadeFalas(int quantidadeFalas)
     {
         falas = new Fala[quantidadeFalas];
@@ -120,19 +137,29 @@ public class DialogueBoxManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Adiciona a fala passando o nome do personagem como referencia
+    /// </summary>
+    /// <param name="nome"></param>
+    /// <param name="texto"></param>
     public void AdicionarFala(string nome, string texto)
     {
         falas[indexBlocoConversas].nome = nome;
         falas[indexBlocoConversas].texto = texto;
         indexBlocoConversas++;
     }
-
+    /// <summary>
+    /// Chama a funcao Custom Comentary que vai realizar a atualizao dos componentes da ui e chamar a funcao para falar realmente
+    /// </summary>
     public void RealizarConversa()
     {
+        Player.GetComponent<PlayerBehaviour>().CanMove = false;
+        Player.GetComponent<PlayerBehaviour>().FicarParado();
         indexBlocoConversas = 0;
         customComentary(falas);
     }
-    
+    #endregion
+
     // Update is called once per frame
     void Update()
     {
@@ -193,7 +220,8 @@ public class DialogueBoxManager : MonoBehaviour
         startTalk = true;
         isConversa = true;
         inTalk = true; // fala para o dialog manager que está em um dialogo
-        
+
+        // Atualiza as informações da ui pelo nome do personagem
         if (falas[indexBlocoConversas].nome == Viktor.name)
         {
             dialogObjects.characterSprite.sprite = Viktor.icon;
@@ -215,17 +243,13 @@ public class DialogueBoxManager : MonoBehaviour
             dialogObjects.CharacterNameText.text = Eric.name;
         }
 
-        actualText = falas[indexBlocoConversas].texto;
-
+        actualText = falas[indexBlocoConversas].texto; // o texto atual para ser falado recebe o texto da array
+        // o index dessa array é atualizado la pra baixo dentro da funcao OKPressed(), que é chamada quando o jogador clica no botao ok da UI
 
         textTyper.StartToSpeak();
-        Debug.LogWarning("MakeCUSTOMComentary()");       
+        Debug.LogWarning("MakeCUSTOMComentary()");
     }
 
-    public void ChangeInfo()
-    {
-
-    }
 
     public void MakeComentary(string texto)
     {
@@ -253,7 +277,7 @@ public class DialogueBoxManager : MonoBehaviour
         startTalk = true;
         isComentary = false;
         SetInTalk(true); // fala para o dialog manager que está em um dialogo
-        SetDialogueInfo(infoCharacter);
+        //SetDialogueInfo(infoCharacter);
     }
 
     void ManagerTalkVariables()
@@ -291,8 +315,8 @@ public class DialogueBoxManager : MonoBehaviour
         }
         else if (isConversa == true)
         {
-            if(indexBlocoConversas != falas.Length - 1) { 
-                
+            if (indexBlocoConversas != falas.Length - 1)
+            {
                 indexBlocoConversas++;
                 startTalk = true;
                 //textTyper.StartToSpeak();
@@ -304,6 +328,10 @@ public class DialogueBoxManager : MonoBehaviour
                 isComentary = false;
                 gameController.SetOnDialogue(false);
                 finishTalk = false;
+                Player.GetComponent<PlayerBehaviour>().CanMove = true;
+
+                gameController.BotaoOk();
+                GameObject.FindGameObjectWithTag("GameController").GetComponent<InteractionsController>().OkPressionado();
                 Hide();
             }
         }
@@ -338,8 +366,6 @@ public class DialogueBoxManager : MonoBehaviour
         //        }
         //    }
         //}
-
-
     }
 
     void Hide()
@@ -370,16 +396,16 @@ public class DialogueBoxManager : MonoBehaviour
     /// <summary>
     /// Dois personagens estarão em dialogo (Player e mais um personagem), essa função seta as informações(nome, imagem) do outro personagem para que seja mostrada na caixa de dialogo
     /// </summary>
-    public void SetDialogueInfo(DialogueBoxInfo infoCharacterScript)
-    {
-        otherCharacterDialog.textsArrays = infoCharacterScript.gameObject.GetComponent<TextsArrays>();
+    //public void SetDialogueInfo(DialogueBoxInfo infoCharacterScript)
+    //{
+    //    otherCharacterDialog.textsArrays = infoCharacterScript.gameObject.GetComponent<TextsArrays>();
 
-        otherCharacterDialog.name = infoCharacterScript.characterName;
-        otherCharacterDialog.characterIcon = infoCharacterScript.characterImg;
+    //    otherCharacterDialog.name = infoCharacterScript.characterName;
+    //    otherCharacterDialog.characterIcon = infoCharacterScript.characterImg;
 
-        dialogObjects.CharacterNameText.text = otherCharacterDialog.name;
-        dialogObjects.characterSprite.sprite = otherCharacterDialog.characterIcon;
+    //    dialogObjects.CharacterNameText.text = otherCharacterDialog.name;
+    //    dialogObjects.characterSprite.sprite = otherCharacterDialog.characterIcon;
 
-    }
+    //}
 
 }

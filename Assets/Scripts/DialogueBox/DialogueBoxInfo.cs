@@ -22,7 +22,7 @@ public class DialogueBoxInfo : MonoBehaviour {
 	{
 		Debug.Log("Clicou em personagem");
 
-        dialogManager.CharacterSpeak(this);
+        //dialogManager.CharacterSpeak(this);
         
         GetComponent<TextsArrays>().ResetLine();
 	}

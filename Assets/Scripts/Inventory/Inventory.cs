@@ -44,10 +44,16 @@ public class Inventory : MonoBehaviour {
     void Start () {
         CreateLayout();
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        
     }
 	
 	// Update is called once per frame
 	void Update () {
+
+        if(eventSystem  == null)
+        {
+            eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+        }
 
         if(Input.GetMouseButtonUp(0))
         {
@@ -147,7 +153,7 @@ public class Inventory : MonoBehaviour {
 
                 if(!temp.IsEmpty)
                 {
-                    if(temp.CurrentItem.type == item.type && temp.IsAvailable)
+                    if(temp.CurrentItem.Type == item.Type && temp.IsAvailable)
                     {
                         temp.AddItem(item);
                         return true;

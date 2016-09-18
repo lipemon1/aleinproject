@@ -69,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013783199706}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.78, y: 0, z: 0}
+  m_LocalPosition: {x: 6.36, y: -1.79, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -211,6 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0f4a142259b8e548b3bcc90f3783f8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canMove: 0
   runMultiplier: 2
   walkingSpeed: 6
   runningSpeed: 10
@@ -224,6 +225,7 @@ MonoBehaviour:
   canRun: 0
   canSneak: 0
   canAttack: 0
+  clickedObject: {fileID: 0}
 --- !u!114 &114000014100605824
 MonoBehaviour:
   m_ObjectHideFlags: 1
