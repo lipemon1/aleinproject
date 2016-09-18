@@ -79,7 +79,7 @@ GameObject:
   - 114: {fileID: 114000013903184922}
   m_Layer: 0
   m_Name: Clickable Object
-  m_TagString: clickable
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

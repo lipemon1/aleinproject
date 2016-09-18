@@ -31,7 +31,7 @@ public class MyText : MonoBehaviour {
 
     void OnMouseDown()
     {
-        Debug.Log("Clicou");
+        //Debug.Log("Clicou");
         if(TemComentarioPlayer == true)
         {
             if(Comentarios.Length == 0 )
@@ -59,5 +59,10 @@ public class MyText : MonoBehaviour {
     {
         if (GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().ShowDescriptionByMouse == true)
             textController.UpdateText("");
+    }
+
+    public string GetOneComentary()
+    {
+        return (Comentarios[Random.Range(0, Comentarios.Length)]);
     }
 }

@@ -12,9 +12,14 @@ TagManager:
   - Mouse Over Text
   - Triggers/Comentarios/EntrouEmCasa
   - Triggers/Comentarios/ChegandoEmCasa
-  - Triggers/Comentarios/Chegou
+  - Triggers/Comentarios/ElaEstaFicandoPesada
   - MobileControll
   - FadePanel
+  - Inventory
+  - Interactive
+  - Item
+  - Canvas/Inventario
+  - Triggers/Acao/DerrubarOvni
   layers:
   - Default
   - TransparentFX

@@ -38,7 +38,7 @@ public class TextTyper : MonoBehaviour
         StartCoroutine(TypeText());
         dialogManager.SetInTalk(true);
 
-        Debug.LogWarning("asdasds");
+        //Debug.LogWarning("asdasds");
     }
 
     IEnumerator TypeText()
@@ -52,12 +52,7 @@ public class TextTyper : MonoBehaviour
                 onLoop = true;
             }
 
-
-            
-                dialogText.text += letter;
-            
-
-
+            dialogText.text += letter;
             yield return 0;
 
             yield return new WaitForSeconds(letterPause);
