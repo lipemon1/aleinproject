@@ -57,7 +57,8 @@ public class PlayerBehaviour : MonoBehaviour
     private bool clickedToMove = false;
     public GameObject clickedObject;
 
-
+    [Header("Flipar No Início")]
+    public bool flipOneMoreTime = false;
 
     // Use this for initialization
     void Start()
@@ -82,6 +83,10 @@ public class PlayerBehaviour : MonoBehaviour
 
         PlayerAnimator = PlayerMesh.GetComponent<Animator>();
 
+        if (flipOneMoreTime)
+        {
+            Flip();
+        }
     }
 
     void Update()
@@ -164,8 +169,16 @@ public class PlayerBehaviour : MonoBehaviour
 
         //linha que movimento o jogador
         
-        
+        //para saber para onde ir já que o persongem não está flipando
+        if(directionX < 0)
+        {
+            transform.Translate(new Vector3(-directionX * actualSpeed * Time.deltaTime, 0f, 0f));
+        }
+        else if(directionX > 0)
+        {
             transform.Translate(new Vector3(directionX * actualSpeed * Time.deltaTime, 0f, 0f));
+        }
+            
         
 
         if (directionX != 0)
@@ -187,8 +200,10 @@ public class PlayerBehaviour : MonoBehaviour
     public void Flip()
     {
         facingRight = !facingRight;
-        PlayerMesh.GetComponent<SpriteRenderer>().flipX = !facingRight;
+        //PlayerMesh.GetComponent<SpriteRenderer>().flipX = !facingRight;
+        transform.Rotate(Vector3.up * 180); //o flip tem que ser por rotation pra a animação não bugar inteira =/
     }
+
     /// <summary>
     /// Função que modifica a velocidade de acordo com o toggle que esta ativo
     /// </summary>
