@@ -85,29 +85,11 @@
     <Reference Include="UnityEditor.Android.Extensions">
       <HintPath>Library\UnityAssemblies\UnityEditor.Android.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions">
-      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.Metro.Extensions">
-      <HintPath>Library\UnityAssemblies\UnityEditor.Metro.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.WebGL.Extensions">
-      <HintPath>Library\UnityAssemblies\UnityEditor.WebGL.Extensions.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>Library\UnityAssemblies\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>Library\UnityAssemblies\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil">
-      <HintPath>Library\UnityAssemblies\Mono.Cecil.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
-      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Common">
-      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -122,10 +104,31 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Editor\CrossPlatformInput\CrossPlatformInputInitialize.cs" />
+    <Compile Include="Assets\UnitySpritesAndBones-Tutorial\SpritesAndBones\Scripts\Editor\AlphaNumericSort.cs" />
+    <Compile Include="Assets\UnitySpritesAndBones-Tutorial\SpritesAndBones\Scripts\Editor\AnimationCurvesCopier.cs" />
+    <Compile Include="Assets\UnitySpritesAndBones-Tutorial\SpritesAndBones\Scripts\Editor\AnimationEventCopier.cs" />
+    <Compile Include="Assets\UnitySpritesAndBones-Tutorial\SpritesAndBones\Scripts\Editor\AnimationHierarchyEditor.cs" />
+    <Compile Include="Assets\UnitySpritesAndBones-Tutorial\SpritesAndBones\Scripts\Editor\AnimationToPNGMenu.cs" />
+    <Compile Include="Assets\UnitySpritesAndBones-Tutorial\SpritesAndBones\Scripts\Editor\BakePoseEditor.cs" />
+    <Compile Include="Assets\UnitySpritesAndBones-Tutorial\SpritesAndBones\Scripts\Editor\BoneEditor.cs" />
+    <Compile Include="Assets\UnitySpritesAndBones-Tutorial\SpritesAndBones\Scripts\Editor\ControlPointEditor.cs" />
+    <Compile Include="Assets\UnitySpritesAndBones-Tutorial\SpritesAndBones\Scripts\Editor\InverseKinematicsEditor.cs" />
+    <Compile Include="Assets\UnitySpritesAndBones-Tutorial\SpritesAndBones\Scripts\Editor\MeshCreator.cs" />
+    <Compile Include="Assets\UnitySpritesAndBones-Tutorial\SpritesAndBones\Scripts\Editor\PoseEditor.cs" />
+    <Compile Include="Assets\UnitySpritesAndBones-Tutorial\SpritesAndBones\Scripts\Editor\SkeletonEditor.cs" />
+    <Compile Include="Assets\UnitySpritesAndBones-Tutorial\SpritesAndBones\Scripts\Editor\Skin2DEditor.cs" />
+    <Compile Include="Assets\UnitySpritesAndBones-Tutorial\SpritesAndBones\Scripts\Editor\SkinMakerEditor.cs" />
+    <Compile Include="Assets\UnitySpritesAndBones-Tutorial\SpritesAndBones\Scripts\Editor\SkinMesh.cs" />
+    <Compile Include="Assets\UnitySpritesAndBones-Tutorial\SpritesAndBones\Scripts\Editor\SortLayerExposedEditor.cs" />
+    <Compile Include="Assets\UnitySpritesAndBones-Tutorial\SpritesAndBones\Scripts\Editor\SortLayerMaterialEditor.cs" />
+    <Compile Include="Assets\UnitySpritesAndBones-Tutorial\SpritesAndBones\Scripts\Editor\SortingLayerDrawer.cs" />
+    <Compile Include="Assets\UnitySpritesAndBones-Tutorial\SpritesAndBones\Scripts\Editor\SortingLayerHelper.cs" />
+    <Compile Include="Assets\UnitySpritesAndBones-Tutorial\SpritesAndBones\Scripts\Editor\Weightpainter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Standard Assets\Sprite-Outline.shader" />
+    <None Include="Assets\UnitySpritesAndBones-Tutorial\SpritesAndBones\Shader\Sprites-Skeleton-Cutout.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
