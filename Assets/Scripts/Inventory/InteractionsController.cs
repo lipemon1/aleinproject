@@ -3,10 +3,7 @@ using System.Collections;
 
 public class InteractionsController : MonoBehaviour
 {
-
     private GameController gameController;
-
-
     private int defaultTimer = 120;
 
     #region Objetos
@@ -74,6 +71,13 @@ public class InteractionsController : MonoBehaviour
         switch (object_name)
         {
 
+            #region Fora de Casa
+            case "Porta Entrada":
+
+
+                break;
+            #endregion
+
             #region Dentro da Casa
             #region Cozinha
             case "Copo":
@@ -95,7 +99,6 @@ public class InteractionsController : MonoBehaviour
                     dialogManager.SetQuantidadeFalas(1);
                     dialogManager.AdicionarFala(dialogManager.Viktor.name, "Alguma hora preciso arrumar essa torneira, está horrivel.");
                     dialogManager.RealizarConversa();
-
 
                     inventory.ClearInventorySlot();
                     inventory.AddItem(copoCheioPrefab.GetComponent<Item>());
@@ -124,6 +127,32 @@ public class InteractionsController : MonoBehaviour
                 else
                 {
                     gameController.FazerComentario("Não preciso fazer nada lá em cima agora...");
+                }
+                break;
+            case "Lanterna":
+                if (gameController.PegouLanterna == false)
+                {
+                    if (gameController.OvniCaiu == true)
+                    {
+                        inventory.AddItem(clickedObject.GetComponent<Item>());
+                        Destroy(clickedObject);
+
+                        gameController.PegouLanterna = true;
+                    }
+                    else
+                    {
+                        gameController.FazerComentario(clickedObject.GetComponent<MyText>().GetOneComentary());
+                    }
+                }
+                break;
+            case "Porta Saida":
+                if(gameController.OvniCaiu == true && gameController.PegouLanterna == true)
+                {
+                    gameController.ChangeToScene("Cena1-ChegadaEmCasa");
+                }
+                else
+                {
+                    gameController.FazerComentario(clickedObject.GetComponent<MyText>().GetOneComentary());
                 }
                 break;
             #endregion
@@ -157,10 +186,19 @@ public class InteractionsController : MonoBehaviour
                 break;
 
             case "Filha":
-                if (gameController.DevePegarFilha == true && gameController.EstaComFilha == false)
+                if (gameController.DevePegarFilha == true)
                 {
-                    gameController.EstaComFilha = true;
+                    if (gameController.EstaComFilha == false)
+                    {
+                        gameController.EstaComFilha = true;
+                    }                    
                 }
+                else
+                {
+                    gameController.FazerComentario(clickedObject.GetComponent<MyText>().GetOneComentary());
+                }
+
+                
                 break;
             #endregion
             #endregion
@@ -168,12 +206,12 @@ public class InteractionsController : MonoBehaviour
             #region UpStairs
             #region Corredor
             case "Porta Quarto Filha":
-                if(gameController.EstaComFilha == true && gameController.ColocouFilhaNaCama == false)
+                if (gameController.EstaComFilha == true && gameController.ColocouFilhaNaCama == false)
                 {
                     gameController.ChangeToScene("Cena4-QuartoFilha");
-                    
+
                 }
-                if(gameController.ColocouFilhaNaCama == true && gameController.OvniCaiu == true)
+                if (gameController.ColocouFilhaNaCama == true && gameController.OvniCaiu == true)
                 {
                     gameController.ChangeToScene("Cena3-Upstairs");
                 }
@@ -182,9 +220,9 @@ public class InteractionsController : MonoBehaviour
             #region Quarto Filha
             case "Cama Filha":
                 Debug.LogWarning("Cliquei na cama da filha");
-                if(gameController.EstaComFilha == true && gameController.ColocouFilhaNaCama == false)
+                if (gameController.EstaComFilha == true && gameController.ColocouFilhaNaCama == false)
                 {
-                    
+
                     gameController.EstaComFilha = false;
                     dialogManager.SetQuantidadeFalas(11);
                     dialogManager.AdicionarFala(dialogManager.Viktor.name, "Como foi hoje na escola filha?");
@@ -196,7 +234,7 @@ public class InteractionsController : MonoBehaviour
 
                     dialogManager.AdicionarFala(dialogManager.Viktor.name, "Não se preocupe querida, deviam ser apenas aviões ou algo parecido.");
                     dialogManager.AdicionarFala(dialogManager.Viktor.name, "Agora deite-se e durma bem. Amanhã precisamos acordar cedo para buscar algumas ferramentas na casa do seu tio");
-                    
+
 
                     dialogManager.AdicionarFala(dialogManager.Filha.name, "Papai, estou com medo de ficar sozinha. E se as luzes voltarem a aparecer?");
                     dialogManager.AdicionarFala(dialogManager.Filha.name, "E se elas me pegarem? Estou com um mau pressentimento!");
@@ -218,9 +256,9 @@ public class InteractionsController : MonoBehaviour
 
     public void OkPressionado()
     {
-        if(gameController.GetSceneName() == "Cena4-QuartoFilha")
+        if (gameController.GetSceneName() == "Cena4-QuartoFilha")
         {
-            if(gameController.EstaComFilha == false && gameController.ColocouFilhaNaCama == false && gameController.OvniCaiu == false)
+            if (gameController.EstaComFilha == false && gameController.ColocouFilhaNaCama == false && gameController.OvniCaiu == false)
             {
                 gameController.ColocouFilhaNaCama = true;
             }

@@ -40,6 +40,7 @@ public class GameController : MonoBehaviour
     [Header("Objetos Interação")]
     #region CONTROLE OBJETOS INTERAÇÃO
     public bool dialogoInicialDentroCasa;
+    public bool dialogoInicialQuarentena;
     public bool DialogoInicialDentroCasa
     {
         get
@@ -157,11 +158,38 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public bool PegouLanterna
+    {
+        get
+        {
+            return pegouLanterna;
+        }
+
+        set
+        {
+            pegouLanterna = value;
+        }
+    }
+
+    public bool DialogoInicialQuarentena
+    {
+        get
+        {
+            return dialogoInicialQuarentena;
+        }
+
+        set
+        {
+            dialogoInicialQuarentena = value;
+        }
+    }
+
     public bool devePegarFilha;
     public bool estaComFilha;
     public bool subiuEscadas;
     public bool colocouFilhaNaCama;
     public bool ovniCaiu;
+    public bool pegouLanterna;
 
 
     #endregion
@@ -170,11 +198,6 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
-
-        //#if UNITY_ANDROID
-        //        onMobile = true;
-        //        ShowDescriptionByMouse = false;
-        //#endif
 
         if (gameObject.tag != "GameController")
             gameObject.tag = "GameController";
@@ -221,11 +244,23 @@ public class GameController : MonoBehaviour
         }
         UpdateInfoScenes();
 
-        if (cenaAtual == Cenas.UpStairs)
+        UpdateInfoControll();
+
+        
+    }
+
+    void UpdateInfoControll()
+    {
+        if (PlayerPrefs.GetInt(PlayerPrefsKeys.ovniCaiu) == 1)
         {
-            if (PlayerPrefs.GetInt(PlayerPrefsKeys.ovniCaiu) == 1)
+            ovniCaiu = true;
+        }
+
+            if (cenaAtual == Cenas.UpStairs)
+        {
+            if (ovniCaiu)
             {
-                ovniCaiu = true;
+                
                 playerBehav.gameObject.transform.position = new Vector3(-12.74f, -1.79f, playerBehav.gameObject.transform.position.z);
             }
             else
@@ -234,7 +269,35 @@ public class GameController : MonoBehaviour
                 playerBehav.gameObject.transform.position = new Vector3(6.36f, -1.79f, playerBehav.gameObject.transform.position.z);
             }
         }
-        if (cenaAtual != Cenas.UpStairs && cenaAtual != Cenas.QuartoDaFilha)
+        if (cenaAtual == Cenas.SalaDeCasa)
+        {
+            if (ovniCaiu)
+            {
+                
+                playerBehav.gameObject.transform.position = new Vector3(-1.82f, -1.08f, playerBehav.gameObject.transform.position.z);
+            }
+            else
+            {
+                playerBehav.gameObject.transform.position = new Vector3(-6.62f, -1.08f, playerBehav.gameObject.transform.position.z);
+            }
+        }
+        if (cenaAtual == Cenas.ChegaEmCasa)
+        {
+            if (ovniCaiu)
+            {
+                playerBehav.gameObject.transform.position = new Vector3(4.42f, -1.95f, playerBehav.gameObject.transform.position.z);
+                playerBehav.Flip();   
+            }
+            else
+            {
+                
+                playerBehav.gameObject.transform.position = new Vector3(1.47f, -1.95f, playerBehav.gameObject.transform.position.z);
+
+            }
+            
+        }
+
+        if (cenaAtual != Cenas.UpStairs && cenaAtual != Cenas.QuartoDaFilha && cenaAtual != Cenas.SalaDeCasa)
         {
             PlayerPrefs.SetInt(PlayerPrefsKeys.ovniCaiu, 0);
         }
@@ -307,6 +370,36 @@ public class GameController : MonoBehaviour
             case Cenas.UpStairs:
                 break;
             case Cenas.QuartoDaFilha:
+                break;
+
+            case Cenas.Quarentena:
+                if (fadeDone == true && DialogoInicialQuarentena == false)
+                {
+                    DialogoInicialQuarentena = true;
+                    dialogManager.SetQuantidadeFalas(15);
+                    dialogManager.AdicionarFala(dialogManager.Viktor.name, "HEY! ALGUÉM ESTÁ AI??");
+                    dialogManager.AdicionarFala(dialogManager.Eric.name, "Finalmente. Depois de 2 meses no coma você acordou.");
+                    dialogManager.AdicionarFala(dialogManager.Viktor.name, "Dois meses? Do que está falando? Quem é você? Onde estou e como vim parar aqui? O que aconteceu com...");
+
+                    dialogManager.AdicionarFala(dialogManager.Eric.name, "Acalme-se meu caro. Sou o doutor responsável por controlar a sua mutação. ");
+                    dialogManager.AdicionarFala(dialogManager.Eric.name, "Você foi atingido quase que fatalmente por um pedaço daquela máquina que caiu em seu terreno.");
+                    dialogManager.AdicionarFala(dialogManager.Eric.name, "Além disso, inalou um poderoso e desconhecido gás proveniente dela.");
+                    dialogManager.AdicionarFala(dialogManager.Eric.name, "É incrível você ainda estar vivo.");
+                    dialogManager.AdicionarFala(dialogManager.Eric.name, "Grande parte de sua cura foi ocasionada pelo estranho gás.");
+                    dialogManager.AdicionarFala(dialogManager.Eric.name, "Vamos descobrir muito sobre ele com você.");
+
+                    dialogManager.AdicionarFala(dialogManager.Viktor.name, "O que fizeram com minha esposa e filha? Onde elas estão?");
+
+                    dialogManager.AdicionarFala(dialogManager.Eric.name, "Elas não sofreram nada com o acidente, estão são e salvas em sua casa.");
+                    dialogManager.AdicionarFala(dialogManager.Eric.name, "Mas precisamos de você aqui. Temos muito para investigar ainda.");
+
+                    dialogManager.AdicionarFala(dialogManager.Viktor.name, "Não, eu quero ver a minha família. Quero sair daqui agora!");
+                    dialogManager.AdicionarFala(dialogManager.Eric.name, "Nós não podemos deixar você sair antes de encerrar o tratamento.");
+                    dialogManager.AdicionarFala(dialogManager.Viktor.name, "NÃO! Eu vou sair daqui agora!");
+
+                    dialogManager.RealizarConversa();
+                    DialogoInicialDentroCasa = true;
+                }
                 break;
         }
     }
