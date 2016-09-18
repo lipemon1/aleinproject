@@ -91,6 +91,7 @@ public class GameController : MonoBehaviour
             jaEntregouAgua = value;
         }
     }
+<<<<<<< HEAD
 
     public bool DevePegarFilha
     {
@@ -164,9 +165,10 @@ public class GameController : MonoBehaviour
     public bool ovniCaiu;
 
 
+=======
+   
+>>>>>>> master
     #endregion
-
-    public DialogueBoxManager dialogManager;
 
     void Awake()
     {
@@ -201,9 +203,12 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+<<<<<<< HEAD
 
         dialogManager = GameObject.FindGameObjectWithTag("DialogManager").GetComponent<DialogueBoxManager>();
 
+=======
+>>>>>>> master
         StartCoroutine(FadeIn(0.0f, timeToFade));
         if (mobileHud == null)
         {
@@ -254,6 +259,7 @@ public class GameController : MonoBehaviour
 
         ManageScenes();
 
+<<<<<<< HEAD
         //if(Input.GetKeyDown(KeyCode.O))
         //{
         //    dialogManager.SetQuantidadeFalas(2);
@@ -262,12 +268,15 @@ public class GameController : MonoBehaviour
         //    dialogManager.RealizarConversa();
         //}
 
+=======
+>>>>>>> master
         //Debug.LogWarning("Active Item: " + GetActiveItem());
 
     }
 
     public void FazerComentario(string texto)
     {
+<<<<<<< HEAD
         dialogManager.MakeComentary(texto);
     }
 
@@ -276,6 +285,13 @@ public class GameController : MonoBehaviour
         return SceneManager.GetActiveScene().name;
     }
 
+=======
+        DialogueBoxManager dialogManager = GameObject.FindGameObjectWithTag("DialogManager").GetComponent<DialogueBoxManager>();
+
+        dialogManager.MakeComentary(texto);
+    }
+
+>>>>>>> master
     void ManageScenes()
     {
         switch (cenaAtual)

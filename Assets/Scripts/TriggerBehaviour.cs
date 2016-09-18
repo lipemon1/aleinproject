@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+<<<<<<< HEAD
 public enum Personagem { VIKTOR, ESPOSA, FILHA, ERIC }
 
 
@@ -61,6 +62,23 @@ public class TriggerBehaviour : MonoBehaviour
     }
 
     
+=======
+public class TriggerBehaviour : MonoBehaviour {
+
+    public bool jaFoiAtivado = false;
+    public string comentario;
+
+	// Use this for initialization
+	void Start () {
+	
+	}
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
+
+>>>>>>> master
 
     public void SetFoiAtivado(bool value)
     {

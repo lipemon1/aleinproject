@@ -30,14 +30,24 @@ public class DialogueBoxManager : MonoBehaviour
         public Image characterSprite;
     }
 
+    public enum Speakers
+    {
+        Player,
+        Other
+    }
     [System.Serializable]
+<<<<<<< HEAD
     // NOME E icone de todos os personagens que falam
     public class CharacterInfo
+=======
+    public class CharactersInfo
+>>>>>>> master
     {
         public string name;
         public Sprite icon;
     }
 
+<<<<<<< HEAD
     [System.Serializable]
     //Array desse tipo recebera o nome e a fala do personagem
     public class Fala
@@ -45,6 +55,9 @@ public class DialogueBoxManager : MonoBehaviour
         public string texto;
         public string nome;
     }
+=======
+    
+>>>>>>> master
 
     public bool inTalk;
     public bool finishTalk;
@@ -64,6 +77,7 @@ public class DialogueBoxManager : MonoBehaviour
     public DialogPersonas playerDialog;
     //public DialogPersonas otherCharacterDialog;
 
+<<<<<<< HEAD
     public CharacterInfo Viktor;
     public CharacterInfo Esposa;
     public CharacterInfo Filha;
@@ -71,14 +85,13 @@ public class DialogueBoxManager : MonoBehaviour
 
     //public int actualSpeaker = 1; // 'index' de quem esta falando no momento, 0 para o jogador, 1 para o outro personagem
     // public int quantidadeFalasBloco = 1;
+=======
+    public int actualSpeaker = 1; // 'index' de quem esta falando no momento, 0 para o jogador, 1 para o outro personagem
+>>>>>>> master
 
-    public int indexBlocoFala = 0;
-    public int indexBlocoConversas = 0;
     private TextTyper textTyper;
 
-    public Fala[] falas;
-
-    public bool isConversa;
+    
 
     // Use this for initialization
     void Start()
@@ -107,6 +120,7 @@ public class DialogueBoxManager : MonoBehaviour
 
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 
+<<<<<<< HEAD
         //falas = new Fala[3];
 
         //for (int i = 0; i < falas.Length; i++)
@@ -160,58 +174,20 @@ public class DialogueBoxManager : MonoBehaviour
     }
     #endregion
 
+=======
+    }
+
+>>>>>>> master
     // Update is called once per frame
     void Update()
     {
         ManagerTalkVariables();
-        //HandleSpeak();
+        HandleSpeak();
     }
+
     void HandleSpeak()
     {
-        //if (startTalk)
-        //{
-        //    startTalk = false;
-
-        //    TextsArrays texts;
-        //    if (isComentary)
-        //    {
-
-        //    }
-        //    else
-        //    {
-        //        Debug.LogWarning("Entrei no else");
-        //        switch (actualSpeaker)
-        //        {
-
-        //            case (int)Speakers.Player: // player
-        //                texts = Player.GetComponent<TextsArrays>();
-
-        //                actualText = texts.GetActualPhrase();
-        //                textTyper.StartToSpeak();
-        //                break;
-
-        //            case (int)Speakers.Other: // outro personagem
-
-        //                texts = otherCharacterDialog.textsArrays;
-
-        //                if (texts.GetEndTalking() == true && finishTalk) // se o personagem ja esta na ultima frase e ja acabou de falar
-        //                {
-        //                    Debug.Log("Não há mais frases");
-        //                }
-        //                else
-        //                {
-        //                    actualText = texts.GetActualPhrase();
-        //                    textTyper.StartToSpeak();
-        //                }
-        //                break;
-        //        }
-        //    }
-        //}
-    }
-
-
-    public void customComentary(Fala[] falas)
-    {
+<<<<<<< HEAD
         actualText = "";
         //isComentary = true;
         finishTalk = false;
@@ -248,6 +224,47 @@ public class DialogueBoxManager : MonoBehaviour
 
         textTyper.StartToSpeak();
         Debug.LogWarning("MakeCUSTOMComentary()");
+=======
+        if (startTalk)
+        {
+            startTalk = false;
+
+            TextsArrays texts;
+            if (isComentary)
+            {
+
+            }
+            else
+            {
+                Debug.LogWarning("Entrei no else");
+                switch (actualSpeaker)
+                {
+
+                    case (int)Speakers.Player: // player
+                        texts = Player.GetComponent<TextsArrays>();
+
+                        actualText = texts.GetActualPhrase();
+                        textTyper.StartToSpeak();
+                        break;
+
+                    case (int)Speakers.Other: // outro personagem
+
+                        texts = otherCharacterDialog.textsArrays;
+
+                        if (texts.GetEndTalking() == true && finishTalk) // se o personagem ja esta na ultima frase e ja acabou de falar
+                        {
+                            Debug.Log("Não há mais frases");
+                        }
+                        else
+                        {
+                            actualText = texts.GetActualPhrase();
+                            textTyper.StartToSpeak();
+                        }
+                        break;
+                }
+            }
+        }
+>>>>>>> master
     }
 
 
@@ -306,6 +323,8 @@ public class DialogueBoxManager : MonoBehaviour
 
     public void OkButtonPressed()
     {
+
+
         if (isComentary)
         {
             isComentary = false;
@@ -313,8 +332,9 @@ public class DialogueBoxManager : MonoBehaviour
             finishTalk = false;
             Hide();
         }
-        else if (isConversa == true)
+        else
         {
+<<<<<<< HEAD
             if (indexBlocoConversas != falas.Length - 1)
             {
                 indexBlocoConversas++;
@@ -322,9 +342,25 @@ public class DialogueBoxManager : MonoBehaviour
                 //textTyper.StartToSpeak();
                 customComentary(falas);
 
-            }
-            else
+=======
+            if (actualSpeaker == (int)Speakers.Player)
             {
+                if (playerDialog.textsArrays.GetEndTalking() == false)
+                {
+                    playerDialog.textsArrays.NextLine();
+                    finishTalk = false;
+                    startTalk = true;
+                }
+                else
+                {
+                    //Hide();
+                    //gameController.SetOnDialogue(false);
+                }
+>>>>>>> master
+            }
+            else if (actualSpeaker == (int)Speakers.Other)
+            {
+<<<<<<< HEAD
                 isComentary = false;
                 gameController.SetOnDialogue(false);
                 finishTalk = false;
@@ -366,6 +402,23 @@ public class DialogueBoxManager : MonoBehaviour
         //        }
         //    }
         //}
+=======
+                if (otherCharacterDialog.textsArrays.GetEndTalking() == false)
+                {
+                    otherCharacterDialog.textsArrays.NextLine();
+                    finishTalk = false;
+                    startTalk = true;
+                }
+                else
+                {
+                    Hide();
+                    gameController.SetOnDialogue(false);
+                }
+            }
+        }
+
+
+>>>>>>> master
     }
 
     void Hide()

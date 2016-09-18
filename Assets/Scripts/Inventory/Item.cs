@@ -36,7 +36,11 @@ public class Item : MonoBehaviour {
     }
 
     void Start()
+<<<<<<< HEAD
     {        
+=======
+    {
+>>>>>>> master
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
     }
