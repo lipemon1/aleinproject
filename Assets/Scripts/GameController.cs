@@ -9,9 +9,12 @@ public class GameController : MonoBehaviour
     public enum Cenas
     {
         ChegaEmCasa,
+        ChegaEmCasaAposOvni,
         SalaDeCasa,
+        SalaDeCasaPosOvniCaiu,
         Cozinha,
         UpStairs,
+        UpStairsPosOvniCaiu,
         QuartoDaFilha,
         Cratera, // tela onde o ovni caiu
         Quarentena
@@ -265,7 +268,9 @@ public class GameController : MonoBehaviour
             HideMobileHud();
 
         }
-        UpdateInfoScenes();
+        SetCenaAtual();
+        Invoke("UpdateInfoScenes",0.1f); // chamando depois de um tempo pq no start é muito cedo pra chamar uma função que esta em outra classe que altera coisa visual
+        //UpdateInfoScenes();
 
         UpdateInfoControll();
 
@@ -308,83 +313,83 @@ public class GameController : MonoBehaviour
 
     void UpdateInfoControll()
     {
-        if (PlayerPrefs.GetInt(PlayerPrefsKeys.ovniCaiu) == 1)
-        {
-            ovniCaiu = true;
-        }
+        //if (PlayerPrefs.GetInt(PlayerPrefsKeys.ovniCaiu) == 1)
+        //{
+        //    ovniCaiu = true;
+        //}
 
-        #region Cena Upstairs
-        if (cenaAtual == Cenas.UpStairs)
-        {
-            if (ovniCaiu)
-            {
+        //#region Cena Upstairs
+        //if (cenaAtual == Cenas.UpStairs)
+        //{
+        //    if (ovniCaiu)
+        //    {
+
+        //        playerBehav.gameObject.transform.position = new Vector3(-12.74f, -1.79f, playerBehav.gameObject.transform.position.z);
+        //    }
+        //    else
+        //    {
+        //        playerBehav.Flip();
+        //        playerBehav.gameObject.transform.position = new Vector3(6.36f, -1.79f, playerBehav.gameObject.transform.position.z);
+        //    }
+        //}
+        //#endregion
+        //#region Cena Sala Casa
+        //else if (cenaAtual == Cenas.SalaDeCasa)
+        //{
+        //    if (ovniCaiu)
+        //    {
                 
-                playerBehav.gameObject.transform.position = new Vector3(-12.74f, -1.79f, playerBehav.gameObject.transform.position.z);
-            }
-            else
-            {
-                playerBehav.Flip();
-                playerBehav.gameObject.transform.position = new Vector3(6.36f, -1.79f, playerBehav.gameObject.transform.position.z);
-            }
-        }
-        #endregion
-        #region Cena Sala Casa
-        else if (cenaAtual == Cenas.SalaDeCasa)
-        {
-            if (ovniCaiu)
-            {
-                
-                playerBehav.gameObject.transform.position = new Vector3(-1.82f, -1.08f, playerBehav.gameObject.transform.position.z);
-            }
-            else
-            {
-                playerBehav.gameObject.transform.position = new Vector3(-6.62f, -1.08f, playerBehav.gameObject.transform.position.z);
-            }
-        }
-        #endregion
+        //        playerBehav.gameObject.transform.position = new Vector3(-1.82f, -1.08f, playerBehav.gameObject.transform.position.z);
+        //    }
+        //    else
+        //    {
+        //        playerBehav.gameObject.transform.position = new Vector3(-6.62f, -1.08f, playerBehav.gameObject.transform.position.z);
+        //    }
+        //}
+        //#endregion
 
-        #region Cena Chega em Casa
-        else if (cenaAtual == Cenas.ChegaEmCasa)
-        {
-            if (ovniCaiu)
-            {
-                playerBehav.gameObject.transform.position = new Vector3(4.42f, -1.95f, playerBehav.gameObject.transform.position.z);
-                playerBehav.Flip();   
-            }
-            else
-            {
+        //#region Cena Chega em Casa
+        //else if (cenaAtual == Cenas.ChegaEmCasa)
+        //{
+        //    if (ovniCaiu)
+        //    {
+        //        playerBehav.gameObject.transform.position = new Vector3(4.42f, -1.95f, playerBehav.gameObject.transform.position.z);
+        //        playerBehav.Flip();   
+        //    }
+        //    else
+        //    {
 
-                playerBehav.gameObject.transform.position = new Vector3(1.47f, -1.95f, playerBehav.gameObject.transform.position.z);
-                playerBehav.Flip();
-            }
+        //        playerBehav.gameObject.transform.position = new Vector3(1.47f, -1.95f, playerBehav.gameObject.transform.position.z);
+        //        playerBehav.Flip();
+        //    }
             
-        }
-        #endregion
-        if (cenaAtual != Cenas.UpStairs && cenaAtual != Cenas.QuartoDaFilha && cenaAtual != Cenas.SalaDeCasa)
-        {
-            PlayerPrefs.SetInt(PlayerPrefsKeys.ovniCaiu, 0);
-        }
+        //}
+        //#endregion
+        //if (cenaAtual != Cenas.UpStairs && cenaAtual != Cenas.QuartoDaFilha && cenaAtual != Cenas.SalaDeCasa)
+        //{
+        //    PlayerPrefs.SetInt(PlayerPrefsKeys.ovniCaiu, 0);
+        //}
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.T))
-        {
-            iTween.ShakePosition(camera.gameObject, OvniCaindoShake.ht);
-        }
-        else if (Input.GetKeyDown(KeyCode.Y))
-        {
-            iTween.ShakePosition(camera.gameObject, porradaTentaculoShake.ht);
-        }
-        else if(Input.GetKeyDown(KeyCode.U))
-        {
-            iTween.ShakePosition(camera.gameObject, porradaViktorShake.ht);
-        }
-        else if(Input.GetKeyDown(KeyCode.I))
-        {
-            iTween.ShakePosition(camera.gameObject, OvniAtingiuChaoShake.ht);
-        }
+        //if(Input.GetKeyDown(KeyCode.T))
+        //{
+        //    iTween.ShakePosition(camera.gameObject, OvniCaindoShake.ht);
+        //}
+        //else if (Input.GetKeyDown(KeyCode.Y))
+        //{
+        //    iTween.ShakePosition(camera.gameObject, porradaTentaculoShake.ht);
+        //}
+        //else if(Input.GetKeyDown(KeyCode.U))
+        //{
+        //    iTween.ShakePosition(camera.gameObject, porradaViktorShake.ht);
+        //}
+        //else if(Input.GetKeyDown(KeyCode.I))
+        //{
+        //    iTween.ShakePosition(camera.gameObject, OvniAtingiuChaoShake.ht);
+        //}
 
         if (onMobile)
         {
@@ -393,20 +398,9 @@ public class GameController : MonoBehaviour
             else
                 ShowMobileHud();
         }
-        UpdateInfoScenes();
+        //UpdateInfoScenes();
 
         ManageScenes();
-
-        //if(Input.GetKeyDown(KeyCode.O))
-        //{
-        //    dialogManager.SetQuantidadeFalas(2);
-        //    dialogManager.AdicionarFala(dialogManager.Viktor.name, "Ola Meninas");
-        //    dialogManager.AdicionarFala(dialogManager.Filha.name, "PAPAIII");
-        //    dialogManager.RealizarConversa();
-        //}
-
-        //Debug.LogWarning("Active Item: " + GetActiveItem());
-
     }
 
     public void FazerComentario(string texto)
@@ -417,6 +411,103 @@ public class GameController : MonoBehaviour
     public string GetSceneName()
     {
         return SceneManager.GetActiveScene().name;
+    }
+
+    public void SetCenaAtual()
+    {
+        if (SceneManager.GetActiveScene().name == "Cena1-ChegadaEmCasa")
+        {
+            cenaAtual = Cenas.ChegaEmCasa;
+            //playerBehav.HideLifeBar();
+            playerBehav.DeveEsconderLifeBar1 = true;
+        }
+        else if (SceneManager.GetActiveScene().name == "Cena1.1-ChegadaEmCasa")
+        {
+            cenaAtual = Cenas.ChegaEmCasaAposOvni;
+            //playerBehav.HideLifeBar();
+            playerBehav.DeveEsconderLifeBar1 = true;
+        }        
+
+        else if (SceneManager.GetActiveScene().name == "Cena2-DentroDeCasa")
+        {
+            cenaAtual = Cenas.SalaDeCasa;
+            //playerBehav.HideLifeBar();
+            playerBehav.DeveEsconderLifeBar1 = true;
+        }
+        else if (SceneManager.GetActiveScene().name == "Cena2.1-DentroDeCasa")
+        {
+            cenaAtual = Cenas.SalaDeCasaPosOvniCaiu;
+            //playerBehav.HideLifeBar();
+            playerBehav.DeveEsconderLifeBar1 = true;
+        }
+        
+
+        else if (SceneManager.GetActiveScene().name == "Cena3-Upstairs")
+        {
+            cenaAtual = Cenas.UpStairs;
+            //playerBehav.HideLifeBar();
+            playerBehav.DeveEsconderLifeBar1 = true;
+        }
+        else if (SceneManager.GetActiveScene().name == "Cena3.1-Upstairs")
+        {
+            cenaAtual = Cenas.UpStairsPosOvniCaiu;
+            //playerBehav.HideLifeBar();
+            playerBehav.DeveEsconderLifeBar1 = true;
+        }
+        else if (SceneManager.GetActiveScene().name == "Cena4-QuartoFilha")
+        {
+            //playerBehav.HideLifeBar();
+            playerBehav.DeveEsconderLifeBar1 = true;
+        }
+        else if (SceneManager.GetActiveScene().name == "Cena5-Quarentena")
+        {
+            //playerBehav.HideLifeBar();
+            playerBehav.DeveEsconderLifeBar1 = true;
+        }
+        else if (SceneManager.GetActiveScene().name == "Cena6-Facility")
+        {
+            //playerBehav.ShowLifeBar();
+        }
+    }
+
+    void UpdateInfoScenes()
+    {
+        if (cenaAtual == Cenas.SalaDeCasa ||
+           cenaAtual == Cenas.Cozinha ||
+           cenaAtual == Cenas.UpStairs ||
+           cenaAtual == Cenas.QuartoDaFilha)
+        {
+            playerBehav.SetCanRun(false);
+            playerBehav.SetCanSneak(false);
+            playerBehav.SetCanAttack(false);
+        }
+        if (cenaAtual == Cenas.ChegaEmCasa)
+        {
+            if (OvniCaiu == false)
+                playerBehav.SetCanRun(false);
+            else
+            {
+                playerBehav.SetCanRun(true);
+            }
+        }
+        else if (cenaAtual == Cenas.UpStairs)
+        {
+            pensamentoM.MostrarPensamento("Coloca-la na cama");
+        }
+
+        else if (cenaAtual == Cenas.UpStairsPosOvniCaiu)
+        {
+            pensamentoM.MostrarPensamento("Descer para investigar");
+        }
+
+        else if (cenaAtual == Cenas.SalaDeCasaPosOvniCaiu)
+        {
+            pensamentoM.MostrarPensamento("Pegar Lanterna");
+        }
+        else if(cenaAtual == Cenas.ChegaEmCasaAposOvni)
+        {
+            pensamentoM.MostrarPensamento("Ir investigar");
+        }
     }
 
     void ManageScenes()
@@ -509,56 +600,7 @@ public class GameController : MonoBehaviour
     /// <summary>
     /// Deve ser chamada toda vez que o jogador entra em outra cena para que os valores das variaveis sejam alterados
     /// </summary>
-    void UpdateInfoScenes()
-    {
-        if (SceneManager.GetActiveScene().name == "Cena1 - ChegadaEmCasa")
-        {
-            cenaAtual = Cenas.ChegaEmCasa;
-            playerBehav.HideLifeBar();
-        }
-        else if (SceneManager.GetActiveScene().name == "Cena2-DentroDeCasa")
-        {
-            cenaAtual = Cenas.SalaDeCasa;
-            playerBehav.HideLifeBar();
-        }
-        else if (SceneManager.GetActiveScene().name == "Cena3-Upstairs")
-        {
-            cenaAtual = Cenas.UpStairs;
-            playerBehav.HideLifeBar();
-        }
-        else if (SceneManager.GetActiveScene().name == "Cena4-QuartoFilha")
-        {
-            playerBehav.HideLifeBar();
-        }
-        else if (SceneManager.GetActiveScene().name == "Cena5-Quarentena")
-        {
-            playerBehav.HideLifeBar();
-        }
-        else if (SceneManager.GetActiveScene().name == "Cena6-Facility")
-        {
-            playerBehav.ShowLifeBar();
-        }
-
-        if (cenaAtual == Cenas.SalaDeCasa ||
-           cenaAtual == Cenas.Cozinha ||
-           cenaAtual == Cenas.UpStairs ||
-           cenaAtual == Cenas.QuartoDaFilha)
-        {
-            playerBehav.SetCanRun(false);
-            playerBehav.SetCanSneak(false);
-            playerBehav.SetCanAttack(false);
-        }
-        if(cenaAtual == Cenas.ChegaEmCasa)
-        {
-            if(OvniCaiu == false)
-                playerBehav.SetCanRun(false);
-            else
-            {
-                playerBehav.SetCanRun(true);
-            }
-        }
-        
-    }
+    
 
     public void DerrubarOvni()
     {

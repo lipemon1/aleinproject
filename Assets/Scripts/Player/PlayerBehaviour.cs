@@ -21,6 +21,19 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+    public bool DeveEsconderLifeBar1
+    {
+        get
+        {
+            return DeveEsconderLifeBar;
+        }
+
+        set
+        {
+            DeveEsconderLifeBar = value;
+        }
+    }
+
     [Header("Testando no Celular?")]
     private bool onMobile; //para saber se estamos no mobile, controle manual
 
@@ -66,6 +79,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     [Header("Flipar No Início")]
     public bool flipOneMoreTime = false;
+
+    private bool DeveEsconderLifeBar;
 
     // Use this for initialization
     void Start()
@@ -118,6 +133,11 @@ public class PlayerBehaviour : MonoBehaviour
     {
         HandleMouseClick();
         InteractionTime();
+
+        if(DeveEsconderLifeBar1 == true)
+        {
+            HideLifeBar();
+        }
 
         if(Input.GetKeyDown(KeyCode.X))
         {

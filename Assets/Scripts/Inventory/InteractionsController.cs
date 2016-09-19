@@ -94,63 +94,86 @@ public class InteractionsController : MonoBehaviour
                 //}
                 break;
             case "Pia":
-                if (gameController.GetActiveItem() == "Copo")
+                if (gameController.GetSceneName() == "Cena2-DentroDeCasa")
                 {
-                    dialogManager.SetQuantidadeFalas(1);
-                    dialogManager.AdicionarFala(dialogManager.Viktor.name, "Alguma hora preciso arrumar essa torneira, está horrivel.");
-                    dialogManager.RealizarConversa();
+                    if (gameController.GetActiveItem() == "Copo")
+                    {
+                        dialogManager.SetQuantidadeFalas(1);
+                        dialogManager.AdicionarFala(dialogManager.Viktor.name, "Alguma hora preciso arrumar essa torneira, está horrivel.");
+                        dialogManager.RealizarConversa();
 
-                    inventory.ClearInventorySlot();
-                    inventory.AddItem(copoCheioPrefab.GetComponent<Item>());
-                    gameController.TemCopo = false;
-                    pensamentoM.MostrarPensamento("Entregar água para Rose");
-                    Debug.LogWarning("Encher Copo!!!!!!!!!!!");
+                        inventory.ClearInventorySlot();
+                        inventory.AddItem(copoCheioPrefab.GetComponent<Item>());
+                        gameController.TemCopo = false;
+                        pensamentoM.MostrarPensamento("Entregar água para Rose");
+                        Debug.LogWarning("Encher Copo!!!!!!!!!!!");
+                    }
+                    else if (gameController.MulherPediuAgua == true)
+                    {
+                        gameController.FazerComentario(clickedObject.GetComponent<MyText>().GetOneComentary());
+                    }
+                    else
+                    {
+                        gameController.FazerComentario("Pia está limpa");
+                    }
                 }
-                else if (gameController.MulherPediuAgua == true)
+                else if (gameController.GetSceneName() == "Cena2.1-DentroDeCasa")
                 {
                     gameController.FazerComentario(clickedObject.GetComponent<MyText>().GetOneComentary());
                 }
-                else
-                {
-                    gameController.FazerComentario("Pia está limpa");
-                }
-                break;
+                    break;
             #endregion
             #region Sala
             case "Escada":
-                if (gameController.DevePegarFilha == true && gameController.EstaComFilha == true)
+                Debug.LogWarning("ESCADASSSS");
+                if (gameController.GetSceneName() == "Cena2-DentroDeCasa")
                 {
-                    Debug.LogWarning("Escadas");
-                    gameController.ChangeToScene("Cena3-Upstairs");
-                    gameController.SubiuEscadas = true;
+                    if (gameController.DevePegarFilha == true && gameController.EstaComFilha == true)
+                    {
+                        Debug.LogWarning("Escadas");
+                        gameController.ChangeToScene("Cena3-Upstairs");
+                        gameController.SubiuEscadas = true;
+                    }
+                    else
+                    {
+                        gameController.FazerComentario("Não preciso fazer nada lá em cima agora...");
+                    }
                 }
-                else
+                else if (gameController.GetSceneName() == "Cena3.1-Upstairs")
                 {
-                    gameController.FazerComentario("Não preciso fazer nada lá em cima agora...");
+                    Debug.LogWarning("Cliquei na escada dps do ovni");
+                    gameController.ChangeToScene("Cena2.1-DentroDeCasa");
                 }
                 break;
             case "Lanterna":
-                if (gameController.PegouLanterna == false)
+                if (gameController.GetSceneName() == "Cena2.1-DentroDeCasa")
                 {
-                    if (gameController.OvniCaiu == true)
+                    if (gameController.PegouLanterna == false)
                     {
                         inventory.AddItem(clickedObject.GetComponent<Item>());
                         Destroy(clickedObject);
 
                         gameController.PegouLanterna = true;
                     }
-                    else
-                    {
-                        gameController.FazerComentario(clickedObject.GetComponent<MyText>().GetOneComentary());
-                    }
+                }
+                else
+                {
+                    gameController.FazerComentario(clickedObject.GetComponent<MyText>().GetOneComentary());
                 }
                 break;
             case "Porta Saida":
-                if(gameController.OvniCaiu == true && gameController.PegouLanterna == true)
+                if (gameController.GetSceneName() == "Cena2.1-DentroDeCasa")
                 {
-                    gameController.ChangeToScene("Cena1-ChegadaEmCasa");
+                    if (gameController.PegouLanterna == true)
+                    {
+                        gameController.ChangeToScene("Cena1.1-ChegadaEmCasa");
+                    }
+                    else
+                    {
+                        gameController.FazerComentario("La fora está muito escuro. Preciso de uma lanterna...");
+                    }
                 }
-                else
+                else if(gameController.GetSceneName() == "Cena2-DentroDeCasa")
                 {
                     gameController.FazerComentario(clickedObject.GetComponent<MyText>().GetOneComentary());
                 }
@@ -190,7 +213,7 @@ public class InteractionsController : MonoBehaviour
                 {
                     if (gameController.EstaComFilha == false)
                     {
-                        
+
                         gameController.EstaComFilha = true;
                         inventory.AddItem(clickedObject.GetComponent<Item>());
                         Destroy(clickedObject);
@@ -201,7 +224,7 @@ public class InteractionsController : MonoBehaviour
                     gameController.FazerComentario(clickedObject.GetComponent<MyText>().GetOneComentary());
                 }
 
-                
+
                 break;
             #endregion
             #endregion
@@ -216,7 +239,7 @@ public class InteractionsController : MonoBehaviour
                 }
                 if (gameController.ColocouFilhaNaCama == true && gameController.OvniCaiu == true)
                 {
-                    gameController.ChangeToScene("Cena3-Upstairs");
+                    gameController.ChangeToScene("Cena3.1-Upstairs");
                 }
                 break;
             #endregion
