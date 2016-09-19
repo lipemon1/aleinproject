@@ -18,8 +18,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/Game/Cena5-Quarentena.unity
   - enabled: 1
+    path: Assets/_Scenes/Game/Cena6-Facility.unity
+  - enabled: 1
     path: Assets/_Scenes/Game/Cena3.1-Upstairs.unity
   - enabled: 1
     path: Assets/_Scenes/Game/Cena2.1-DentroDeCasa.unity
   - enabled: 1
     path: Assets/_Scenes/Game/Cena1.1-ChegadaEmCasa.unity
+  - enabled: 1
+    path: Assets/_Scenes/Game/Cena7-SalaDuto.unity

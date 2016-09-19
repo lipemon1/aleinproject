@@ -166,12 +166,14 @@ public class PlayerBehaviour : MonoBehaviour
         if (canMove == true)
         {
             PlayerMovement();
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Attack();
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Attack();
-        }
+        
+        
 
         CalculateAttack();
     }

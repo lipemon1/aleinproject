@@ -527,6 +527,11 @@ public class GameController : MonoBehaviour
         {
             pensamentoM.MostrarPensamento("Ir investigar");
         }
+        else if(cenaAtual == Cenas.Quarentena)
+        {
+            pensamentoM.EsconderPensamentos();
+            playerBehav.FicarParado();
+        }
     }
 
     void ManageScenes()
@@ -660,6 +665,8 @@ public class GameController : MonoBehaviour
         dialogManager.SetQuantidadeFalas(1);
         dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Viktor.name, "Mas que Me...", 0.2f);
         dialogManager.RealizarConversa();
+
+        ChangeToScene("Cena5-Quarentena");
     }
 
     public void ChangeToScene(string sceneName)
