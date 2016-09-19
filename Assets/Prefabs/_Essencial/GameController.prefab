@@ -55,6 +55,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   copoCheioPrefab: {fileID: 0}
+  filhaPrefab: {fileID: 1000013699720646, guid: e1124b82b1d783243bb15950d71e79fb,
+    type: 2}
   inventory: {fileID: 0}
   dialogManager: {fileID: 0}
 --- !u!114 &114000011297328138

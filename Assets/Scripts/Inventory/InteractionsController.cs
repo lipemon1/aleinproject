@@ -8,19 +8,12 @@ public class InteractionsController : MonoBehaviour
 
     #region Objetos
     public GameObject copoCheioPrefab;
-    //public GameObject cabineDireitaObject;
-    //public GameObject scissorObject;
-    //public GameObject deskObject;
-    //public GameObject faixaObject;
-    //public GameObject deskPrefabObject;
-    //public GameObject faixaPrefabObject;
+    public GameObject filhaPrefab;
+    public GameObject filhaNaCama;
+    public GameObject filhaDpsQueOvnicaiu;
+    public GameObject esposaDepoisDoOvni;
+    
 
-    //public Transform wire;
-    //public Transform scissor;
-    //public Transform desk;
-
-    //public GameObject deskPrefab;
-    //public GameObject faixaPrefab;
     #endregion
 
     public Inventory inventory;
@@ -232,15 +225,28 @@ public class InteractionsController : MonoBehaviour
             #region UpStairs
             #region Corredor
             case "Porta Quarto Filha":
-                if (gameController.EstaComFilha == true && gameController.ColocouFilhaNaCama == false)
-                {
-                    gameController.ChangeToScene("Cena4-QuartoFilha");
+                //if (gameController.EstaComFilha == true && gameController.ColocouFilhaNaCama == false)
+                //{
+                //    gameController.ChangeToScene("Cena4-QuartoFilha");
 
-                }
-                if (gameController.ColocouFilhaNaCama == true && gameController.OvniCaiu == true)
+                //}
+                //if (gameController.ColocouFilhaNaCama == true && gameController.OvniCaiu == true)
+                //{
+                //    gameController.ChangeToScene("Cena3.1-Upstairs");
+                //}
+                if(gameController.GetSceneName() == "Cena4-QuartoFilha")
                 {
-                    gameController.ChangeToScene("Cena3.1-Upstairs");
+                    if(gameController.ColocouFilhaNaCama == true && gameController.OvniCaiu == true)
+                    {
+                        gameController.ChangeToScene("Cena3.1-Upstairs");
+                    }
                 }
+                else if(gameController.GetSceneName() == "Cena3-Upstairs") { 
+                    gameController.ChangeToScene("Cena4-QuartoFilha");
+                }
+
+
+
                 break;
             #endregion
             #region Quarto Filha
@@ -248,26 +254,31 @@ public class InteractionsController : MonoBehaviour
                 Debug.LogWarning("Cliquei na cama da filha");
                 if (gameController.EstaComFilha == true && gameController.ColocouFilhaNaCama == false)
                 {
+                    if(gameController.activeItem == "Filha")
+                    {
+                        inventory.ClearInventorySlot();
+                        pensamentoM.EsconderPensamentos();
+                        filhaNaCama.SetActive(true);
+                        gameController.EstaComFilha = false;
+                        dialogManager.SetQuantidadeFalas(11);
+                        dialogManager.AdicionarFala(dialogManager.Viktor.name, "Como foi hoje na escola filha?");
 
-                    gameController.EstaComFilha = false;
-                    dialogManager.SetQuantidadeFalas(11);
-                    dialogManager.AdicionarFala(dialogManager.Viktor.name, "Como foi hoje na escola filha?");
+                        dialogManager.AdicionarFala(dialogManager.Filha.name, "Foi legal, hoje aprendemos um pouco sobre flores.");
+                        dialogManager.AdicionarFala(dialogManager.Filha.name, "O dia só começou a ficar esquisito quando estava voltando pra casa.");
+                        dialogManager.AdicionarFala(dialogManager.Filha.name, "Vi várias luzes no céu, elas estavam girando muito rápido, depois de um tempo sumiram.");
+                        dialogManager.AdicionarFala(dialogManager.Filha.name, "Fiquei com medo e vim correndo para casa. Contei à mamãe mas ela não acreditou em mim...");
 
-                    dialogManager.AdicionarFala(dialogManager.Filha.name, "Foi legal, hoje aprendemos um pouco sobre flores.");
-                    dialogManager.AdicionarFala(dialogManager.Filha.name, "O dia só começou a ficar esquisito quando estava voltando pra casa.");
-                    dialogManager.AdicionarFala(dialogManager.Filha.name, "Vi várias luzes no céu, elas estavam girando muito rápido, depois de um tempo sumiram.");
-                    dialogManager.AdicionarFala(dialogManager.Filha.name, "Fiquei com medo e vim correndo para casa. Contei à mamãe mas ela não acreditou em mim...");
-
-                    dialogManager.AdicionarFala(dialogManager.Viktor.name, "Não se preocupe querida, deviam ser apenas aviões ou algo parecido.");
-                    dialogManager.AdicionarFala(dialogManager.Viktor.name, "Agora deite-se e durma bem. Amanhã precisamos acordar cedo para buscar algumas ferramentas na casa do seu tio");
+                        dialogManager.AdicionarFala(dialogManager.Viktor.name, "Não se preocupe querida, deviam ser apenas aviões ou algo parecido.");
+                        dialogManager.AdicionarFala(dialogManager.Viktor.name, "Agora deite-se e durma bem. Amanhã precisamos acordar cedo para buscar algumas ferramentas na casa do seu tio");
 
 
-                    dialogManager.AdicionarFala(dialogManager.Filha.name, "Papai, estou com medo de ficar sozinha. E se as luzes voltarem a aparecer?");
-                    dialogManager.AdicionarFala(dialogManager.Filha.name, "E se elas me pegarem? Estou com um mau pressentimento!");
+                        dialogManager.AdicionarFala(dialogManager.Filha.name, "Papai, estou com medo de ficar sozinha. E se as luzes voltarem a aparecer?");
+                        dialogManager.AdicionarFala(dialogManager.Filha.name, "E se elas me pegarem? Estou com um mau pressentimento!");
 
-                    dialogManager.AdicionarFala(dialogManager.Viktor.name, "Não se preocupe Emily.");
-                    dialogManager.AdicionarFala(dialogManager.Viktor.name, "Papai vai deixar a porta aberta para que se qualquer coisa acontecer você avisar a mim e sua mãe.");
-                    dialogManager.RealizarConversa();
+                        dialogManager.AdicionarFala(dialogManager.Viktor.name, "Não se preocupe Emily.");
+                        dialogManager.AdicionarFala(dialogManager.Viktor.name, "Papai vai deixar a porta aberta para que se qualquer coisa acontecer você avisar a mim e sua mãe.");
+                        dialogManager.RealizarConversa();
+                    }
                 }
                 break;
             #endregion
@@ -278,6 +289,18 @@ public class InteractionsController : MonoBehaviour
                 break;
         }
 
+    }
+
+    public void OvniAtingiuChao()
+    {
+        filhaNaCama.SetActive(false);
+        filhaDpsQueOvnicaiu.SetActive(true);
+        esposaDepoisDoOvni.SetActive(true);
+    }
+
+    public void AdicionarFilhaAoInventario()
+    {
+        inventory.AddItem(filhaPrefab.GetComponent<Item>());
     }
 
     public void OkPressionado()

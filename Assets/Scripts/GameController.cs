@@ -17,7 +17,8 @@ public class GameController : MonoBehaviour
         UpStairsPosOvniCaiu,
         QuartoDaFilha,
         Cratera, // tela onde o ovni caiu
-        Quarentena
+        Quarentena,
+        Facility
     }
     [System.Serializable]
     public class ScreenShake
@@ -220,6 +221,7 @@ public class GameController : MonoBehaviour
 
     public DialogueBoxManager dialogManager;
     PensamentosManager pensamentoM;
+    InteractionsController interacController;
 
     void Awake()
     {
@@ -252,6 +254,7 @@ public class GameController : MonoBehaviour
 
         dialogManager = GameObject.FindGameObjectWithTag("DialogManager").GetComponent<DialogueBoxManager>();
         pensamentoM = gameObject.GetComponent<PensamentosManager>();
+        interacController = gameObject.GetComponent<InteractionsController>();
 
         StartCoroutine(FadeIn(0.0f, timeToFade));
         if (mobileHud == null)
@@ -456,16 +459,19 @@ public class GameController : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == "Cena4-QuartoFilha")
         {
+            cenaAtual = Cenas.QuartoDaFilha;
             //playerBehav.HideLifeBar();
             playerBehav.DeveEsconderLifeBar1 = true;
         }
         else if (SceneManager.GetActiveScene().name == "Cena5-Quarentena")
         {
+            cenaAtual = Cenas.Quarentena;
             //playerBehav.HideLifeBar();
             playerBehav.DeveEsconderLifeBar1 = true;
         }
         else if (SceneManager.GetActiveScene().name == "Cena6-Facility")
         {
+            cenaAtual = Cenas.Facility;
             //playerBehav.ShowLifeBar();
         }
     }
@@ -490,9 +496,15 @@ public class GameController : MonoBehaviour
                 playerBehav.SetCanRun(true);
             }
         }
-        else if (cenaAtual == Cenas.UpStairs)
+        else if(cenaAtual == Cenas.QuartoDaFilha)
         {
             pensamentoM.MostrarPensamento("Coloca-la na cama");
+            interacController.AdicionarFilhaAoInventario();
+        }
+        else if (cenaAtual == Cenas.UpStairs)
+        {
+            pensamentoM.MostrarPensamento("Levar Filha ao quarto");
+            interacController.AdicionarFilhaAoInventario();
         }
 
         else if (cenaAtual == Cenas.UpStairsPosOvniCaiu)
@@ -619,8 +631,10 @@ public class GameController : MonoBehaviour
     public void OvniAtingiuOChao()
     {
         OvniCaiu = true;
-        dialogManager.SetQuantidadeFalas(3);
+        interacController.OvniAtingiuChao();
+        dialogManager.SetQuantidadeFalas(4);
         dialogManager.AdicionarFala(dialogManager.Filha.name, "PAPAAAAAAAI!!");
+        dialogManager.AdicionarFala(dialogManager.Esposa.name, "O que foi isso??");
         dialogManager.AdicionarFala(dialogManager.Viktor.name, "Fiquem aqui dentro, vou lá fora ver o que houve");
         dialogManager.AdicionarFala(dialogManager.Viktor.name, "Se acontecer alguma coisa gritem que eu volto correndo!");
         dialogManager.RealizarConversa();

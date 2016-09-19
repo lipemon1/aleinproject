@@ -293,50 +293,19 @@ public class DialogueBoxManager : MonoBehaviour
                 GameObject.FindGameObjectWithTag("GameController").GetComponent<InteractionsController>().OkPressionado();
                 Hide();
             }
-        }
-        //else
-        //{
-        //    if (actualSpeaker == (int)Speakers.Player)
-        //    {
-        //        if (playerDialog.textsArrays.GetEndTalking() == false)
-        //        {
-        //            playerDialog.textsArrays.NextLine();
-        //            finishTalk = false;
-        //            startTalk = true;
-        //        }
-        //        else
-        //        {
-        //            //Hide();
-        //            //gameController.SetOnDialogue(false);
-        //        }
-        //    }
-        //    else if (actualSpeaker == (int)Speakers.Other)
-        //    {
-        //        if (otherCharacterDialog.textsArrays.GetEndTalking() == false)
-        //        {
-        //            otherCharacterDialog.textsArrays.NextLine();
-        //            finishTalk = false;
-        //            startTalk = true;
-        //        }
-        //        else
-        //        {
-        //            Hide();
-        //            gameController.SetOnDialogue(false);
-        //        }
-        //    }
-        //}
+        }        
     }
 
     void Hide()
     {
-        canvasGroup.alpha = 0f; //this makes everything transparent
-        canvasGroup.blocksRaycasts = false; //this prevents the UI element to receive input events
+        canvasGroup.alpha = 0f; //faz o canvas grupo ficar transparente
+        canvasGroup.blocksRaycasts = false; //bloquei o click
     }
 
     void Show()
     {
-        canvasGroup.alpha = 1f; //this makes everything transparent
-        canvasGroup.blocksRaycasts = true; //this prevents the UI element to receive input events
+        canvasGroup.alpha = 1f; 
+        canvasGroup.blocksRaycasts = true; 
     }
 
     public void SetInTalk(bool value)

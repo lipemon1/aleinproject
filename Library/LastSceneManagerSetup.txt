@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/_Scenes/Game/Cena5-Quarentena.unity
+- path: Assets/_Scenes/Game/Cena2-DentroDeCasa.unity
   isLoaded: 1
   isActive: 1
