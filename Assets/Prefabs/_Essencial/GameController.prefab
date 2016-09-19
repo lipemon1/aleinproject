@@ -23,6 +23,7 @@ GameObject:
   - 114: {fileID: 114000011721011244}
   - 114: {fileID: 114000011259151908}
   - 114: {fileID: 114000011297328138}
+  - 114: {fileID: 114000013157314234}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -37,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011911961268}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.35, y: 0, z: 0}
+  m_LocalPosition: {x: 455.775, y: 25.760002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -96,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40b08a02bcbd8e7499759d8684f5e699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onMobile: 0
+  onMobile: 1
   onDialogue: 0
   ShowDescriptionByMouse: 1
   cenaAtual: 3
@@ -124,10 +125,39 @@ MonoBehaviour:
   mulherPediuAgua: 0
   jaEntregouAgua: 0
   devePegarFilha: 0
-  estaComFilha: 0
+  estaComFilha: 1
   subiuEscadas: 0
   colocouFilhaNaCama: 0
   ovniCaiu: 0
   pegouLanterna: 0
   dialogoInicialQuarentena: 0
   dialogManager: {fileID: 0}
+--- !u!114 &114000013157314234
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011911961268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7558683c3a3ae94dbd32dc40588ab53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundMusic: []
+  sfx: []
+  viktorVoices: []
+  thomasVoices: []
+  roseVoices: []
+  emilyVoices: []
+  backgroundMusicAudioSource: []
+  sfxAudioSource: []
+  viktorVoicesAudioSource: []
+  thomasVoicesAudioSource: []
+  roseVoicesAudioSource: []
+  emilyVoicesAudioSource: []
+  backgroundMusicAudioSourceLenght: []
+  sfxAudioSourceLenght: []
+  viktorVoicesAudioSourceLenght: []
+  thomasVoicesAudioSourceLenght: []
+  roseVoicesAudioSourceLenght: []
+  emilyVoicesAudioSourceLenght: []
