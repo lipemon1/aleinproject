@@ -11,6 +11,7 @@ public class DoctorAI : MonoBehaviour {
     public bool startDoctorAI = false; //para controlar quando a AI do médico deve começar
     public int playerLayerNumber = 8;
     public int enemyLayerNumber = 9;
+    public bool isAlive = true;
 
     [Header("Detecção do Jogador")]
     public bool spotted; //se viu o jogador
@@ -32,15 +33,47 @@ public class DoctorAI : MonoBehaviour {
     public bool isGoingRight = true; //verifica se esta indo para a direita ou esquerda
     public float timeToLookAround = 1f; //tempo que o medico fica parado olhando para uma direção
 
+    [Header("Animações")]
+    public Animator doctorAnimator;
+
 	// Use this for initialization
 	void Start () {
-        eye = transform.GetChild(0).transform; //pega o inicio de visao do médico
-        endViewSight = transform.GetChild(1).transform; //pega o final da visao do médico
-        timeToCallSliderGameObject = transform.GetChild(2).transform.GetChild(0).transform.gameObject;// pega o gameobject do slider
-        timeToCallGuardUI = timeToCallSliderGameObject.GetComponent<Slider>(); //pega o slider
-        playerAlert = transform.GetChild(3).gameObject; // pega o sinal de alerta
 
-        player = GameObject.FindWithTag("Player");  
+        if(eye == null)
+        {
+            eye = transform.GetChild(0).transform; //pega o inicio de visao do médico
+        }
+
+        if (endViewSight == null)
+        {
+            endViewSight = transform.GetChild(1).transform; //pega o final da visao do médico
+        }
+
+        if (timeToCallSliderGameObject == null)
+        {
+            timeToCallSliderGameObject = transform.GetChild(2).transform.GetChild(0).transform.gameObject;// pega o gameobject do slider
+        }
+
+        if (timeToCallGuardUI == null)
+        {
+            timeToCallGuardUI = timeToCallSliderGameObject.GetComponent<Slider>(); //pega o slider
+        }
+
+        if(playerAlert == null)
+        {
+            playerAlert = transform.GetChild(3).gameObject; // pega o sinal de alerta
+        }
+        
+        if(player == null)
+        {
+            player = GameObject.FindWithTag("Player");
+        }
+
+        if(doctorAnimator == null)
+        {
+            doctorAnimator = GetComponent<Animator>();
+        }
+               
 
         InitiateDoctorAI(); //Inicia a lógica do doctor
 
@@ -49,35 +82,37 @@ public class DoctorAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        if (startDoctorAI)
+        if (isAlive)
         {
-            //vai procurar o jogador até que encontre uma vez
-            if (!alreadySpotted) //se ainda nao encontrou o jogador
+            if (startDoctorAI)
             {
-                LookingForPlayer(); //continua procurando
-            }
-            else //se encontrou o jogador
-            {
-                playerAlert.SetActive(true); //exibe sinal de alerta
-                if (!alreadyCancelInvoke)
+                //vai procurar o jogador até que encontre uma vez
+                if (!alreadySpotted) //se ainda nao encontrou o jogador
                 {
-                    Debug.Log("Cancelando o LookingAround"); //apenas debug
-                    CancelInvoke("LookingAround"); //cancela o invoke
-                    alreadyCancelInvoke = true; //cancela o invoke para ficar olhando para os lados
+                    LookingForPlayer(); //continua procurando
+                }
+                else //se encontrou o jogador
+                {
+                    playerAlert.SetActive(true); //exibe sinal de alerta
+                    if (!alreadyCancelInvoke)
+                    {
+                        Debug.Log("Cancelando o LookingAround"); //apenas debug
+                        CancelInvoke("LookingAround"); //cancela o invoke
+                        alreadyCancelInvoke = true; //cancela o invoke para ficar olhando para os lados
 
-                    StartCallingGuard(); //começa a chamar um guarda
+                        StartCallingGuard(); //começa a chamar um guarda
+                    }
+                }
+
+                //se estiver chamando um guarda
+                if (callingGuard)
+                {
+                    CallingGuard();
                 }
             }
 
-            //se estiver chamando um guarda
-            if (callingGuard)
-            {
-                CallingGuard();
-            }
+            Physics2D.IgnoreLayerCollision(playerLayerNumber, enemyLayerNumber); //ignora colisoes de quem estiver nessas layers
         }
-
-        Physics2D.IgnoreLayerCollision(playerLayerNumber, enemyLayerNumber); //ignora colisoes de quem estiver nessas layers
     }
 
     /// <summary>
@@ -97,6 +132,7 @@ public class DoctorAI : MonoBehaviour {
         Debug.Log("Iniciando chmada de um médico");
         timeToCallSliderGameObject.SetActive(true); //habilita o gameobject do slider
         callingGuard = true; //habilita a chamada para o guarda
+        doctorAnimator.SetTrigger("Calling Guard");
     }
 
     /// <summary>
@@ -188,7 +224,8 @@ public class DoctorAI : MonoBehaviour {
     /// </summary>
     void Flip()
     {
-        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        //transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        transform.Rotate(Vector3.up * 180); //o flip tem que ser por rotation pra a animação não bugar inteira =/
         isGoingRight = !isGoingRight;
     }
 
@@ -199,5 +236,12 @@ public class DoctorAI : MonoBehaviour {
     {
         startDoctorAI = true;
         InvokeRepeating("LookingAround", 0f, timeToLookAround);
+    }
+
+    public void KillDoctor()
+    {
+        isAlive = false;
+        timeToCallSliderGameObject.transform.parent.gameObject.SetActive(false);
+        //Destroy(timeToCallSliderGameObject.transform.parent.gameObject);
     }
 }

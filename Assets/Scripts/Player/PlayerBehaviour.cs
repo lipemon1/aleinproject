@@ -38,6 +38,13 @@ public class PlayerBehaviour : MonoBehaviour
     public bool sneaking; //controle para saber se esta em modo sneaking ou não
     public bool walking; //controle para sabe se esta andando ou ano
 
+    [Header("Variáveis para Combate")]
+    public Transform hand;
+    public Transform punchLimit;
+    public bool hitSomeEnemy;
+    public Animator enemyAnimator;
+
+    [Header("Outros")]
     private float directionX; //valor do input do jogador
     private GameController gameController;
 
@@ -103,6 +110,8 @@ public class PlayerBehaviour : MonoBehaviour
         {
             Flip();
         }
+
+        runningSpeed = walkingSpeed * runMultiplier;
     }
 
     public void HideLifeBar()
@@ -138,6 +147,70 @@ public class PlayerBehaviour : MonoBehaviour
         {
             PlayerMovement();
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Attack();
+        }
+
+        CalculateAttack();
+    }
+
+    void CalculateAttack()
+    {
+        Debug.DrawLine(hand.position, punchLimit.position, Color.blue); //desenha uma linha para debug (ver na Scene)
+
+        RaycastHit2D hit = Physics2D.Raycast(hand.position, punchLimit.position);
+
+        if (hit != null && hit.collider != null)
+        {
+            if (hit.collider.gameObject.CompareTag("Enemy"))
+            {
+                hitSomeEnemy = true;
+                enemyAnimator = hit.collider.gameObject.GetComponent<Animator>();
+            }
+            else
+            {
+                hitSomeEnemy = false;
+            }
+        }
+    }
+
+    void Attack()
+    {
+        int punch;
+        if(directionX != 0) //esta em movimento
+        {
+            punch = (int)Random.Range(1, 3);
+            PlayerAnimator.SetTrigger("Punch" + punch.ToString());
+        } else
+        {
+            punch = (int)Random.Range(1, 4);
+            PlayerAnimator.SetTrigger("Punch" + punch.ToString());
+        }
+
+        if (hitSomeEnemy)
+        {
+            switch (punch)
+            {
+                case 1:
+                    Invoke("KillEnemyPunched", 0.42f);
+                    break;
+                case 2:
+                    Invoke("KillEnemyPunched", 0.42f);
+                    break;
+                case 3:
+                    Invoke("KillEnemyPunched", 0.23f);
+                    break;
+            }
+        }
+    }
+
+    void KillEnemyPunched()
+    {
+        enemyAnimator.SetTrigger("Punched");
+        enemyAnimator.gameObject.GetComponent<DoctorAI>().KillDoctor();
+        
     }
 
     public void AplicarDano(float value)
@@ -163,20 +236,46 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
         //Código para pegar quando o jogador apertar shift esquerdo para correr
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift))
         {
             //ToggleRun(); //função de correr            
             running = true;
-            PlayerAnimator.SetBool("Running", true);
-            actualSpeed *= runMultiplier;
+            PlayerAnimator.SetBool("Running", running);
+            actualSpeed = runningSpeed;
+        } else
+        {
+            //ToggleRun(); //função de correr            
+            running = false;
+            PlayerAnimator.SetBool("Running", running);
+            actualSpeed = walkingSpeed;
         }
 
+        if (!running)
+        {
+            //Código para pegar quando o jogador apertar control esquerdo para
+            //entrar no modo sneaking
+            if (Input.GetKey(KeyCode.LeftControl))
+            {
+                sneaking = true;
+                PlayerAnimator.SetBool("Sneaking", sneaking);
+                actualSpeed = sneakingSpeed;
+            }
+            else
+            {
+                sneaking = false;
+                PlayerAnimator.SetBool("Sneaking", sneaking);
+                actualSpeed = walkingSpeed;
+            }
+        }
+
+        /*
         //Código para pegar quando o jogador apertar control esquerdo para
         //entrar no modo sneaking
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             ToggleSneaking(); //função para sneakar
         }
+        */
 
         if (facingRight && directionX < 0)
         {
@@ -187,9 +286,17 @@ public class PlayerBehaviour : MonoBehaviour
             Flip();
         }
 
+        if (sneaking && walking)
+        {
+            PlayerAnimator.SetBool("Sneaking", true);
+        } else
+        {
+            PlayerAnimator.SetBool("Sneaking", false);
+        }
+
         //velocidade utilizada na movimentação recebe a 
         //velocidade de andar por padrao
-        actualSpeed = walkingSpeed;
+        //actualSpeed = walkingSpeed;
         walking = true; //jogador sempre está andando?
 
         //Para utilizar os botoões de trigger descomenta a linha abaixo
@@ -197,17 +304,21 @@ public class PlayerBehaviour : MonoBehaviour
 
         //Enquanto o jogador pressionar o botão de correr
         //o jogador terá sua velocidade multiplicada por "runMultiplier"
-        if (CrossPlatformInputManager.GetButton("Run"))
+        if (onMobile)
         {
-            PlayerAnimator.SetBool("Running", true);
-            actualSpeed *= runMultiplier;
-            running = true;
+            if (CrossPlatformInputManager.GetButton("Run"))
+            {
+                PlayerAnimator.SetBool("Running", true);
+                actualSpeed *= runMultiplier;
+                running = true;
+            }
+            else
+            {
+                PlayerAnimator.SetBool("Running", false);
+                running = false;
+            }
         }
-        else
-        {
-            PlayerAnimator.SetBool("Running", false);
-            running = false;
-        }
+       
 
         //linha que movimento o jogador
         

@@ -511,32 +511,33 @@ public class GameController : MonoBehaviour
     /// </summary>
     void UpdateInfoScenes()
     {
+        
         if (SceneManager.GetActiveScene().name == "Cena1 - ChegadaEmCasa")
         {
             cenaAtual = Cenas.ChegaEmCasa;
-            playerBehav.HideLifeBar();
+           // playerBehav.HideLifeBar();
         }
         else if (SceneManager.GetActiveScene().name == "Cena2-DentroDeCasa")
         {
             cenaAtual = Cenas.SalaDeCasa;
-            playerBehav.HideLifeBar();
+           // playerBehav.HideLifeBar();
         }
         else if (SceneManager.GetActiveScene().name == "Cena3-Upstairs")
         {
             cenaAtual = Cenas.UpStairs;
-            playerBehav.HideLifeBar();
+           // playerBehav.HideLifeBar();
         }
         else if (SceneManager.GetActiveScene().name == "Cena4-QuartoFilha")
         {
-            playerBehav.HideLifeBar();
+           // playerBehav.HideLifeBar();
         }
         else if (SceneManager.GetActiveScene().name == "Cena5-Quarentena")
         {
-            playerBehav.HideLifeBar();
+           // playerBehav.HideLifeBar();
         }
         else if (SceneManager.GetActiveScene().name == "Cena6-Facility")
         {
-            playerBehav.ShowLifeBar();
+           // playerBehav.ShowLifeBar();
         }
 
         if (cenaAtual == Cenas.SalaDeCasa ||

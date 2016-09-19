@@ -615,67 +615,67 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013926781408, guid: 570b62da850428f46adfb542bada9c3b, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.20124361
+      value: 0.20119098
       objectReference: {fileID: 0}
     - target: {fileID: 4000013926781408, guid: 570b62da850428f46adfb542bada9c3b, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.97954124
+      value: 0.97955203
       objectReference: {fileID: 0}
     - target: {fileID: 4000013849855542, guid: 570b62da850428f46adfb542bada9c3b, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.048211865
+      value: 0.048204247
       objectReference: {fileID: 0}
     - target: {fileID: 4000013849855542, guid: 570b62da850428f46adfb542bada9c3b, type: 2}
       propertyPath: m_LocalRotation.w
-      value: -0.9988371
+      value: -0.99883753
       objectReference: {fileID: 0}
     - target: {fileID: 4000012904750596, guid: 570b62da850428f46adfb542bada9c3b, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.9997775
+      value: 0.99977744
       objectReference: {fileID: 0}
     - target: {fileID: 4000012904750596, guid: 570b62da850428f46adfb542bada9c3b, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.021094978
+      value: 0.02109772
       objectReference: {fileID: 0}
     - target: {fileID: 4000012451132648, guid: 570b62da850428f46adfb542bada9c3b, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.9967841
+      value: 0.9967832
       objectReference: {fileID: 0}
     - target: {fileID: 4000012451132648, guid: 570b62da850428f46adfb542bada9c3b, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.08013393
+      value: 0.08014498
       objectReference: {fileID: 0}
     - target: {fileID: 4000011994619232, guid: 570b62da850428f46adfb542bada9c3b, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.33605412
+      value: 0.3360769
       objectReference: {fileID: 0}
     - target: {fileID: 4000011994619232, guid: 570b62da850428f46adfb542bada9c3b, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.94184273
+      value: 0.94183457
       objectReference: {fileID: 0}
     - target: {fileID: 4000011930609652, guid: 570b62da850428f46adfb542bada9c3b, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.99958247
+      value: 0.9995819
       objectReference: {fileID: 0}
     - target: {fileID: 4000011930609652, guid: 570b62da850428f46adfb542bada9c3b, type: 2}
       propertyPath: m_LocalRotation.w
-      value: -0.028894022
+      value: -0.028914519
       objectReference: {fileID: 0}
     - target: {fileID: 4000011084475630, guid: 570b62da850428f46adfb542bada9c3b, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.034996428
+      value: 0.034986656
       objectReference: {fileID: 0}
     - target: {fileID: 4000011084475630, guid: 570b62da850428f46adfb542bada9c3b, type: 2}
       propertyPath: m_LocalRotation.w
-      value: -0.99938744
+      value: -0.9993878
       objectReference: {fileID: 0}
     - target: {fileID: 4000010758237762, guid: 570b62da850428f46adfb542bada9c3b, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.99465597
+      value: 0.99465674
       objectReference: {fileID: 0}
     - target: {fileID: 4000010758237762, guid: 570b62da850428f46adfb542bada9c3b, type: 2}
       propertyPath: m_LocalRotation.w
-      value: -0.103245296
+      value: -0.103237465
       objectReference: {fileID: 0}
     - target: {fileID: 114000011378714900, guid: 570b62da850428f46adfb542bada9c3b,
         type: 2}
@@ -1133,6 +1133,11 @@ Prefab:
     - target: {fileID: 4000013957631688, guid: c46eae87e7408eb4985cc9cd8d53bf2a, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011955801576, guid: c46eae87e7408eb4985cc9cd8d53bf2a,
+        type: 2}
+      propertyPath: onMobile
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c46eae87e7408eb4985cc9cd8d53bf2a, type: 2}
