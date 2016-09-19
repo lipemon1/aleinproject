@@ -42,6 +42,7 @@ public class GameController : MonoBehaviour
     private Camera camera;
 
     PlayerBehaviour playerBehav;
+    
     public string activeItem = "";
     public bool mouseOverUI;
 
@@ -50,6 +51,8 @@ public class GameController : MonoBehaviour
     public ScreenShake OvniAtingiuChaoShake;
     public ScreenShake porradaTentaculoShake;
     public ScreenShake porradaViktorShake;
+
+    public bool ViktorJaehMonstro;
 
     [Header("Objetos Interação")]
     #region CONTROLE OBJETOS INTERAÇÃO
@@ -213,6 +216,7 @@ public class GameController : MonoBehaviour
     #endregion
 
     public DialogueBoxManager dialogManager;
+    PensamentosManager pensamentoM;
 
     void Awake()
     {
@@ -244,6 +248,7 @@ public class GameController : MonoBehaviour
     {
 
         dialogManager = GameObject.FindGameObjectWithTag("DialogManager").GetComponent<DialogueBoxManager>();
+        pensamentoM = gameObject.GetComponent<PensamentosManager>();
 
         StartCoroutine(FadeIn(0.0f, timeToFade));
         if (mobileHud == null)
@@ -422,7 +427,10 @@ public class GameController : MonoBehaviour
 
                 break;
             case Cenas.SalaDeCasa:
-                playerBehav.FicarParado();
+                if(DialogoInicialDentroCasa == false)
+                {
+                    playerBehav.FicarParado();
+                }
                 if (fadeDone == true && DialogoInicialDentroCasa == false)
                 {
                     DialogoInicialDentroCasa = true;
@@ -481,13 +489,20 @@ public class GameController : MonoBehaviour
 
     public void BotaoOk()
     {
+
         if (dialogoInicialDentroCasa == true && mulherPediuAgua == false)
         {
             mulherPediuAgua = true;
+            pensamentoM.MostrarPensamento("Pegar água na cozinha");
         }
         else if (JaEntregouAgua == true && DevePegarFilha == false)
         {
+            pensamentoM.MostrarPensamento("Levar filha para o quarto");
             DevePegarFilha = true;
+        }
+        if(DialogoInicialDentroCasa == true)
+        {
+            playerBehav.CanMove = true;
         }
     }
 
@@ -499,14 +514,29 @@ public class GameController : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Cena1 - ChegadaEmCasa")
         {
             cenaAtual = Cenas.ChegaEmCasa;
+            playerBehav.HideLifeBar();
         }
         else if (SceneManager.GetActiveScene().name == "Cena2-DentroDeCasa")
         {
             cenaAtual = Cenas.SalaDeCasa;
+            playerBehav.HideLifeBar();
         }
         else if (SceneManager.GetActiveScene().name == "Cena3-Upstairs")
         {
             cenaAtual = Cenas.UpStairs;
+            playerBehav.HideLifeBar();
+        }
+        else if (SceneManager.GetActiveScene().name == "Cena4-QuartoFilha")
+        {
+            playerBehav.HideLifeBar();
+        }
+        else if (SceneManager.GetActiveScene().name == "Cena5-Quarentena")
+        {
+            playerBehav.HideLifeBar();
+        }
+        else if (SceneManager.GetActiveScene().name == "Cena6-Facility")
+        {
+            playerBehav.ShowLifeBar();
         }
 
         if (cenaAtual == Cenas.SalaDeCasa ||

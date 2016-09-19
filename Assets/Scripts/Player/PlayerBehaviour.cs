@@ -70,10 +70,7 @@ public class PlayerBehaviour : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
-
         canMove = true;
-
 
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 
@@ -106,6 +103,15 @@ public class PlayerBehaviour : MonoBehaviour
         {
             Flip();
         }
+    }
+
+    public void HideLifeBar()
+    {
+        sliderLife.SetActive(false);
+    }
+    public void ShowLifeBar()
+    {
+        sliderLife.SetActive(true);
     }
 
     void Update()

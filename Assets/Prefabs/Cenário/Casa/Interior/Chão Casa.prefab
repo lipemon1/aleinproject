@@ -34,9 +34,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010279764206}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.04, y: -4.5, z: 1}
-  m_LocalScale: {x: 8.688278, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -7.09, y: -2.83, z: 1}
+  m_LocalScale: {x: 0.37018755, y: 0.20721072, z: 0.20721072}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -47,14 +47,14 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010279764206}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 1.25, y: 0.92888117}
+  m_Offset: {x: 0.028258255, y: -1.1763483}
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 1.8577623}
+  m_Size: {x: 9.945412, y: 5.0426726}
 --- !u!212 &212000011963985902
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -83,8 +83,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1d0c184845252df44a655359de388cb8, type: 3}
+  m_SortingOrder: -15
+  m_Sprite: {fileID: 21300000, guid: 5d0d8800c17fac04b86bbd8f89be9848, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

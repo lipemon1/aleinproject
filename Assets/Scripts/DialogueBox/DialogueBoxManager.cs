@@ -65,6 +65,7 @@ public class DialogueBoxManager : MonoBehaviour
     //public DialogPersonas otherCharacterDialog;
 
     public CharacterInfo Viktor;
+    public CharacterInfo ViktorMonstro;
     public CharacterInfo Esposa;
     public CharacterInfo Filha;
     public CharacterInfo Eric;
@@ -106,18 +107,6 @@ public class DialogueBoxManager : MonoBehaviour
         }
 
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-
-        //falas = new Fala[3];
-
-        //for (int i = 0; i < falas.Length; i++)
-        //{
-        //    falas[i] = new Fala();
-        //}
-
-
-        //customComentary(falas);
-        //customComentary("Fala Vagabunda", Viktor.name);
-        //customComentary("Falei seu cuzudo", Esposa.name);
 
     }
 
@@ -164,51 +153,12 @@ public class DialogueBoxManager : MonoBehaviour
     void Update()
     {
         ManagerTalkVariables();
-        //HandleSpeak();
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            OkButtonPressed();
+        }
+        
     }
-    void HandleSpeak()
-    {
-        //if (startTalk)
-        //{
-        //    startTalk = false;
-
-        //    TextsArrays texts;
-        //    if (isComentary)
-        //    {
-
-        //    }
-        //    else
-        //    {
-        //        Debug.LogWarning("Entrei no else");
-        //        switch (actualSpeaker)
-        //        {
-
-        //            case (int)Speakers.Player: // player
-        //                texts = Player.GetComponent<TextsArrays>();
-
-        //                actualText = texts.GetActualPhrase();
-        //                textTyper.StartToSpeak();
-        //                break;
-
-        //            case (int)Speakers.Other: // outro personagem
-
-        //                texts = otherCharacterDialog.textsArrays;
-
-        //                if (texts.GetEndTalking() == true && finishTalk) // se o personagem ja esta na ultima frase e ja acabou de falar
-        //                {
-        //                    Debug.Log("Não há mais frases");
-        //                }
-        //                else
-        //                {
-        //                    actualText = texts.GetActualPhrase();
-        //                    textTyper.StartToSpeak();
-        //                }
-        //                break;
-        //        }
-        //    }
-        //}
-    }
-
 
     public void customComentary(Fala[] falas)
     {
@@ -224,8 +174,17 @@ public class DialogueBoxManager : MonoBehaviour
         // Atualiza as informações da ui pelo nome do personagem
         if (falas[indexBlocoConversas].nome == Viktor.name)
         {
-            dialogObjects.characterSprite.sprite = Viktor.icon;
-            dialogObjects.CharacterNameText.text = Viktor.name;
+            if (gameController.ViktorJaehMonstro == false)
+            {
+                dialogObjects.characterSprite.sprite = Viktor.icon;
+                dialogObjects.CharacterNameText.text = Viktor.name;
+            }
+            else
+            {
+                dialogObjects.characterSprite.sprite = ViktorMonstro.icon;
+                dialogObjects.CharacterNameText.text = ViktorMonstro.name;
+            }
+            
         }
         else if (falas[indexBlocoConversas].nome == Esposa.name)
         {

@@ -96,6 +96,8 @@
     <Compile Include="Assets\Scripts\Inventory\Item.cs" />
     <Compile Include="Assets\Scripts\Inventory\Slot.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\PensamentoBehaviour.cs" />
+    <Compile Include="Assets\Scripts\PensamentosManager.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerBehaviour.cs" />
     <Compile Include="Assets\Scripts\PlayerPrefsKeys.cs" />
     <Compile Include="Assets\Scripts\TriggerAcao.cs" />

@@ -22,6 +22,7 @@ GameObject:
   - 114: {fileID: 114000011955801576}
   - 114: {fileID: 114000011721011244}
   - 114: {fileID: 114000011259151908}
+  - 114: {fileID: 114000011297328138}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011911961268}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 455.775, y: 25.760002, z: 0}
+  m_LocalPosition: {x: 8.35, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -56,6 +57,23 @@ MonoBehaviour:
   copoCheioPrefab: {fileID: 0}
   inventory: {fileID: 0}
   dialogManager: {fileID: 0}
+--- !u!114 &114000011297328138
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011911961268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75de1b5ddbf489a46adda294a61c1ad3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pensamentoText: {fileID: 0}
+  pensamentoIcon: {fileID: 0}
+  pensamentoHolder: {fileID: 0}
+  PensamentoHolderAtivo: 0
+  MostrarPanelText: 0
+  pensamentoPanel: {fileID: 0}
 --- !u!114 &114000011721011244
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -100,6 +118,7 @@ MonoBehaviour:
   porradaViktorShake:
     shakeQuantidade: 0.1
     shakeTempo: 0.2
+  ViktorJaehMonstro: 0
   dialogoInicialDentroCasa: 0
   temCopo: 0
   mulherPediuAgua: 0
@@ -108,7 +127,7 @@ MonoBehaviour:
   estaComFilha: 0
   subiuEscadas: 0
   colocouFilhaNaCama: 0
-  ovniCaiu: 1
+  ovniCaiu: 0
   pegouLanterna: 0
   dialogoInicialQuarentena: 0
   dialogManager: {fileID: 0}

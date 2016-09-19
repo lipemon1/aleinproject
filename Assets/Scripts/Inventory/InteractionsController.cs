@@ -27,13 +27,13 @@ public class InteractionsController : MonoBehaviour
 
     private string nextScene;
     public DialogueBoxManager dialogManager;
-
+    PensamentosManager pensamentoM;
 
     // Use this for initialization
     void Start()
     {
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-
+        pensamentoM = gameController.gameObject.GetComponent<PensamentosManager>();
         inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
         dialogManager = GameObject.FindGameObjectWithTag("DialogManager").GetComponent<DialogueBoxManager>();
     }
@@ -103,7 +103,7 @@ public class InteractionsController : MonoBehaviour
                     inventory.ClearInventorySlot();
                     inventory.AddItem(copoCheioPrefab.GetComponent<Item>());
                     gameController.TemCopo = false;
-
+                    pensamentoM.MostrarPensamento("Entregar água para Rose");
                     Debug.LogWarning("Encher Copo!!!!!!!!!!!");
                 }
                 else if (gameController.MulherPediuAgua == true)
@@ -190,8 +190,11 @@ public class InteractionsController : MonoBehaviour
                 {
                     if (gameController.EstaComFilha == false)
                     {
+                        
                         gameController.EstaComFilha = true;
-                    }                    
+                        inventory.AddItem(clickedObject.GetComponent<Item>());
+                        Destroy(clickedObject);
+                    }
                 }
                 else
                 {

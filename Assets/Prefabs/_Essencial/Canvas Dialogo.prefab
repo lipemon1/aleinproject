@@ -414,11 +414,14 @@ MonoBehaviour:
   Viktor:
     name: Viktor
     icon: {fileID: 21300000, guid: c9092c0ed75e4904cac58342d7a5074d, type: 3}
+  ViktorMonstro:
+    name: Viktor
+    icon: {fileID: 21300000, guid: d202996bec1e3cb4c918f54cdf513b5c, type: 3}
   Esposa:
-    name: Esposa
+    name: Rose
     icon: {fileID: 21300000, guid: 4a85bdb64c7c097448027e04755321a5, type: 3}
   Filha:
-    name: Filha
+    name: Emily
     icon: {fileID: 21300000, guid: 2b8b26994c9ee0844932c4f468f93067, type: 3}
   Eric:
     name: Eric

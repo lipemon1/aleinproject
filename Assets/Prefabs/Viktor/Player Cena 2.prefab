@@ -567,7 +567,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010668536124}
-  m_LocalRotation: {x: 0, y: 0, z: 0.9997773, w: 0.021102488}
+  m_LocalRotation: {x: 0, y: 0, z: 0.9997781, w: 0.021064825}
   m_LocalPosition: {x: -0.56, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 178.52101}
@@ -629,7 +629,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010890501782}
-  m_LocalRotation: {x: 0, y: 0, z: 0.9995832, w: -0.028869595}
+  m_LocalRotation: {x: 0, y: 0, z: 0.99958354, w: -0.028856965}
   m_LocalPosition: {x: 0.92, y: 3.3, z: 0}
   m_LocalScale: {x: 1.0000004, y: 1.0000004, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 192.068}
@@ -670,7 +670,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012489443252}
-  m_LocalRotation: {x: 0, y: 0, z: 0.99678385, w: 0.08013737}
+  m_LocalRotation: {x: 0, y: 0, z: 0.99678123, w: 0.08016969}
   m_LocalPosition: {x: -2.12, y: 2.83, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 170.20801}
@@ -737,7 +737,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011529613590}
-  m_LocalRotation: {x: 0, y: 0, z: 0.048255444, w: -0.998835}
+  m_LocalRotation: {x: 0, y: 0, z: 0.048213053, w: -0.99883705}
   m_LocalPosition: {x: -0.00000029802337, y: 1.7800062, z: 0}
   m_LocalScale: {x: 1.0000002, y: 1.0000002, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 1.7630001}
@@ -751,7 +751,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011648798870}
-  m_LocalRotation: {x: 0, y: 0, z: 0.20127958, w: 0.97953385}
+  m_LocalRotation: {x: 0, y: 0, z: 0.2013102, w: 0.97952753}
   m_LocalPosition: {x: 0.000000059604623, y: 1.8226944, z: 0}
   m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -765,7 +765,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012157047012}
-  m_LocalRotation: {x: 0, y: 0, z: 0.33606243, w: 0.9418397}
+  m_LocalRotation: {x: 0, y: 0, z: 0.33609685, w: 0.9418275}
   m_LocalPosition: {x: 0.00000008940697, y: 1.8905187, z: 0}
   m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -779,7 +779,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011051278258}
-  m_LocalRotation: {x: 0, y: 0, z: 0.99465364, w: -0.10326746}
+  m_LocalRotation: {x: 0, y: 0, z: 0.99465686, w: -0.10323664}
   m_LocalPosition: {x: 0.52, y: -0.11, z: 0}
   m_LocalScale: {x: 0.9999996, y: 0.9999996, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 183.758}
@@ -834,7 +834,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014131075466}
-  m_LocalRotation: {x: 0, y: 0, z: 0.034980703, w: -0.99938804}
+  m_LocalRotation: {x: 0, y: 0, z: 0.035030738, w: -0.99938625}
   m_LocalPosition: {x: -0.000000074505806, y: 1.7799133, z: 0}
   m_LocalScale: {x: 1.0000002, y: 1.0000002, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -3.3460002}
@@ -862,8 +862,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014288498904}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.62, y: -1.08, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalPosition: {x: -6.01, y: -1.2776, z: 0}
+  m_LocalScale: {x: 0.3755005, y: 0.3755005, z: 0.3755005}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000010295738360}
@@ -969,7 +969,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &61000011141120958
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -1155,6 +1155,10 @@ MonoBehaviour:
   canSneak: 0
   canAttack: 0
   clickedObject: {fileID: 0}
+  Life: 0
+  sliderLife: {fileID: 0}
+  textLife: {fileID: 0}
+  flipOneMoreTime: 0
 --- !u!114 &114000011133112918
 MonoBehaviour:
   m_ObjectHideFlags: 1
