@@ -538,13 +538,14 @@ public class GameController : MonoBehaviour
                 {
                     DialogoInicialDentroCasa = true;
                     dialogManager.SetQuantidadeFalas(8);
-                    dialogManager.AdicionarFala(dialogManager.Filha.name, "PAPAI!");
+                    //dialogManager.AdicionarFala(dialogManager.Filha.name, "PAPAI!");
+                    dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Filha.name, "PAPAI!",0.2f);
                     dialogManager.AdicionarFala(dialogManager.Viktor.name, "Hahaha, boa noite filha, não deveria estar na sua cama?");
-                    dialogManager.AdicionarFala(dialogManager.Filha.name, "Estávamos esperando você papai.");
-                    dialogManager.AdicionarFala(dialogManager.Esposa.name, "Oi querido. Foi tudo bem no trabalho?.");
+                    dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Filha.name, "Estávamos esperando você papai.", 0.6f);
+                    dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Esposa.name, "Oi querido. Foi tudo bem no trabalho?.", 0.6f);
                     dialogManager.AdicionarFala(dialogManager.Viktor.name, "Olá, foi sim, mas, não precisavam me esperar até tão tarde.");
-                    dialogManager.AdicionarFala(dialogManager.Esposa.name, "Tudo bem, a Emily queria te ver antes de dormir.");
-                    dialogManager.AdicionarFala(dialogManager.Esposa.name, "Leve ela pra cama mas antes traga um copo d’água pra mim amor. Estou com sede.");
+                    dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Esposa.name, "Tudo bem, a Emily queria te ver antes de dormir.", 0.7f);
+                    dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Esposa.name, "Leve ela pra cama mas antes traga um copo d’água pra mim amor. Estou com sede.",0.8f);
                     dialogManager.AdicionarFala(dialogManager.Viktor.name, "Claro querida, só um minuto.");
 
                     dialogManager.RealizarConversa();

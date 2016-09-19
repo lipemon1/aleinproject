@@ -44,6 +44,13 @@ public class DialogueBoxManager : MonoBehaviour
     {
         public string texto;
         public string nome;
+        public bool precisaConfirmacao;
+        public float tempoPassarParaProximo;
+        public Fala()
+        {
+            precisaConfirmacao = true;
+            tempoPassarParaProximo = 0.2f;
+        }
     }
 
     public bool inTalk;
@@ -110,6 +117,17 @@ public class DialogueBoxManager : MonoBehaviour
 
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        ManagerTalkVariables();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            OkButtonPressed();
+        }
+
+    }
+
     #region Gerar Falas
     /// QUANDO FOR CHAMAR ESSAS 3 FUNCOES PARA FALAR, CHAMAR NESSA ORDEM
     /// <summary>
@@ -138,6 +156,21 @@ public class DialogueBoxManager : MonoBehaviour
         indexBlocoConversas++;
     }
     /// <summary>
+    /// Adiciona uma fala ao dialogo mas que nao precisa apertar no botao de OK para passar para proxima fala
+    /// </summary>
+    /// <param name="nome">Nome do Personagem. Ex: dialogManager.Viktor.name</param>
+    /// <param name="texto">O que o personagem vai dizer</param>
+    /// <param name="TempoParaProximaFala">Tempo do final da fala até mostrar a proxima fala</param>
+    public void AdicionarFalaSemConfirmacao(string nome, string texto, float TempoParaProximaFala)
+    {
+        falas[indexBlocoConversas].nome = nome;
+        falas[indexBlocoConversas].texto = texto;
+        falas[indexBlocoConversas].precisaConfirmacao = false;
+        falas[indexBlocoConversas].tempoPassarParaProximo = TempoParaProximaFala;
+
+        indexBlocoConversas++;
+    }
+    /// <summary>
     /// Chama a funcao Custom Comentary que vai realizar a atualizao dos componentes da ui e chamar a funcao para falar realmente
     /// </summary>
     public void RealizarConversa()
@@ -149,21 +182,13 @@ public class DialogueBoxManager : MonoBehaviour
     }
     #endregion
 
-    // Update is called once per frame
-    void Update()
-    {
-        ManagerTalkVariables();
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            OkButtonPressed();
-        }
-        
-    }
+  
 
     public void customComentary(Fala[] falas)
     {
         actualText = "";
         //isComentary = true;
+        Debug.LogWarning("Custom Comentary" + indexBlocoConversas);
         finishTalk = false;
         dialogObjects.DialogText.text = "";
         textTyper.dialogText.text = "";
@@ -183,8 +208,7 @@ public class DialogueBoxManager : MonoBehaviour
             {
                 dialogObjects.characterSprite.sprite = ViktorMonstro.icon;
                 dialogObjects.CharacterNameText.text = ViktorMonstro.name;
-            }
-            
+            }            
         }
         else if (falas[indexBlocoConversas].nome == Esposa.name)
         {
@@ -206,7 +230,7 @@ public class DialogueBoxManager : MonoBehaviour
         // o index dessa array é atualizado la pra baixo dentro da funcao OKPressed(), que é chamada quando o jogador clica no botao ok da UI
 
         textTyper.StartToSpeak();
-        Debug.LogWarning("MakeCUSTOMComentary()");
+        //Debug.LogWarning("MakeCUSTOMComentary()");
     }
 
 
@@ -251,7 +275,15 @@ public class DialogueBoxManager : MonoBehaviour
         }
         else
         {
-            dialogObjects.OkButton.SetActive(true);
+            if(falas[indexBlocoConversas].precisaConfirmacao == true) { 
+                dialogObjects.OkButton.SetActive(true);                
+            }
+            else
+            {
+                // OkButtonPressed();
+                Invoke("OkButtonPressed", falas[indexBlocoConversas].tempoPassarParaProximo);
+                finishTalk = false;
+            }
             startTalk = false;
             inTalk = false;
         }
