@@ -146,6 +146,7 @@ public class InteractionsController : MonoBehaviour
                         inventory.AddItem(clickedObject.GetComponent<Item>());
                         Destroy(clickedObject);
 
+                        pensamentoM.MostrarPensamento("Sair para investigar");
                         gameController.PegouLanterna = true;
                     }
                 }

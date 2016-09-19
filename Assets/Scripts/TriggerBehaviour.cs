@@ -12,8 +12,8 @@ public class TriggerBehaviour : MonoBehaviour
     public bool isComentario;
     public string comentario;
     public bool geraDialogo;
-
-    
+    public bool precisaConfirmacao = true;
+    public float tempoProximaFala;    
 
     [System.Serializable]
     public class Fala

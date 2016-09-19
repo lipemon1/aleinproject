@@ -50,7 +50,7 @@ public class TriggersComentarios : MonoBehaviour {
         {            
             if(triggerBehav.isComentario == true) { 
                 Debug.LogWarning(triggerBehav.comentario);
-                gameController.FazerComentario(triggerBehav.comentario);
+                gameController.FazerComentario(triggerBehav.comentario, triggerBehav.precisaConfirmacao, triggerBehav.tempoProximaFala);
                 triggerBehav.SetFoiAtivado(true);
             }
             else if(triggerBehav.geraDialogo == true)

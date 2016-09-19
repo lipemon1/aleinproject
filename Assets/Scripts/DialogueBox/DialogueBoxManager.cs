@@ -175,8 +175,13 @@ public class DialogueBoxManager : MonoBehaviour
     /// </summary>
     public void RealizarConversa()
     {
-        Player.GetComponent<PlayerBehaviour>().CanMove = false;
-        Player.GetComponent<PlayerBehaviour>().FicarParado();
+        if(isComentary == false)
+            Player.GetComponent<PlayerBehaviour>().FicarParado();
+        else
+        {
+            Player.GetComponent<PlayerBehaviour>().CanMove = true;
+        }
+
         indexBlocoConversas = 0;
         customComentary(falas);
     }
@@ -234,12 +239,13 @@ public class DialogueBoxManager : MonoBehaviour
     }
 
 
-    public void MakeComentary(string texto)
+    public void MakeComentary(string texto, bool precisaConfirmacao, float tempoProximaFala)
     {
         dialogObjects.characterSprite.sprite = playerDialog.characterIcon;
         dialogObjects.CharacterNameText.text = playerDialog.name;
         //dialogObjects.characterSprite.sprite = iconPersonagem;
         //dialogObjects.CharacterNameText.text = namePersonagem;
+
 
         actualText = "";
         isComentary = true;
@@ -249,7 +255,18 @@ public class DialogueBoxManager : MonoBehaviour
         startTalk = true;
         inTalk = true; // fala para o dialog manager que está em um dialogo
         actualText = texto;
-        textTyper.StartToSpeak();
+        //textTyper.StartToSpeak();
+        SetQuantidadeFalas(1);
+        if(precisaConfirmacao == true)
+        {
+            AdicionarFala(Viktor.name, texto);
+        }
+        else
+        {
+            AdicionarFalaSemConfirmacao(Viktor.name, texto, tempoProximaFala);
+        }
+        RealizarConversa();
+
         Debug.LogWarning("MakeComentary()");
     }
 
@@ -302,6 +319,7 @@ public class DialogueBoxManager : MonoBehaviour
             isComentary = false;
             gameController.SetOnDialogue(false);
             finishTalk = false;
+            Player.GetComponent<PlayerBehaviour>().CanMove = true;
             Hide();
         }
         else if (isConversa == true)
@@ -319,7 +337,7 @@ public class DialogueBoxManager : MonoBehaviour
                 isComentary = false;
                 gameController.SetOnDialogue(false);
                 finishTalk = false;
-                Player.GetComponent<PlayerBehaviour>().CanMove = true;
+                Player.GetComponent<PlayerBehaviour>().canMove = true;
 
                 gameController.BotaoOk();
                 GameObject.FindGameObjectWithTag("GameController").GetComponent<InteractionsController>().OkPressionado();

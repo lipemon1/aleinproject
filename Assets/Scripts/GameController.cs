@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class GameController : MonoBehaviour
 {
@@ -46,7 +47,9 @@ public class GameController : MonoBehaviour
     private Camera camera;
 
     PlayerBehaviour playerBehav;
-    
+
+  
+
     public string activeItem = "";
     public bool mouseOverUI;
 
@@ -406,9 +409,13 @@ public class GameController : MonoBehaviour
         ManageScenes();
     }
 
+    public void FazerComentario(string texto, bool precisaConfirmacao, float tempoProximaFala)
+    {
+        dialogManager.MakeComentary(texto,precisaConfirmacao, tempoProximaFala);
+    }
     public void FazerComentario(string texto)
     {
-        dialogManager.MakeComentary(texto);
+        dialogManager.MakeComentary(texto, true, 0f);
     }
 
     public string GetSceneName()
@@ -640,6 +647,19 @@ public class GameController : MonoBehaviour
         dialogManager.AdicionarFala(dialogManager.Viktor.name, "Se acontecer alguma coisa gritem que eu volto correndo!");
         dialogManager.RealizarConversa();
         PlayerPrefs.SetInt(PlayerPrefsKeys.ovniCaiu, 1);
+    }
+
+    public void AproximouDoOvni()
+    {
+        playerBehav.FicarParado();
+
+        Invoke("AproximouDeVddDoOvni",0.5f);
+    }
+    public void AproximouDeVddDoOvni()
+    {
+        dialogManager.SetQuantidadeFalas(1);
+        dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Viktor.name, "Mas que Me...", 0.2f);
+        dialogManager.RealizarConversa();
     }
 
     public void ChangeToScene(string sceneName)

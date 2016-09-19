@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum Acoes { OVNICAINDO }
+public enum Acoes { OVNICAINDO, SEAPROXIMOUDOOVNI }
 
 public class TriggerAcao : MonoBehaviour
 {
@@ -9,11 +9,13 @@ public class TriggerAcao : MonoBehaviour
     public bool geraAcao;
     public Acoes acao;
     public bool jaFoiAtivado;
+    GameController gm;
 
     // Use this for initialization
     void Start()
     {
         jaFoiAtivado = false;
+        gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 
     }
 
@@ -36,10 +38,20 @@ public class TriggerAcao : MonoBehaviour
                     if (jaFoiAtivado == false)
                     {
                         jaFoiAtivado = true;
-                        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().DerrubarOvni();
+                        gm.DerrubarOvni();
                     }
                 }
 
+            }
+        }
+        else if (acao == Acoes.SEAPROXIMOUDOOVNI)
+        {
+            if (jaFoiAtivado == false)
+            {
+                jaFoiAtivado = true;
+                
+                gm.AproximouDoOvni();
+                Debug.LogWarning("AÇÃO DE QUANDO CHEGA PERTO DO OVNI CAI (CLIQUE DUAS VEZES NESSE AVISO PARA SABER ONDE ESTOU)");
             }
         }
 
