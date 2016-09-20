@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="Assets\AI Pack\Scripts\DoctorAI.cs" />
     <Compile Include="Assets\AI Pack\Scripts\SoldierAI.cs" />
+    <Compile Include="Assets\Dialogs\VoicesManager.cs" />
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\ChangeCursorImage.cs" />

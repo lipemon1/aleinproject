@@ -29,3 +29,5 @@ EditorBuildSettings:
     path: Assets/_Scenes/Game/Cena7-SalaDuto.unity
   - enabled: 1
     path: Assets/_Scenes/Cinematicas/EscapandoFacility.unity
+  - enabled: 1
+    path: Assets/_Scenes/Cinematicas/EncontraCristal.unity

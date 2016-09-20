@@ -270,6 +270,7 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Cursor.visible = true;
         audioSource = GetComponent<AudioSource>();
         dialogManager = GameObject.FindGameObjectWithTag("DialogManager").GetComponent<DialogueBoxManager>();
         pensamentoM = gameObject.GetComponent<PensamentosManager>();
@@ -682,11 +683,11 @@ public class GameController : MonoBehaviour
     }
     public void AproximouDeVddDoOvni()
     {
-        dialogManager.SetQuantidadeFalas(1);
-        dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Viktor.name, "Mas que Me...", 0.2f);
-        dialogManager.RealizarConversa();
+        //dialogManager.SetQuantidadeFalas(1);
+        //dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Viktor.name, "Mas que Me...", 0.2f);
+        //dialogManager.RealizarConversa();
 
-        ChangeToScene("Cena5-Quarentena");
+        ChangeToScene("EncontraCristal");
     }
 
     public void ChangeToScene(string sceneName)
