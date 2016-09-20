@@ -26,6 +26,9 @@ TagManager:
   - Pensamento/Icon
   - Pensamento/Holder
   - Pensamento/Panel
+  - Enemy
+  - EnemyDoctor
+  - EnemySoldier
   layers:
   - Default
   - TransparentFX

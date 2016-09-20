@@ -22,6 +22,7 @@ GameObject:
   - 212: {fileID: 212000010479054770}
   - 61: {fileID: 61000011774211694}
   - 114: {fileID: 114000011550014936}
+  - 95: {fileID: 95000014086367228}
   m_Layer: 0
   m_Name: "Al\xE7ap\xE3o"
   m_TagString: Untagged
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011543250610}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14, y: -3.75, z: 0}
+  m_LocalPosition: {x: 99.72, y: -3.75, z: 0}
   m_LocalScale: {x: 0.54617196, y: 0.54617196, z: 0.54617196}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -53,9 +54,26 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: -0.04295816, y: -0.013709775}
+  m_Offset: {x: -2.201854, y: -0.01370999}
   serializedVersion: 2
-  m_Size: {x: 4.4660053, y: 1.633706}
+  m_Size: {x: 5.861943, y: 1.633706}
+--- !u!95 &95000014086367228
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011543250610}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: af56074351b81f94898d4b5b158d660d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114000011550014936
 MonoBehaviour:
   m_ObjectHideFlags: 1

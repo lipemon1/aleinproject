@@ -50,12 +50,14 @@ public class PlayerBehaviour : MonoBehaviour
     public bool running; //controle para saber se esta correndo ou não
     public bool sneaking; //controle para saber se esta em modo sneaking ou não
     public bool walking; //controle para sabe se esta andando ou ano
+    public Collider2D viktorCollider;
 
     [Header("Variáveis para Combate")]
     public Transform hand;
     public Transform punchLimit;
     public bool hitSomeEnemy;
     public Animator enemyAnimator;
+    public bool gettinHit = false;
 
     [Header("Outros")]
     private float directionX; //valor do input do jogador
@@ -182,7 +184,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         Debug.DrawLine(hand.position, punchLimit.position, Color.blue); //desenha uma linha para debug (ver na Scene)
 
-        RaycastHit2D hit = Physics2D.Raycast(hand.position, punchLimit.position);
+        RaycastHit2D hit = Physics2D.Raycast(hand.position, punchLimit.position, (punchLimit.position.x - hand.position.x));
 
         if (hit != null && hit.collider != null)
         {
@@ -194,6 +196,7 @@ public class PlayerBehaviour : MonoBehaviour
             else
             {
                 hitSomeEnemy = false;
+                enemyAnimator = null;
             }
         }
     }
@@ -231,8 +234,7 @@ public class PlayerBehaviour : MonoBehaviour
     void KillEnemyPunched()
     {
         enemyAnimator.SetTrigger("Punched");
-        enemyAnimator.gameObject.GetComponent<DoctorAI>().KillDoctor();
-        
+        enemyAnimator.gameObject.GetComponent<EnemyBehaviour>().KillEnemy();
     }
 
     public void AplicarDano(float value)
@@ -281,12 +283,14 @@ public class PlayerBehaviour : MonoBehaviour
                 sneaking = true;
                 PlayerAnimator.SetBool("Sneaking", sneaking);
                 actualSpeed = sneakingSpeed;
+                viktorCollider.offset = new Vector2(0, -1.45f);
             }
             else
             {
                 sneaking = false;
                 PlayerAnimator.SetBool("Sneaking", sneaking);
                 actualSpeed = walkingSpeed;
+                viktorCollider.offset = new Vector2(0, 1.31f);
             }
         }
 
@@ -514,5 +518,10 @@ public class PlayerBehaviour : MonoBehaviour
     {
         // Debug.Log("Entrou em Player.CallInteraction");
         gameController.Interaction(clickedObject, clicked_object_name);
+    }
+
+    public void GettinHit(bool hit)
+    {
+        gettinHit = hit;
     }
 }
