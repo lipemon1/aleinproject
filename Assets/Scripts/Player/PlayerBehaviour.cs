@@ -268,8 +268,7 @@ public class PlayerBehaviour : MonoBehaviour
     void KillEnemyPunched()
     {
         enemyAnimator.SetTrigger("Punched");
-        enemyAnimator.gameObject.GetComponent<DoctorAI>().KillDoctor();
-
+        enemyAnimator.gameObject.GetComponent<EnemyBehaviour>().KillEnemy();
     }
 
     public void AplicarDano(float value)
@@ -301,8 +300,7 @@ public class PlayerBehaviour : MonoBehaviour
             running = true;
             PlayerAnimator.SetBool("Running", running);
             actualSpeed = runningSpeed;
-        }
-        else
+        } else
         {
             //ToggleRun(); //função de correr            
             running = false;
@@ -319,12 +317,14 @@ public class PlayerBehaviour : MonoBehaviour
                 sneaking = true;
                 PlayerAnimator.SetBool("Sneaking", sneaking);
                 actualSpeed = sneakingSpeed;
+                viktorCollider.offset = new Vector2(0, -1.45f);
             }
             else
             {
                 sneaking = false;
                 PlayerAnimator.SetBool("Sneaking", sneaking);
                 actualSpeed = walkingSpeed;
+                viktorCollider.offset = new Vector2(0, 1.31f);
             }
         }
 
@@ -349,8 +349,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (sneaking && walking)
         {
             PlayerAnimator.SetBool("Sneaking", true);
-        }
-        else
+        } else
         {
             PlayerAnimator.SetBool("Sneaking", false);
         }
@@ -379,21 +378,21 @@ public class PlayerBehaviour : MonoBehaviour
                 running = false;
             }
         }
-
+       
 
         //linha que movimento o jogador
-
+        
         //para saber para onde ir já que o persongem não está flipando
-        if (directionX < 0)
+        if(directionX < 0)
         {
             transform.Translate(new Vector3(-directionX * actualSpeed * Time.deltaTime, 0f, 0f));
         }
-        else if (directionX > 0)
+        else if(directionX > 0)
         {
             transform.Translate(new Vector3(directionX * actualSpeed * Time.deltaTime, 0f, 0f));
         }
-
-
+            
+        
 
         if (directionX != 0)
         {
@@ -553,5 +552,10 @@ public class PlayerBehaviour : MonoBehaviour
     {
         // Debug.Log("Entrou em Player.CallInteraction");
         gameController.Interaction(clickedObject, clicked_object_name);
+    }
+
+    public void GettinHit(bool hit)
+    {
+        gettinHit = hit;
     }
 }
