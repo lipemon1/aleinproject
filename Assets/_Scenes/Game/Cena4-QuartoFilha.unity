@@ -988,6 +988,16 @@ Prefab:
       propertyPath: m_Alpha
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 224000012172509716, guid: fa1fea9396932a14083bf06942fcb59f,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012172509716, guid: fa1fea9396932a14083bf06942fcb59f,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fa1fea9396932a14083bf06942fcb59f, type: 2}
   m_IsPrefabParent: 0
@@ -1357,11 +1367,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011881657488, guid: 1fc51903805bed844ae022dbcdc5d498, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.994656
+      value: 0.9946559
       objectReference: {fileID: 0}
     - target: {fileID: 4000011881657488, guid: 1fc51903805bed844ae022dbcdc5d498, type: 2}
       propertyPath: m_LocalRotation.w
-      value: -0.10324434
+      value: -0.10324553
       objectReference: {fileID: 0}
     - target: {fileID: 4000010649350252, guid: 1fc51903805bed844ae022dbcdc5d498, type: 2}
       propertyPath: m_LocalRotation.z
@@ -1381,11 +1391,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010507476546, guid: 1fc51903805bed844ae022dbcdc5d498, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.04822615
+      value: 0.04822782
       objectReference: {fileID: 0}
     - target: {fileID: 4000010507476546, guid: 1fc51903805bed844ae022dbcdc5d498, type: 2}
       propertyPath: m_LocalRotation.w
-      value: -0.99883646
+      value: -0.99883634
       objectReference: {fileID: 0}
     - target: {fileID: 4000011202850562, guid: 1fc51903805bed844ae022dbcdc5d498, type: 2}
       propertyPath: m_LocalRotation.z
@@ -1621,6 +1631,11 @@ Prefab:
       propertyPath: esposaDepoisDoOvni
       value: 
       objectReference: {fileID: 941190505}
+    - target: {fileID: 114000011955801576, guid: c46eae87e7408eb4985cc9cd8d53bf2a,
+        type: 2}
+      propertyPath: Viktor14
+      value: 
+      objectReference: {fileID: 8300000, guid: 4d24b3115f6ef814b9f313419931f734, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c46eae87e7408eb4985cc9cd8d53bf2a, type: 2}
   m_IsPrefabParent: 0

@@ -29,7 +29,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1000010370186846
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -54,6 +54,7 @@ GameObject:
   - 212: {fileID: 212000013034709800}
   - 61: {fileID: 61000010632445646}
   - 114: {fileID: 114000013140844958}
+  - 95: {fileID: 95000010427953822}
   m_Layer: 0
   m_Name: Porta B Facility
   m_TagString: Untagged
@@ -103,9 +104,10 @@ Transform:
   m_LocalPosition: {x: -0.04, y: 1.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
+  m_Children:
+  - {fileID: 4000014135005526}
   m_Father: {fileID: 4000013384636494}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!4 &4000010118575892
 Transform:
   m_ObjectHideFlags: 1
@@ -118,7 +120,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000013384636494}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!4 &4000013384636494
 Transform:
   m_ObjectHideFlags: 1
@@ -126,12 +128,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011030190198}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.93, y: -0.09, z: 0}
+  m_LocalPosition: {x: 27.3, y: -0.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000013571203354}
-  - {fileID: 4000014135005526}
   - {fileID: 4000010087959232}
   - {fileID: 4000010118575892}
   m_Father: {fileID: 0}
@@ -155,13 +156,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010370186846}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.04, y: -1.27, z: 0}
   m_LocalScale: {x: 0.9417157, y: 0.94171596, z: 0.94171596}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 4000013384636494}
-  m_RootOrder: 1
+  m_Father: {fileID: 4000010087959232}
+  m_RootOrder: 0
 --- !u!61 &61000010632445646
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -176,6 +177,23 @@ BoxCollider2D:
   m_Offset: {x: 0.04188609, y: 0.027924776}
   serializedVersion: 2
   m_Size: {x: 4.378931, y: 5.7472596}
+--- !u!95 &95000010427953822
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011030190198}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: be3fce5e4bdf9d9489644e87631f5834, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114000013140844958
 MonoBehaviour:
   m_ObjectHideFlags: 1

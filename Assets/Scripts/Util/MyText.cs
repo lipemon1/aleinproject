@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MyText : MonoBehaviour {
+public class MyText : MonoBehaviour
+{
 
     public string myDescription;
     private MouseOverController textController;
@@ -13,8 +14,9 @@ public class MyText : MonoBehaviour {
         "Não preciso fazer nada la em cima"
     };
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
 
         //textController = GameObject.FindGameObjectWithTag("Text Controller").GetComponent<MouseOverController>();
         textController = Camera.main.GetComponent<MouseOverController>();
@@ -22,43 +24,53 @@ public class MyText : MonoBehaviour {
         //{
         //    Destroy(this);
         //}
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     void OnMouseDown()
     {
         //Debug.Log("Clicou");
-        if(TemComentarioPlayer == true)
+        if (TemComentarioPlayer == true)
         {
-            if(Comentarios.Length == 0 )
+            if (Comentarios.Length == 0)
             {
                 Debug.LogWarning("Falta incluir comentário do objeto");
             }
-            else if(Comentarios.Length == 1) { 
+            else if (Comentarios.Length == 1)
+            {
                 GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().FazerComentario(Comentarios[0]);
             }
-            else if( Comentarios.Length > 1)
+            else if (Comentarios.Length > 1)
             {
                 GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().
-                    FazerComentario(Comentarios[Random.Range(0,Comentarios.Length)]);
+                    FazerComentario(Comentarios[Random.Range(0, Comentarios.Length)]);
             }
         }
     }
 
     void OnMouseEnter()
     {
-        if(GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().ShowDescriptionByMouse == true)
-        textController.UpdateText(myDescription);
+        GameController gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        if (gm != null)
+        {
+            if (gm.ShowDescriptionByMouse == true)
+                textController.UpdateText(myDescription);
+        }
     }
 
     void OnMouseExit()
     {
-        if (GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().ShowDescriptionByMouse == true)
-            textController.UpdateText("");
+        GameController gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        if (gm != null)
+        {
+            if (gm.ShowDescriptionByMouse == true)
+                textController.UpdateText("");
+        }
     }
 
     public string GetOneComentary()

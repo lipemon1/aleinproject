@@ -13,7 +13,8 @@ public class Inventory : MonoBehaviour {
     public float slotPaddingLeft, slotPaddingTop, slotSize;
     public GameObject slotPrefab;
     private List<GameObject> allSlots;
-    private static int emptySlot;
+    public static int emptySlot;
+    public int quantidade;
     public static Slot from, to;
     public GameObject iconPrefab;
     public Canvas canvas;
@@ -49,8 +50,8 @@ public class Inventory : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        if(eventSystem  == null)
+        quantidade = emptySlot;
+        if (eventSystem  == null)
         {
             eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
         }
@@ -62,7 +63,7 @@ public class Inventory : MonoBehaviour {
                 if(from != null)
                 { 
                     from.GetComponent<Image>().color = Color.white;
-                    from.ClearSlot();
+                    //from.ClearSlot();
                     Destroy(GameObject.Find("Hover"));
                     to = null;
                     from = null;
@@ -197,7 +198,7 @@ public class Inventory : MonoBehaviour {
             if(!clicked.GetComponent<Slot>().IsEmpty)
             {
                 from = clicked.GetComponent<Slot>();
-                from.GetComponent<Image>().color = Color.gray;
+                //from.GetComponent<Image>().color = Color.gray;
 
                 hoverObject = (GameObject)Instantiate(iconPrefab);
                 hoverObject.GetComponent<Image>().sprite = clicked.GetComponent<Image>().sprite;
@@ -251,5 +252,6 @@ public class Inventory : MonoBehaviour {
         from = null;
         hoverObject = null;
         gameController.SetActiveItem("");
+        EmptySlot++;
     }
 }

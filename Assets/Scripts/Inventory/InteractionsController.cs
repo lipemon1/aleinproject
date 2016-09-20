@@ -13,7 +13,6 @@ public class InteractionsController : MonoBehaviour
     public GameObject filhaDpsQueOvnicaiu;
     public GameObject esposaDepoisDoOvni;
     
-
     #endregion
 
     public Inventory inventory;
@@ -268,7 +267,7 @@ public class InteractionsController : MonoBehaviour
                         dialogManager.AdicionarFala(dialogManager.Filha.name, "O dia só começou a ficar esquisito quando estava voltando pra casa.");
                         dialogManager.AdicionarFala(dialogManager.Filha.name, "Vi várias luzes no céu, elas estavam girando muito rápido, depois de um tempo sumiram.");
                         dialogManager.AdicionarFala(dialogManager.Filha.name, "Fiquei com medo e vim correndo para casa. Contei à mamãe mas ela não acreditou em mim...");
-
+                        
                         dialogManager.AdicionarFala(dialogManager.Viktor.name, "Não se preocupe querida, deviam ser apenas aviões ou algo parecido.");
                         dialogManager.AdicionarFala(dialogManager.Viktor.name, "Agora deite-se e durma bem. Amanhã precisamos acordar cedo para buscar algumas ferramentas na casa do seu tio");
 
@@ -283,6 +282,12 @@ public class InteractionsController : MonoBehaviour
                 }
                 break;
             #endregion
+            #endregion
+
+            #region Cena Quarentena:
+            case "Porta Quarentena" :
+                gameController.ChangeToScene("Cena6-Facility");
+                break;
             #endregion
 
             default:

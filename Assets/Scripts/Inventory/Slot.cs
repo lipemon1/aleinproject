@@ -8,12 +8,13 @@ using System;
 public class Slot : MonoBehaviour, IPointerClickHandler
 {
     private GameController gameController;
-    private Stack<Item> items;
+    
+    public Stack<Item> items;
     public Sprite slotEmpty;
     public Sprite slotHighlight;
     //public MouseOverController mouseOverController;
     //public InventoryTextController inventoryTextController;
-
+    public bool isEmpty;
     public bool IsEmpty
     {
         get { return Items.Count == 0; }
@@ -69,6 +70,14 @@ public class Slot : MonoBehaviour, IPointerClickHandler
         //{
         //    inventoryTextController = GameObject.FindGameObjectWithTag("Inventory Text Controller").GetComponent<InventoryTextController>();
         //}
+        if(IsEmpty == true)
+        {
+            isEmpty = true;
+        }
+        else
+        {
+            isEmpty = false;
+        }
     }
 
     public void MouseEnter()
@@ -127,6 +136,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler
 
             if (IsEmpty)
             {
+             
                 ChangeSprite(slotEmpty, slotHighlight);
                 Inventory.EmptySlot++;
             }
@@ -156,7 +166,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler
     public void ClearSlot()
     {
         items.Clear();
-
+        Debug.LogWarning("Clear Slot");
         ChangeSprite(slotEmpty, slotHighlight);
     }
 }

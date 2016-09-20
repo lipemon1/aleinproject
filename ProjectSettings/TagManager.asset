@@ -26,6 +26,8 @@ TagManager:
   - Pensamento/Icon
   - Pensamento/Holder
   - Pensamento/Panel
+  - Enemy
+  - PortaQuebravel
   layers:
   - Default
   - TransparentFX

@@ -56,6 +56,10 @@ public class PlayerBehaviour : MonoBehaviour
     public Transform punchLimit;
     public bool hitSomeEnemy;
     public Animator enemyAnimator;
+    [Tooltip("controle para que só aplique dano no objeto dps do tempo da animação")]
+    public bool podeLancarDano;
+    public float tempoAnimacao;
+    public float tempoPadraoAnimacao = 1f;
 
     [Header("Outros")]
     private float directionX; //valor do input do jogador
@@ -83,6 +87,8 @@ public class PlayerBehaviour : MonoBehaviour
     public GameObject sliderLife;
     public Text textLife;
 
+    public bool hitPorta;
+    public PortaBehaviour portaBehav;
 
     [Header("Flipar No Início")]
     public bool flipOneMoreTime = false;
@@ -94,6 +100,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         canMove = true;
 
+        tempoAnimacao = tempoPadraoAnimacao;
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 
         if (sliderLife == null)
@@ -113,7 +120,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         onMobile = gameController.GetOnMobile();
         Life = 100;
-        
+
         walking = true;
         sneaking = false;
         running = false;
@@ -140,19 +147,33 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Update()
     {
+        if (podeLancarDano == false)
+        {
+            if (tempoAnimacao > 0)
+            {
+                tempoAnimacao -= Time.deltaTime;
+            }
+            if (tempoAnimacao < 0)
+            {
+                podeLancarDano = true;
+                tempoAnimacao = tempoPadraoAnimacao;
+            }
+
+        }
+
         HandleMouseClick();
         InteractionTime();
 
-        if(DeveEsconderLifeBar1 == true)
+        if (DeveEsconderLifeBar1 == true)
         {
             HideLifeBar();
         }
 
-        if(Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X))
         {
             AplicarDano(10);
         }
-        if(Life <= 0)
+        if (Life <= 0)
         {
             Life = 0;
             gameController.GameOver();
@@ -172,9 +193,6 @@ public class PlayerBehaviour : MonoBehaviour
             }
         }
 
-        
-        
-
         CalculateAttack();
     }
 
@@ -182,18 +200,27 @@ public class PlayerBehaviour : MonoBehaviour
     {
         Debug.DrawLine(hand.position, punchLimit.position, Color.blue); //desenha uma linha para debug (ver na Scene)
 
-        RaycastHit2D hit = Physics2D.Raycast(hand.position, punchLimit.position);
+        RaycastHit2D hit = Physics2D.Raycast(hand.position, punchLimit.position, (punchLimit.position.x - hand.position.x));
 
         if (hit != null && hit.collider != null)
         {
+
             if (hit.collider.gameObject.CompareTag("Enemy"))
             {
                 hitSomeEnemy = true;
                 enemyAnimator = hit.collider.gameObject.GetComponent<Animator>();
             }
+            else if (hit.collider.gameObject.CompareTag("PortaQuebravel"))
+            {
+
+                hitPorta = true;
+                
+                portaBehav = hit.collider.gameObject.GetComponent<PortaBehaviour>();
+            }
             else
             {
                 hitSomeEnemy = false;
+                hitPorta = false;
             }
         }
     }
@@ -201,14 +228,24 @@ public class PlayerBehaviour : MonoBehaviour
     void Attack()
     {
         int punch;
-        if(directionX != 0) //esta em movimento
+        if (directionX != 0) //esta em movimento
         {
             punch = (int)Random.Range(1, 3);
             PlayerAnimator.SetTrigger("Punch" + punch.ToString());
-        } else
+        }
+        else
         {
             punch = (int)Random.Range(1, 4);
             PlayerAnimator.SetTrigger("Punch" + punch.ToString());
+        }
+        if (hitPorta)
+        {
+            if (podeLancarDano == true)
+            {
+
+                podeLancarDano = false;
+                portaBehav.AplicarDano(10);
+            }
         }
 
         if (hitSomeEnemy)
@@ -232,7 +269,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         enemyAnimator.SetTrigger("Punched");
         enemyAnimator.gameObject.GetComponent<DoctorAI>().KillDoctor();
-        
+
     }
 
     public void AplicarDano(float value)
@@ -264,7 +301,8 @@ public class PlayerBehaviour : MonoBehaviour
             running = true;
             PlayerAnimator.SetBool("Running", running);
             actualSpeed = runningSpeed;
-        } else
+        }
+        else
         {
             //ToggleRun(); //função de correr            
             running = false;
@@ -311,7 +349,8 @@ public class PlayerBehaviour : MonoBehaviour
         if (sneaking && walking)
         {
             PlayerAnimator.SetBool("Sneaking", true);
-        } else
+        }
+        else
         {
             PlayerAnimator.SetBool("Sneaking", false);
         }
@@ -340,21 +379,21 @@ public class PlayerBehaviour : MonoBehaviour
                 running = false;
             }
         }
-       
+
 
         //linha que movimento o jogador
-        
+
         //para saber para onde ir já que o persongem não está flipando
-        if(directionX < 0)
+        if (directionX < 0)
         {
             transform.Translate(new Vector3(-directionX * actualSpeed * Time.deltaTime, 0f, 0f));
         }
-        else if(directionX > 0)
+        else if (directionX > 0)
         {
             transform.Translate(new Vector3(directionX * actualSpeed * Time.deltaTime, 0f, 0f));
         }
-            
-        
+
+
 
         if (directionX != 0)
         {

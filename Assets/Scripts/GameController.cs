@@ -37,7 +37,7 @@ public class GameController : MonoBehaviour
     [Tooltip("Se ativado, apresenta o texto com a descrição do objeto proximo ao mouse ao passa-lo sob o objeto(objeto precisa ter a classe myText)\nÉ preciso ter o objeto Canvas Follow Mouse na cena")]
     public bool ShowDescriptionByMouse = true;
 
-    public Cenas cenaAtual;
+    public Cenas cenaAtual;    
 
     public GameObject mobileHud;
 
@@ -48,7 +48,7 @@ public class GameController : MonoBehaviour
 
     PlayerBehaviour playerBehav;
 
-  
+    AudioSource audioSource;
 
     public string activeItem = "";
     public bool mouseOverUI;
@@ -225,6 +225,7 @@ public class GameController : MonoBehaviour
     public DialogueBoxManager dialogManager;
     PensamentosManager pensamentoM;
     InteractionsController interacController;
+    AudioManager audioManager;
 
     void Awake()
     {
@@ -254,7 +255,7 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        audioSource = GetComponent<AudioSource>();
         dialogManager = GameObject.FindGameObjectWithTag("DialogManager").GetComponent<DialogueBoxManager>();
         pensamentoM = gameObject.GetComponent<PensamentosManager>();
         interacController = gameObject.GetComponent<InteractionsController>();
@@ -380,22 +381,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if(Input.GetKeyDown(KeyCode.T))
-        //{
-        //    iTween.ShakePosition(camera.gameObject, OvniCaindoShake.ht);
-        //}
-        //else if (Input.GetKeyDown(KeyCode.Y))
-        //{
-        //    iTween.ShakePosition(camera.gameObject, porradaTentaculoShake.ht);
-        //}
-        //else if(Input.GetKeyDown(KeyCode.U))
-        //{
-        //    iTween.ShakePosition(camera.gameObject, porradaViktorShake.ht);
-        //}
-        //else if(Input.GetKeyDown(KeyCode.I))
-        //{
-        //    iTween.ShakePosition(camera.gameObject, OvniAtingiuChaoShake.ht);
-        //}
+    
 
         if (onMobile)
         {
@@ -529,8 +515,10 @@ public class GameController : MonoBehaviour
         }
         else if(cenaAtual == Cenas.Quarentena)
         {
+            if(dialogoInicialQuarentena == false)
+                playerBehav.FicarParado();
             pensamentoM.EsconderPensamentos();
-            playerBehav.FicarParado();
+            
         }
     }
 
@@ -551,14 +539,14 @@ public class GameController : MonoBehaviour
                     DialogoInicialDentroCasa = true;
                     dialogManager.SetQuantidadeFalas(8);
                     //dialogManager.AdicionarFala(dialogManager.Filha.name, "PAPAI!");
-                    dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Filha.name, "PAPAI!",0.2f);
-                    dialogManager.AdicionarFala(dialogManager.Viktor.name, "Hahaha, boa noite filha, não deveria estar na sua cama?");
+                    dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Filha.name, "PAPAI!",0.7f);
+                    dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Viktor.name, "Hahaha, boa noite filha, não deveria estar na sua cama?",0.7f);
                     dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Filha.name, "Estávamos esperando você papai.", 0.6f);
                     dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Esposa.name, "Oi querido. Foi tudo bem no trabalho?.", 0.6f);
-                    dialogManager.AdicionarFala(dialogManager.Viktor.name, "Olá, foi sim, mas, não precisavam me esperar até tão tarde.");
+                    dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Viktor.name, "Olá, foi sim, mas, não precisavam me esperar até tão tarde.",0.8f);
                     dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Esposa.name, "Tudo bem, a Emily queria te ver antes de dormir.", 0.7f);
                     dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Esposa.name, "Leve ela pra cama mas antes traga um copo d’água pra mim amor. Estou com sede.",0.8f);
-                    dialogManager.AdicionarFala(dialogManager.Viktor.name, "Claro querida, só um minuto.");
+                    dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Viktor.name, "Claro querida, só um minuto.",0.6f);
 
                     dialogManager.RealizarConversa();
                     DialogoInicialDentroCasa = true;
@@ -602,6 +590,8 @@ public class GameController : MonoBehaviour
                 break;
         }
     }
+
+
 
     public void BotaoOk()
     {
@@ -672,6 +662,7 @@ public class GameController : MonoBehaviour
     public void ChangeToScene(string sceneName)
     {
         fadeDone = false;
+        playerBehav.FicarParado();
         FadePanel.GetComponent<CanvasGroup>().blocksRaycasts = false; //this prevents the UI element to receive input events
         //FadePanel.GetComponent<CanvasGroup>().alpha = 0;
 
