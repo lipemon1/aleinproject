@@ -177,11 +177,12 @@ MonoBehaviour:
   podeSerQuebrada: 1
   vida: 0
   vidaInicial: 10
-  _dano: 10
+  _dano: 60
   parteQueIraSumir: {fileID: 1000012834253986}
   bordaPorta: {fileID: 1000010069397452}
   objetoComTagInteragivel: {fileID: 1000010515556584}
   portaMorreu: 0
+  PodePassarDireto: 0
 --- !u!114 &114000010886187824
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -193,7 +194,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21fdd9bfe0e0ae04a882b9085e661306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorTexture: {fileID: 2800000, guid: 4ff13defc345d5348a61e361519bbba2, type: 3}
+  direcaoCursor: 0
+  cursorDireita: {fileID: 0}
+  cursorEsquerda: {fileID: 0}
   cursorMode: 0
   hotSpot: {x: 0, y: 0}
 --- !u!114 &114000012550491600
@@ -229,6 +232,7 @@ MonoBehaviour:
   bordaPorta: {fileID: 0}
   objetoComTagInteragivel: {fileID: 1000010515556584}
   portaMorreu: 0
+  PodePassarDireto: 0
 --- !u!114 &114000013915112762
 MonoBehaviour:
   m_ObjectHideFlags: 1

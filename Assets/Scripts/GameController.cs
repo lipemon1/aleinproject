@@ -19,7 +19,8 @@ public class GameController : MonoBehaviour
         QuartoDaFilha,
         Cratera, // tela onde o ovni caiu
         Quarentena,
-        Facility
+        Facility,
+        SalaDuto
     }
     [System.Serializable]
     public class ScreenShake
@@ -209,12 +210,26 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public bool JaQuebrouDutoFinal
+    {
+        get
+        {
+            return jaQuebrouDutoFinal;
+        }
+
+        set
+        {
+            jaQuebrouDutoFinal = value;
+        }
+    }
+
     public bool devePegarFilha;
     public bool estaComFilha;
     public bool subiuEscadas;
     public bool colocouFilhaNaCama;
     public bool ovniCaiu;
     public bool pegouLanterna;
+    public bool jaQuebrouDutoFinal = false;
 
     [Header("Quarentena")]
     public bool dialogoInicialQuarentena;
@@ -460,12 +475,19 @@ public class GameController : MonoBehaviour
         {
             cenaAtual = Cenas.Quarentena;
             //playerBehav.HideLifeBar();
+            playerBehav.estaNaInstalacao = true;
             playerBehav.DeveEsconderLifeBar1 = true;
         }
         else if (SceneManager.GetActiveScene().name == "Cena6-Facility")
         {
+            playerBehav.estaNaInstalacao = true;
             cenaAtual = Cenas.Facility;
             //playerBehav.ShowLifeBar();
+        }
+        else if(SceneManager.GetActiveScene().name == "Cena7-SalaDuto")
+        {
+            playerBehav.estaNaInstalacao = true;
+            cenaAtual = Cenas.SalaDuto;
         }
     }
 
@@ -560,8 +582,10 @@ public class GameController : MonoBehaviour
                 break;
 
             case Cenas.Quarentena:
+                playerBehav.estaNaInstalacao = true;
                 if (fadeDone == true && DialogoInicialQuarentena == false)
                 {
+                    playerBehav.estaNaInstalacao = true;
                     DialogoInicialQuarentena = true;
                     dialogManager.SetQuantidadeFalas(15);
                     dialogManager.AdicionarFala(dialogManager.Viktor.name, "HEY! ALGUÉM ESTÁ AI??");
@@ -587,6 +611,12 @@ public class GameController : MonoBehaviour
                     dialogManager.RealizarConversa();
                     DialogoInicialDentroCasa = true;
                 }
+                break;
+            case Cenas.Facility:
+                
+                break;
+            case Cenas.SalaDuto:
+              
                 break;
         }
     }
@@ -661,14 +691,16 @@ public class GameController : MonoBehaviour
 
     public void ChangeToScene(string sceneName)
     {
+        Debug.LogError("ENTROU AQUI");
         fadeDone = false;
         playerBehav.FicarParado();
         FadePanel.GetComponent<CanvasGroup>().blocksRaycasts = false; //this prevents the UI element to receive input events
         //FadePanel.GetComponent<CanvasGroup>().alpha = 0;
 
         StartCoroutine(FadeOut(1.0f, timeToFade));
-
+        Debug.LogError("LA");
         StartCoroutine(GotToScene(sceneName));
+        Debug.LogError("TROCA A CENA");
 
     }
     IEnumerator GotToScene(string name)

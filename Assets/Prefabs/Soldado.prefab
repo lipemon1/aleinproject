@@ -1355,7 +1355,7 @@ MonoBehaviour:
   isShooting: 0
   bullet: {fileID: 1000010719863214, guid: f6c628331384c554c89ad5a6612d3cc4, type: 2}
   gun: {fileID: 1000012289324834}
-  fireRate: 0.1
+  fireRate: 0.4
   timeToShoot: 0.1
   soldierAnimator: {fileID: 95000013956978560}
 --- !u!114 &114000010200836410

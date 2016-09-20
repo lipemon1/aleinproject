@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\ChangeCursorImage.cs" />
     <Compile Include="Assets\Scripts\Characters.cs" />
+    <Compile Include="Assets\Scripts\Cinematics.cs" />
     <Compile Include="Assets\Scripts\ClickableObject.cs" />
     <Compile Include="Assets\Scripts\ClickableObjectsManager.cs" />
     <Compile Include="Assets\Scripts\ComputadorAbrirPorta.cs" />

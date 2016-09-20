@@ -34,6 +34,8 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+
+
     [Header("Testando no Celular?")]
     private bool onMobile; //para saber se estamos no mobile, controle manual
 
@@ -50,6 +52,7 @@ public class PlayerBehaviour : MonoBehaviour
     public bool running; //controle para saber se esta correndo ou não
     public bool sneaking; //controle para saber se esta em modo sneaking ou não
     public bool walking; //controle para sabe se esta andando ou ano
+    public Collider2D viktorCollider;
 
     [Header("Variáveis para Combate")]
     public Transform hand;
@@ -60,6 +63,9 @@ public class PlayerBehaviour : MonoBehaviour
     public bool podeLancarDano;
     public float tempoAnimacao;
     public float tempoPadraoAnimacao = 1f;
+    public bool gettinHit = false;
+
+    public bool estaNaInstalacao = false;
 
     [Header("Outros")]
     private float directionX; //valor do input do jogador
@@ -187,17 +193,21 @@ public class PlayerBehaviour : MonoBehaviour
         if (canMove == true)
         {
             PlayerMovement();
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (estaNaInstalacao == true)
             {
-                Attack();
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    Attack();
+                }
             }
         }
-
-        CalculateAttack();
+        if (estaNaInstalacao == true)
+            CalculateAttack();
     }
 
     void CalculateAttack()
     {
+
         Debug.DrawLine(hand.position, punchLimit.position, Color.blue); //desenha uma linha para debug (ver na Scene)
 
         RaycastHit2D hit = Physics2D.Raycast(hand.position, punchLimit.position, (punchLimit.position.x - hand.position.x));
@@ -214,7 +224,7 @@ public class PlayerBehaviour : MonoBehaviour
             {
 
                 hitPorta = true;
-                
+
                 portaBehav = hit.collider.gameObject.GetComponent<PortaBehaviour>();
             }
             else
@@ -300,7 +310,8 @@ public class PlayerBehaviour : MonoBehaviour
             running = true;
             PlayerAnimator.SetBool("Running", running);
             actualSpeed = runningSpeed;
-        } else
+        }
+        else
         {
             //ToggleRun(); //função de correr            
             running = false;
@@ -310,21 +321,24 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (!running)
         {
-            //Código para pegar quando o jogador apertar control esquerdo para
-            //entrar no modo sneaking
-            if (Input.GetKey(KeyCode.LeftControl))
+            if (estaNaInstalacao == true)
             {
-                sneaking = true;
-                PlayerAnimator.SetBool("Sneaking", sneaking);
-                actualSpeed = sneakingSpeed;
-                viktorCollider.offset = new Vector2(0, -1.45f);
-            }
-            else
-            {
-                sneaking = false;
-                PlayerAnimator.SetBool("Sneaking", sneaking);
-                actualSpeed = walkingSpeed;
-                viktorCollider.offset = new Vector2(0, 1.31f);
+                //Código para pegar quando o jogador apertar control esquerdo para
+                //entrar no modo sneaking
+                if (Input.GetKey(KeyCode.LeftControl))
+                {
+                    sneaking = true;
+                    PlayerAnimator.SetBool("Sneaking", sneaking);
+                    actualSpeed = sneakingSpeed;
+                    viktorCollider.offset = new Vector2(0, -1.45f);
+                }
+                else
+                {
+                    sneaking = false;
+                    PlayerAnimator.SetBool("Sneaking", sneaking);
+                    actualSpeed = walkingSpeed;
+                    viktorCollider.offset = new Vector2(0, 1.31f);
+                }
             }
         }
 
@@ -349,7 +363,8 @@ public class PlayerBehaviour : MonoBehaviour
         if (sneaking && walking)
         {
             PlayerAnimator.SetBool("Sneaking", true);
-        } else
+        }
+        else
         {
             PlayerAnimator.SetBool("Sneaking", false);
         }
@@ -378,21 +393,21 @@ public class PlayerBehaviour : MonoBehaviour
                 running = false;
             }
         }
-       
+
 
         //linha que movimento o jogador
-        
+
         //para saber para onde ir já que o persongem não está flipando
-        if(directionX < 0)
+        if (directionX < 0)
         {
             transform.Translate(new Vector3(-directionX * actualSpeed * Time.deltaTime, 0f, 0f));
         }
-        else if(directionX > 0)
+        else if (directionX > 0)
         {
             transform.Translate(new Vector3(directionX * actualSpeed * Time.deltaTime, 0f, 0f));
         }
-            
-        
+
+
 
         if (directionX != 0)
         {

@@ -1843,10 +1843,16 @@ MonoBehaviour:
   running: 0
   sneaking: 0
   walking: 0
+  viktorCollider: {fileID: 61000012882069606}
   hand: {fileID: 4000010324952290}
   punchLimit: {fileID: 4000011349794266}
   hitSomeEnemy: 0
   enemyAnimator: {fileID: 0}
+  podeLancarDano: 0
+  tempoAnimacao: 0
+  tempoPadraoAnimacao: 1
+  gettinHit: 0
+  estaNaInstalacao: 0
   PlayerMesh: {fileID: 1000013929637386}
   facingRight: 0
   canRun: 0
@@ -1856,6 +1862,8 @@ MonoBehaviour:
   Life: 0
   sliderLife: {fileID: 0}
   textLife: {fileID: 0}
+  hitPorta: 0
+  portaBehav: {fileID: 0}
   flipOneMoreTime: 0
 --- !u!114 &114000013369014890
 MonoBehaviour:

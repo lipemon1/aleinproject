@@ -12,6 +12,7 @@ public class InteractionsController : MonoBehaviour
     public GameObject filhaNaCama;
     public GameObject filhaDpsQueOvnicaiu;
     public GameObject esposaDepoisDoOvni;
+    public GameObject dutoFinal;
     
     #endregion
 
@@ -287,6 +288,38 @@ public class InteractionsController : MonoBehaviour
             #region Cena Quarentena:
             case "Porta Quarentena" :
                 gameController.ChangeToScene("Cena6-Facility");
+                break;
+            #endregion
+            #region cenaFacility
+            case "Porta Escapada":
+                Debug.LogWarning("Porta escapada clicada");
+                gameController.ChangeToScene("Cena7-SalaDuto");
+                break;
+            #endregion
+            #region Sala Duto:
+            case "Pedaço de Pau":
+                inventory.AddItem(clickedObject.GetComponent<Item>());
+                Destroy(clickedObject.gameObject);
+                break;
+
+            case "Duto Escapada":
+                Debug.LogWarning("Duto Escapada");
+                if (gameController.JaQuebrouDutoFinal == true)
+                {
+                    gameController.ChangeToScene("EscapandoFacility");
+                }
+                //if (gameController.activeItem == "Pedaço de Pau")
+                //{
+                //    Debug.LogWarning("Meti o Pau");
+                //    inventory.ClearInventorySlot();
+                //    dutoFinal.GetComponent<PortaBehaviour>().AplicarDano(100);
+                //    gameController.JaQuebrouDutoFinal = true;
+                    
+                //}
+
+                
+                Debug.LogWarning("duto escapada");
+                
                 break;
             #endregion
 

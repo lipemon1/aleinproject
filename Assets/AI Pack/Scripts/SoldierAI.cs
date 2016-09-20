@@ -167,7 +167,7 @@ public class SoldierAI : MonoBehaviour
     /// </summary>
     void Shoot()
     {
-        Debug.Log("Atirando");
+        //Debug.Log("Atirando");
 
         if (timeToShoot <= 0.0f)
         {
