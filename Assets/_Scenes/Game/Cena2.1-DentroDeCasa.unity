@@ -650,6 +650,14 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 13c0a0469077d8e4b824e2e0f7527d70, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 13c0a0469077d8e4b824e2e0f7527d70, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 13c0a0469077d8e4b824e2e0f7527d70, type: 2}
   m_IsPrefabParent: 0
@@ -983,19 +991,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010649350252, guid: 1fc51903805bed844ae022dbcdc5d498, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.33615297
+      value: 0.33617422
       objectReference: {fileID: 0}
     - target: {fileID: 4000010649350252, guid: 1fc51903805bed844ae022dbcdc5d498, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.94180745
+      value: 0.9417998
       objectReference: {fileID: 0}
     - target: {fileID: 4000013711999808, guid: 1fc51903805bed844ae022dbcdc5d498, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.20131712
+      value: 0.20130646
       objectReference: {fileID: 0}
     - target: {fileID: 4000013711999808, guid: 1fc51903805bed844ae022dbcdc5d498, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.9795261
+      value: 0.9795283
       objectReference: {fileID: 0}
     - target: {fileID: 4000010507476546, guid: 1fc51903805bed844ae022dbcdc5d498, type: 2}
       propertyPath: m_LocalRotation.z
@@ -1007,35 +1015,35 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011202850562, guid: 1fc51903805bed844ae022dbcdc5d498, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.99677825
+      value: 0.99677694
       objectReference: {fileID: 0}
     - target: {fileID: 4000011202850562, guid: 1fc51903805bed844ae022dbcdc5d498, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.080207005
+      value: 0.080223285
       objectReference: {fileID: 0}
     - target: {fileID: 4000014191797806, guid: 1fc51903805bed844ae022dbcdc5d498, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.99958384
+      value: 0.99958354
       objectReference: {fileID: 0}
     - target: {fileID: 4000014191797806, guid: 1fc51903805bed844ae022dbcdc5d498, type: 2}
       propertyPath: m_LocalRotation.w
-      value: -0.028846359
+      value: -0.028857082
       objectReference: {fileID: 0}
     - target: {fileID: 4000010198559408, guid: 1fc51903805bed844ae022dbcdc5d498, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.035019305
+      value: 0.035025258
       objectReference: {fileID: 0}
     - target: {fileID: 4000010198559408, guid: 1fc51903805bed844ae022dbcdc5d498, type: 2}
       propertyPath: m_LocalRotation.w
-      value: -0.99938667
+      value: -0.9993864
       objectReference: {fileID: 0}
     - target: {fileID: 4000012987489962, guid: 1fc51903805bed844ae022dbcdc5d498, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.999778
+      value: 0.99977803
       objectReference: {fileID: 0}
     - target: {fileID: 4000012987489962, guid: 1fc51903805bed844ae022dbcdc5d498, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.021071857
+      value: 0.02106983
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1fc51903805bed844ae022dbcdc5d498, type: 2}
@@ -2672,6 +2680,18 @@ Prefab:
       propertyPath: Comentarios.Array.data[1]
       value: "La fora est\xE1 muito escuro, preciso de uma lanterna"
       objectReference: {fileID: 0}
+    - target: {fileID: 114000010575521674, guid: d0c739c4e9431bc419e61aa77e57a257,
+        type: 2}
+      propertyPath: spriteNeutral
+      value: 
+      objectReference: {fileID: 21300000, guid: d5eecf55939531d4c867e004ea914e2f,
+        type: 3}
+    - target: {fileID: 114000010575521674, guid: d0c739c4e9431bc419e61aa77e57a257,
+        type: 2}
+      propertyPath: spriteHighlighted
+      value: 
+      objectReference: {fileID: 21300000, guid: d5eecf55939531d4c867e004ea914e2f,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d0c739c4e9431bc419e61aa77e57a257, type: 2}
   m_IsPrefabParent: 0
@@ -3311,6 +3331,16 @@ Prefab:
         type: 2}
       propertyPath: m_FontData.m_FontSize
       value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012172509716, guid: fa1fea9396932a14083bf06942fcb59f,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012172509716, guid: fa1fea9396932a14083bf06942fcb59f,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fa1fea9396932a14083bf06942fcb59f, type: 2}

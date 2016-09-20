@@ -1,10 +1,21 @@
 fileFormatVersion: 2
 guid: 90e7c4e9d81d2794f87f27b449957f2d
-timeCreated: 1473257909
+timeCreated: 1474384228
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - startPos: {instanceID: 0}
+  - endPos: {instanceID: 0}
+  - visionLimit: {instanceID: 0}
+  - eye: {instanceID: 0}
+  - alertSign: {instanceID: 0}
+  - lostAlertSign: {instanceID: 0}
+  - player: {instanceID: 0}
+  - visionToShootLimit: {instanceID: 0}
+  - bullet: {fileID: 1000010719863214, guid: f6c628331384c554c89ad5a6612d3cc4, type: 2}
+  - gun: {instanceID: 0}
+  - soldierAnimator: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

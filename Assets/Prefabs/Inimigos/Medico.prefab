@@ -572,6 +572,7 @@ GameObject:
   - 95: {fileID: 95000010271333490}
   - 61: {fileID: 61000010956055654}
   - 114: {fileID: 114000012447700380}
+  - 114: {fileID: 114000011851317446}
   m_Layer: 11
   m_Name: Medico
   m_TagString: Enemy
@@ -1532,6 +1533,21 @@ MonoBehaviour:
   iterations: 20
   damping: 1
   angleLimits: []
+--- !u!114 &114000011851317446
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013131344656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eeaeb579c6a51b408908e9f4bb9662c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doctor: 1
+  soldier: 0
+  doctorAi: {fileID: 114000012447700380}
+  soldierAi: {fileID: 0}
 --- !u!114 &114000012447700380
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1546,6 +1562,7 @@ MonoBehaviour:
   startDoctorAI: 0
   playerLayerNumber: 10
   enemyLayerNumber: 11
+  isAlive: 1
   spotted: 0
   alreadySpotted: 0
   alreadyCancelInvoke: 0
@@ -1558,8 +1575,10 @@ MonoBehaviour:
   timeToCallGuard: 5
   callingGuard: 0
   guardWasCalled: 0
+  soldierToSpawn: {fileID: 0}
   isGoingRight: 1
   timeToLookAround: 1
+  doctorAnimator: {fileID: 0}
 --- !u!114 &114000012554135898
 MonoBehaviour:
   m_ObjectHideFlags: 1

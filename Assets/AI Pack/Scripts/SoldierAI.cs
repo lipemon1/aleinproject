@@ -11,7 +11,8 @@ using System.Collections;
 /// Nas "Configurações de Layer" coloque o número das layers correspondentes para que possa ignora-la
 /// </summary>
 
-public class SoldierAI : MonoBehaviour {
+public class SoldierAI : MonoBehaviour
+{
 
     [Header("Configuração de Layer")]
     public int playerLayerNumber = 8;
@@ -55,53 +56,93 @@ public class SoldierAI : MonoBehaviour {
     public bool isAbleToShoot = false; //se ja pode atirar no jogador
     public Transform visionToShootLimit; //alcance maximo para poder atirar
     public bool isShooting; //permitir que o inimigo aitre
+    public GameObject bullet;
+    public GameObject gun;
+    public float fireRate = 2;
+    public float timeToShoot = 2;
 
+    [Header("Animações")]
+    public Animator soldierAnimator;
+    private bool isAlive = true;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         // Pega as variaveis filhos do Inimigo
-        player = GameObject.FindWithTag("Player");
-        eye = transform.GetChild(0).transform;
-        visionLimit = transform.GetChild(1).transform;
-        alertSign = transform.GetChild(2).gameObject;
-        lostAlertSign = transform.GetChild(4).gameObject;
-        visionToShootLimit = transform.GetChild(3);
+        if (player == null)
+        {
+            player = GameObject.FindWithTag("Player");
+        }
+
+        if (eye == null)
+        {
+            eye = transform.GetChild(0).transform;
+        }
+
+        if (visionLimit == null)
+        {
+            visionLimit = transform.GetChild(1).transform;
+        }
+
+        if (alertSign == null)
+        {
+            alertSign = transform.GetChild(2).gameObject;
+        }
+
+        if (lostAlertSign == null)
+        {
+            lostAlertSign = transform.GetChild(4).gameObject;
+        }
+
+        if (visionToShootLimit == null)
+        {
+            visionToShootLimit = transform.GetChild(3);
+        }
+
+        if (soldierAnimator == null)
+        {
+            soldierAnimator = GetComponent<Animator>();
+        }
 
         if (startItSelf)
         {
             Initiate(); //começa a AI do guarda
         }
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
 
-        //se patrolling for true, o inimigo fica patrulhando
-        if (patrolling)
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        if (isAlive)
         {
-            Patrol();
+            //se patrolling for true, o inimigo fica patrulhando
+            if (patrolling)
+            {
+                Patrol();
+            }
+
+            //se chaseing for true, o inimigo fica perseguindo
+            if (chasing)
+            {
+                Chase();
+            }
+
+            //se o inimigo estiver atirando
+            if (isShooting)
+            {
+                Shoot();
+            }
+
+            //visao do inimigo
+            EnemyVision();
+
+            //raio de tiro do inimigo
+            EnemyVisionToShot();
+
+            Physics2D.IgnoreLayerCollision(playerLayerNumber, enemyLayerNumber); //ignora colisoes de quem estiver nessas layers
+            AnimateSoldier();
         }
-
-        //se chaseing for true, o inimigo fica perseguindo
-        if (chasing)
-        {
-            Chase();
-        }
-
-        //se o inimigo estiver atirando
-        if (isShooting)
-        {
-            Shoot();
-        }
-
-        //visao do inimigo
-        EnemyVision();
-
-        //raio de tiro do inimigo
-        EnemyVisionToShot();
-
-        Physics2D.IgnoreLayerCollision(playerLayerNumber, enemyLayerNumber); //ignora colisoes de quem estiver nessas layers
-	}
+    }
 
     /// <summary>
     /// Cria um linecast que será utilizado como distancia para poder atirar no jogador
@@ -116,7 +157,7 @@ public class SoldierAI : MonoBehaviour {
         //se o inimigo estiver perto o suficiente para atirar
         if (isAbleToShoot)
         {
-            Debug.Log("Posso atirar");
+            //Debug.Log("Posso atirar");
             isShooting = true;
         }
     }
@@ -127,6 +168,23 @@ public class SoldierAI : MonoBehaviour {
     void Shoot()
     {
         Debug.Log("Atirando");
+
+        if (timeToShoot <= 0.0f)
+        {
+            if (bullet == null)
+            {
+                Debug.Log("Objeto bala nao atribuido");
+            }
+            else
+            {
+                
+            }
+            GameObject tmp = Instantiate(bullet, gun.transform.position, Quaternion.identity) as GameObject;
+            tmp.GetComponent<bulletBehaviour>().SetDirecao(isGoingRight == true ? 1 : 0);
+            timeToShoot = fireRate;
+        }
+
+        timeToShoot -= Time.deltaTime;
     }
 
     /// <summary>
@@ -156,7 +214,7 @@ public class SoldierAI : MonoBehaviour {
     void StartChase()
     {
         HideLostAlert(); //esconde sinal de alerta de jogador perdido
-        Debug.Log("Começando a perseguir");
+        //Debug.Log("Começando a perseguir");
         alertSign.SetActive(true); //mostra sinal de alerta
         patrolling = false; //para de patrulhar
         idle = false; //sai do idle
@@ -173,24 +231,24 @@ public class SoldierAI : MonoBehaviour {
     /// </summary>
     void Chase()
     {
-        Debug.Log("Perseguindo..");
+        //Debug.Log("Perseguindo..");
         wasChasing = true;
 
         // perseguir somente até voce poder atirar
         if (!isAbleToShoot)
         {
             //se o jogador estiver a esquerda do inimigo, o inimigo vai pra esquerda
-            if(player.transform.position.x < transform.position.x)
+            if (player.transform.position.x < transform.position.x)
             {
                 //movimenta o inimigo para esquerda multiplicando pelo chaseSpeed
-                transform.Translate(new Vector2(1, 0) * chaseSpeed * Time.deltaTime);
+                transform.Translate(new Vector2(-1, 0) * chaseSpeed * Time.deltaTime);
             }
 
             //se o jogador estiver a direita do inimigo, o inimigo vai pra direita
             if (player.transform.position.x > transform.position.x)
             {
                 //movimenta o inimigo para esquerda multiplicando pelo chaseSpeed
-                transform.Translate(new Vector2(1, 0) * chaseSpeed * Time.deltaTime);
+                transform.Translate(new Vector2(-1, 0) * chaseSpeed * Time.deltaTime);
             }
         }
 
@@ -214,13 +272,13 @@ public class SoldierAI : MonoBehaviour {
     {
         //chamar animação de olhando para os lados aqui
         ShowLostAlert(); //mostra sinal de alerta de busca
-        Debug.Log("Olhando para um lado");
+        //Debug.Log("Olhando para um lado");
         Flip();
         yield return new WaitForSeconds(0.5f);
 
         if (!spotted)
         {
-            Debug.Log("Olhando para o outro");
+            //Debug.Log("Olhando para o outro");
             Flip();
             yield return new WaitForSeconds(0.5f);
         }
@@ -231,7 +289,7 @@ public class SoldierAI : MonoBehaviour {
 
         if (!spotted)
         {
-            Debug.Log("Olhando para um lado");
+            //Debug.Log("Olhando para um lado");
             Flip();
             yield return new WaitForSeconds(0.5f);
         }
@@ -242,7 +300,7 @@ public class SoldierAI : MonoBehaviour {
 
         if (!spotted)
         {
-            Debug.Log("Olhando para o outro");
+            //Debug.Log("Olhando para o outro");
             Flip();
         }
         else
@@ -269,7 +327,7 @@ public class SoldierAI : MonoBehaviour {
     void StartPatrol()
     {
         HideLostAlert(); //esconde sinal de alerta de jogador perdido
-        Debug.Log("Começando patrulha..");
+        //Debug.Log("Começando patrulha..");
         canMove = true; //pode se mover
         chasing = false; //para de perseguir
         patrolling = true; //começa a patrulhar
@@ -281,37 +339,37 @@ public class SoldierAI : MonoBehaviour {
     /// </summary>
     void Patrol()
     {
-        Debug.Log("Patrulhando!");
+        //Debug.Log("Patrulhando!");
         walking = true; //esta andando
         idle = false; //nao esta mais no idle
 
         //verifica se o inimigo esta indo para direita
         if (isGoingRight && canMove)
         {
-            Debug.Log("Indo para a direita...");
+            //Debug.Log("Indo para a direita...");
             //movimenta o inimigo para direita multiplicando pelo patrolSpeed
-            transform.Translate(new Vector2(1, 0) * patrolSpeed * Time.deltaTime);
+            transform.Translate(new Vector2(-1, 0) * patrolSpeed * Time.deltaTime);
 
             //quando o inimigo chegar a posição final da patrulha
             if (transform.position.x > endPos.position.x)
             {
-                Debug.Log("Cheguei ao meu ponto de patrulha direito. Parando e olhando para os lados..");
+                //Debug.Log("Cheguei ao meu ponto de patrulha direito. Parando e olhando para os lados..");
                 //Parar inimigo e fazer ele olhar para os dois lados
                 canMove = false; //desabilita a movimentação do inimmigo
                 PatrolPointWait();
                 Flip();
             }
         }
-        else if(!isGoingRight && canMove) //se estiver indo para esquerda
+        else if (!isGoingRight && canMove) //se estiver indo para esquerda
         {
-            Debug.Log("Indo para a esquerda...");
+            //Debug.Log("Indo para a esquerda...");
             //movimenta o inimigo para esquerda multiplicando pelo patrolSpeed
-            transform.Translate(new Vector2(1, 0) * patrolSpeed * Time.deltaTime);
+            transform.Translate(new Vector2(-1, 0) * patrolSpeed * Time.deltaTime);
 
             //quando o inimigo chegar a posição final da patrulha
             if (transform.position.x < startPos.position.x)
             {
-                Debug.Log("Cheguei ao meu ponto de patrulha esquerdo. Parando e olhando para os lados..");
+                //Debug.Log("Cheguei ao meu ponto de patrulha esquerdo. Parando e olhando para os lados..");
                 //Parar inimigo e fazer ele olhar para os dois lados
                 canMove = false; //desabilita a movimentação do inimmigo
                 PatrolPointWait();
@@ -338,9 +396,9 @@ public class SoldierAI : MonoBehaviour {
     IEnumerator PayingAtention()
     {
         //chamar animação de olhando para os lados aqui
-        Debug.Log("Olhando para os lados");
+        //Debug.Log("Olhando para os lados");
         yield return new WaitForSeconds(patrolWaitTime);
-        Debug.Log("Terminei de olhar para os lados");
+        //Debug.Log("Terminei de olhar para os lados");
         StartPatrol();
     }
 
@@ -350,7 +408,8 @@ public class SoldierAI : MonoBehaviour {
     /// </summary>
     void Flip()
     {
-        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        //transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        transform.Rotate(Vector3.up * 180); //o flip tem que ser por rotation pra a animação não bugar inteira =/
         isGoingRight = !isGoingRight;
     }
 
@@ -380,4 +439,31 @@ public class SoldierAI : MonoBehaviour {
         alreadyStarted = true; //guarda ja foi iniciado
         StartPatrol(); // inicia patrulha
     }
+
+    /// <summary>
+    /// Atualiza o animator
+    /// </summary>
+    /// <param name="idle"></param>
+    /// <param name="walking"></param>
+    /// <param name="running"></param>
+    /// <param name="shooting"></param>
+    /// <param name="lost"></param>
+    void AnimateSoldier()
+    {
+        soldierAnimator.SetBool("idle", idle);
+        soldierAnimator.SetBool("walking", walking);
+        soldierAnimator.SetBool("running", running);
+        soldierAnimator.SetBool("shooting", isShooting);
+        soldierAnimator.SetBool("lostTarget", wasChasing);
+    }
+
+    public void KillSoldier()
+    {
+        Debug.LogWarning("Matar Soldado");
+        isAlive = false;
+        //desativar alertas
+        alertSign.SetActive(false);
+        lostAlertSign.SetActive(false);
+    }
+
 }

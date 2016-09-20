@@ -28,6 +28,7 @@ public class DoctorAI : MonoBehaviour {
     public float timeToCallGuard; //tempo até chamar os guardas
     public bool callingGuard; //se esta chamando um guarda ou nao
     public bool guardWasCalled; //se ja chamou um guarda ou nao
+    public GameObject soldierToSpawn;//soldado que vai chamar
 
     [Header("Movimentação")]
     public bool isGoingRight = true; //verifica se esta indo para a direita ou esquerda
@@ -143,14 +144,14 @@ public class DoctorAI : MonoBehaviour {
         if (!guardWasCalled) //se o guarda ainda nao foi chamado
         {
             timeToCallGuardUI.value = timeToCallGuard; //atualiza o valor da UI
-            Debug.Log("Chamando um guarda em: " + timeToCallGuard.ToString() + " segundos");
+            //Debug.Log("Chamando um guarda em: " + timeToCallGuard.ToString() + " segundos");
 
             //se o tempo para chamar um guarda chegar a zero
             if (timeToCallGuard <= 0.0f)
             {
                 Debug.Log("Chamando um guarda AGORA");
                 //escrever o código para chamar um guarda aqui
-
+                soldierToSpawn.SetActive(true);
                 guardWasCalled = true;
             }
 
@@ -214,7 +215,7 @@ public class DoctorAI : MonoBehaviour {
     void LookingAround()
     {
         //chamar animação de olhando para os lados aqui
-        Debug.Log("Olhando para um lado");
+
         Flip();
     }
 
@@ -242,6 +243,7 @@ public class DoctorAI : MonoBehaviour {
     {
         isAlive = false;
         timeToCallSliderGameObject.transform.parent.gameObject.SetActive(false);
+        playerAlert.SetActive(false);
         //Destroy(timeToCallSliderGameObject.transform.parent.gameObject);
     }
 }
