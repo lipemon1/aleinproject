@@ -163,7 +163,7 @@ MonoBehaviour:
   speed: 50
   player: {fileID: 0}
   canGo: 0
-  damage: 5
+  damage: 2
   direcao: 0
 --- !u!212 &212000012814603132
 SpriteRenderer:

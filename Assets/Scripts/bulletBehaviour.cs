@@ -9,6 +9,7 @@ public class bulletBehaviour : MonoBehaviour
     public bool canGo = false;
     public float damage = 5.0f;
     public int direcao; // 1 direita 0 esquerda
+    PlayerBehaviour playerbehav;
 
     // Use this for initialization
     void Start()
@@ -52,7 +53,17 @@ public class bulletBehaviour : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Eu bala, atingi player");
-            player.GetComponent<PlayerBehaviour>().AplicarDano(damage);
+            
+
+            if (player != null) {
+                playerbehav = player.GetComponent<PlayerBehaviour>();
+            }
+
+            if (playerbehav != null)
+            {
+                playerbehav.AplicarDano(damage);
+            }
+            
             Destroy(gameObject);
         }
     }

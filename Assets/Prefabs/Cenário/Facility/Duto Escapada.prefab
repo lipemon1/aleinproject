@@ -11,22 +11,6 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1000011618473024}
   m_IsPrefabParent: 1
---- !u!1 &1000010215901748
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 4000013150931702}
-  - 212: {fileID: 212000011529593290}
-  m_Layer: 0
-  m_Name: Porta
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
 --- !u!1 &1000011063605946
 GameObject:
   m_ObjectHideFlags: 0
@@ -38,7 +22,7 @@ GameObject:
   - 212: {fileID: 212000013847896828}
   - 114: {fileID: 114000012953721220}
   m_Layer: 0
-  m_Name: BordaPorta
+  m_Name: BordaDuto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,10 +37,12 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012842204922}
   - 61: {fileID: 61000014219532152}
-  - 114: {fileID: 114000013479817298}
+  - 114: {fileID: 114000011966939234}
+  - 114: {fileID: 114000012105795314}
+  - 114: {fileID: 114000011751645700}
   m_Layer: 0
   m_Name: Duto Escapada
-  m_TagString: PortaQuebravel
+  m_TagString: Interactive
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,7 +94,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000012842204922}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!4 &4000012238985400
 Transform:
   m_ObjectHideFlags: 1
@@ -121,7 +107,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000012842204922}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!4 &4000012614812644
 Transform:
   m_ObjectHideFlags: 1
@@ -134,7 +120,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000012842204922}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!4 &4000012842204922
 Transform:
   m_ObjectHideFlags: 1
@@ -142,28 +128,14 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011618473024}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.5, y: -0.42, z: 0}
-  m_LocalScale: {x: 0.78055406, y: 0.78055376, z: 0.78055376}
+  m_LocalPosition: {x: 6.421, y: -0.14, z: 0}
+  m_LocalScale: {x: 1.0829147, y: 1.0829146, z: 1.0829146}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 4000013150931702}
   - {fileID: 4000010279322034}
   - {fileID: 4000012614812644}
   - {fileID: 4000012238985400}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
---- !u!4 &4000013150931702
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010215901748}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 4000012842204922}
   m_RootOrder: 0
 --- !u!61 &61000013756033842
 BoxCollider2D:
@@ -210,6 +182,52 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114000011751645700
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011618473024}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21fdd9bfe0e0ae04a882b9085e661306, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direcaoCursor: 0
+  cursorDireita: {fileID: 2800000, guid: 98c6bdd0541217247917dcb21252f6a8, type: 3}
+  cursorEsquerda: {fileID: 2800000, guid: 511c2e5b7b99e52428bca78c9c508453, type: 3}
+  cursorMode: 0
+  hotSpot: {x: 0, y: 0}
+--- !u!114 &114000011966939234
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011618473024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df21e288e5b2e9d4f861d1aef3895cf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: Duto Escapada
+  spriteNeutral: {fileID: 21300000, guid: 05a2539160029df4e85cc39397531f29, type: 3}
+  spriteHighlighted: {fileID: 21300000, guid: 05a2539160029df4e85cc39397531f29, type: 3}
+  maxSize: 0
+--- !u!114 &114000012105795314
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011618473024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b30f640b10486b4ea73f57fc97c4758, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myDescription: "Duto - Sa\xEDda"
+  TemComentarioPlayer: 0
+  Comentarios:
+  - Preciso de alguma coisa para quebrar as helices
 --- !u!114 &114000012953721220
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -224,26 +242,6 @@ MonoBehaviour:
   distanciaMinima: 3
   color: {r: 1, g: 1, b: 1, a: 1}
   outlineSize: 1
---- !u!114 &114000013479817298
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011618473024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a18fdd8a2c56df4da3b99cc0850ea6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  podeSerQuebrada: 1
-  vida: 0
-  vidaInicial: 10
-  _dano: 60
-  parteQueIraSumir: {fileID: 1000014097817394}
-  bordaPorta: {fileID: 1000011063605946}
-  objetoComTagInteragivel: {fileID: 1000011824311374}
-  portaMorreu: 0
-  PodePassarDireto: 0
 --- !u!114 &114000013496869864
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -275,39 +273,6 @@ MonoBehaviour:
   cursorEsquerda: {fileID: 2800000, guid: 511c2e5b7b99e52428bca78c9c508453, type: 3}
   cursorMode: 0
   hotSpot: {x: 0, y: 0}
---- !u!212 &212000011529593290
-SpriteRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010215901748}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 83ed0918873b7074f8a746e6e98a99d0, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
 --- !u!212 &212000012064997022
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -336,7 +301,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 91047ea195867614692e75b48de1d247, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -369,7 +334,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: bf46cf8257446f04bb07eea4aa842290, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

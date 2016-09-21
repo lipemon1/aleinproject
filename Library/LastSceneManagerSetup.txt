@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/_Scenes/Game/Cena1-ChegadaEmCasa.unity
+- path: Assets/_Scenes/Game/Cena1.1-ChegadaEmCasa.unity
   isLoaded: 1
   isActive: 1

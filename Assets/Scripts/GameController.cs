@@ -60,6 +60,8 @@ public class GameController : MonoBehaviour
     public ScreenShake porradaTentaculoShake;
     public ScreenShake porradaViktorShake;
 
+    public GameObject ControleEspaco;
+
     public bool ViktorJaehMonstro;
 
     [Header("Objetos Interação")]
@@ -230,9 +232,11 @@ public class GameController : MonoBehaviour
     public bool ovniCaiu;
     public bool pegouLanterna;
     public bool jaQuebrouDutoFinal = false;
+    public bool jaPegouPau = false;
 
     [Header("Quarentena")]
     public bool dialogoInicialQuarentena;
+    public bool terminouDialogoInicialQuarentena;
 
 
     #endregion
@@ -634,6 +638,10 @@ public class GameController : MonoBehaviour
                     dialogManager.RealizarConversa();
                     DialogoInicialDentroCasa = true;
                 }
+                if(fadeDone && DialogoInicialQuarentena == true)
+                {
+                    pensamentoM.MostrarPensamento("Fugir da sala.");
+                }
                 break;
             case Cenas.Facility:
                 
@@ -662,6 +670,15 @@ public class GameController : MonoBehaviour
         if(DialogoInicialDentroCasa == true)
         {
             playerBehav.CanMove = true;
+        }
+        if(cenaAtual == Cenas.Quarentena)
+        {
+            if(dialogoInicialQuarentena == true)
+            {
+                terminouDialogoInicialQuarentena = true;
+                Debug.Log("Mostrar Controle");
+                ControleEspaco.SetActive(true);
+            }
         }
     }
 

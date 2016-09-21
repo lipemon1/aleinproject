@@ -155,6 +155,10 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.F9))
+        {
+            Life = 100;
+        }
         if (podeLancarDano == false)
         {
             if (tempoAnimacao > 0)
@@ -245,7 +249,7 @@ public class PlayerBehaviour : MonoBehaviour
     void Attack()
     {
         isAttacking = true;
-        Invoke("EnableAttack", 1.5f);
+        Invoke("EnableAttack", 0.5f);
         int punch;
         if (directionX != 0) //esta em movimento
         {
@@ -313,7 +317,7 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
         //Código para pegar quando o jogador apertar shift esquerdo para correr
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {
             //ToggleRun(); //função de correr            
             running = true;
@@ -334,7 +338,7 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 //Código para pegar quando o jogador apertar control esquerdo para
                 //entrar no modo sneaking
-                if (Input.GetKey(KeyCode.LeftControl))
+                if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
                 {
                     sneaking = true;
                     PlayerAnimator.SetBool("Sneaking", sneaking);

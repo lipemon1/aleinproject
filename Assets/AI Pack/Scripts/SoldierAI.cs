@@ -14,6 +14,9 @@ using System.Collections;
 public class SoldierAI : MonoBehaviour
 {
 
+    public bool DroparItem = false;
+    public GameObject itemADropar;
+
     [Header("Configuração de Layer")]
     public int playerLayerNumber = 8;
     public int enemyLayerNumber = 9;
@@ -469,6 +472,10 @@ public class SoldierAI : MonoBehaviour
             Flip();
         }
 
+        if(DroparItem == true)
+        {
+            Instantiate(itemADropar, transform.position, Quaternion.identity);
+        }
         Debug.LogWarning("Matar Soldado");
         isAlive = false;
         //desativar alertas

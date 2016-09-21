@@ -24,6 +24,7 @@ GameObject:
   - 50: {fileID: 50000011116728694}
   - 114: {fileID: 114000013328871410}
   - 114: {fileID: 114000011355393942}
+  - 114: {fileID: 114000012746280436}
   m_Layer: 0
   m_Name: "Peda\xE7o de Pau"
   m_TagString: Interactive
@@ -89,6 +90,21 @@ MonoBehaviour:
   distanciaMinima: 3
   color: {r: 1, g: 1, b: 1, a: 1}
   outlineSize: 2
+--- !u!114 &114000012746280436
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010872222208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b30f640b10486b4ea73f57fc97c4758, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myDescription: "Peda\xE7o de pau"
+  TemComentarioPlayer: 0
+  Comentarios:
+  - "N\xE3o preciso fazer nada la em cima"
 --- !u!114 &114000013328871410
 MonoBehaviour:
   m_ObjectHideFlags: 1

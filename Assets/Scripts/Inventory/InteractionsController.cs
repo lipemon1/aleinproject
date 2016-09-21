@@ -13,7 +13,8 @@ public class InteractionsController : MonoBehaviour
     public GameObject filhaDpsQueOvnicaiu;
     public GameObject esposaDepoisDoOvni;
     public GameObject dutoFinal;
-    
+    public GameObject HelicesDuto;
+
     #endregion
 
     public Inventory inventory;
@@ -114,7 +115,7 @@ public class InteractionsController : MonoBehaviour
                 {
                     gameController.FazerComentario(clickedObject.GetComponent<MyText>().GetOneComentary());
                 }
-                    break;
+                break;
             #endregion
             #region Sala
             case "Escada":
@@ -167,7 +168,7 @@ public class InteractionsController : MonoBehaviour
                         gameController.FazerComentario("La fora está muito escuro. Preciso de uma lanterna...");
                     }
                 }
-                else if(gameController.GetSceneName() == "Cena2-DentroDeCasa")
+                else if (gameController.GetSceneName() == "Cena2-DentroDeCasa")
                 {
                     gameController.FazerComentario(clickedObject.GetComponent<MyText>().GetOneComentary());
                 }
@@ -235,14 +236,15 @@ public class InteractionsController : MonoBehaviour
                 //{
                 //    gameController.ChangeToScene("Cena3.1-Upstairs");
                 //}
-                if(gameController.GetSceneName() == "Cena4-QuartoFilha")
+                if (gameController.GetSceneName() == "Cena4-QuartoFilha")
                 {
-                    if(gameController.ColocouFilhaNaCama == true && gameController.OvniCaiu == true)
+                    if (gameController.ColocouFilhaNaCama == true && gameController.OvniCaiu == true)
                     {
                         gameController.ChangeToScene("Cena3.1-Upstairs");
                     }
                 }
-                else if(gameController.GetSceneName() == "Cena3-Upstairs") { 
+                else if (gameController.GetSceneName() == "Cena3-Upstairs")
+                {
                     gameController.ChangeToScene("Cena4-QuartoFilha");
                 }
 
@@ -255,7 +257,7 @@ public class InteractionsController : MonoBehaviour
                 Debug.LogWarning("Cliquei na cama da filha");
                 if (gameController.EstaComFilha == true && gameController.ColocouFilhaNaCama == false)
                 {
-                    if(gameController.activeItem == "Filha")
+                    if (gameController.activeItem == "Filha")
                     {
                         inventory.ClearInventorySlot();
                         pensamentoM.EsconderPensamentos();
@@ -268,7 +270,7 @@ public class InteractionsController : MonoBehaviour
                         dialogManager.AdicionarFala(dialogManager.Filha.name, "O dia só começou a ficar esquisito quando estava voltando pra casa.");
                         dialogManager.AdicionarFala(dialogManager.Filha.name, "Vi várias luzes no céu, elas estavam girando muito rápido, depois de um tempo sumiram.");
                         dialogManager.AdicionarFala(dialogManager.Filha.name, "Fiquei com medo e vim correndo para casa. Contei à mamãe mas ela não acreditou em mim...");
-                        
+
                         dialogManager.AdicionarFala(dialogManager.Viktor.name, "Não se preocupe querida, deviam ser apenas aviões ou algo parecido.");
                         dialogManager.AdicionarFala(dialogManager.Viktor.name, "Agora deite-se e durma bem. Amanhã precisamos acordar cedo para buscar algumas ferramentas na casa do seu tio");
 
@@ -286,7 +288,7 @@ public class InteractionsController : MonoBehaviour
             #endregion
 
             #region Cena Quarentena:
-            case "Porta Quarentena" :
+            case "Porta Quarentena":
                 gameController.ChangeToScene("Cena6-Facility");
                 break;
             #endregion
@@ -299,27 +301,55 @@ public class InteractionsController : MonoBehaviour
             #region Sala Duto:
             case "Pedaço de Pau":
                 inventory.AddItem(clickedObject.GetComponent<Item>());
+                gameController.jaPegouPau = true;
                 Destroy(clickedObject.gameObject);
                 break;
 
             case "Duto Escapada":
                 Debug.LogWarning("Duto Escapada");
-                if (gameController.JaQuebrouDutoFinal == true)
+
+                if (gameController.JaQuebrouDutoFinal == true && gameController.jaPegouPau == true)
                 {
+                    if (gameController.bgm != null)
+                    {
+                        Destroy(gameController.bgm.gameObject);
+                    }
                     gameController.ChangeToScene("EscapandoFacility");
+                    
+
                 }
+                if (gameController.JaQuebrouDutoFinal == false)
+                {
+                    if (gameController.GetActiveItem() != "Pedaço de Pau")
+                    {
+                        gameController.FazerComentario(clickedObject.GetComponent<MyText>().GetOneComentary());
+                    }
+                }
+
+                if (gameController.GetActiveItem() == "Pedaço de Pau" && gameController.jaPegouPau == true)
+                {
+                    HelicesDuto.SetActive(false);
+                    gameController.jaQuebrouDutoFinal = true;
+                    clickedObject.GetComponent<MyText>().myDescription = "";
+                    
+                    // troca a imagem do cursor
+                    ChangeCursorImage changeCursor = clickedObject.GetComponent<ChangeCursorImage>();
+                    if (changeCursor != null)
+                        changeCursor.enabled = true;
+                }
+
                 //if (gameController.activeItem == "Pedaço de Pau")
                 //{
                 //    Debug.LogWarning("Meti o Pau");
                 //    inventory.ClearInventorySlot();
                 //    dutoFinal.GetComponent<PortaBehaviour>().AplicarDano(100);
                 //    gameController.JaQuebrouDutoFinal = true;
-                    
+
                 //}
 
-                
+
                 Debug.LogWarning("duto escapada");
-                
+
                 break;
             #endregion
 

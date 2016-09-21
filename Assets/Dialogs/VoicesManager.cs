@@ -12,6 +12,12 @@ public class VoicesManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        if(dialog == null)
+        {
+            dialog = GameObject.FindGameObjectWithTag("DialogManager").GetComponent<DialogueBoxManager>();
+        }
+
+
         if (bgm == null)
         {
             bgm = GameObject.FindWithTag("BGM").GetComponent<BackgroundMusicManager>();
