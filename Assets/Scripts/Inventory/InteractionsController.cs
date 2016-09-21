@@ -67,7 +67,7 @@ public class InteractionsController : MonoBehaviour
             #region Fora de Casa
             case "Porta Entrada":
 
-
+                gameController.ChangeToScene("Cena2-DentroDeCasa");
                 break;
             #endregion
 

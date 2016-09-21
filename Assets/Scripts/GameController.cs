@@ -242,8 +242,17 @@ public class GameController : MonoBehaviour
     InteractionsController interacController;
     AudioManager audioManager;
 
+    [Header("Diálogos")]
+    public VoicesManager vm;
+    public BackgroundMusicManager bgm;
+
     void Awake()
     {
+
+        //if (bgm == null)
+        //{
+        //    bgm = GameObject.FindWithTag("BGM").GetComponent<BackgroundMusicManager>();
+        //}
 
         if (gameObject.tag != "GameController")
             gameObject.tag = "GameController";
@@ -275,6 +284,12 @@ public class GameController : MonoBehaviour
         dialogManager = GameObject.FindGameObjectWithTag("DialogManager").GetComponent<DialogueBoxManager>();
         pensamentoM = gameObject.GetComponent<PensamentosManager>();
         interacController = gameObject.GetComponent<InteractionsController>();
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+
+        if (bgm == null)
+        {
+            bgm = GameObject.FindWithTag("BGM").GetComponent<BackgroundMusicManager>();
+        }
 
         StartCoroutine(FadeIn(0.0f, timeToFade));
         if (mobileHud == null)
@@ -397,7 +412,11 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
+
+        if(Input.GetKeyDown(KeyCode.F8))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
 
         if (onMobile)
         {
@@ -436,6 +455,7 @@ public class GameController : MonoBehaviour
         else if (SceneManager.GetActiveScene().name == "Cena1.1-ChegadaEmCasa")
         {
             cenaAtual = Cenas.ChegaEmCasaAposOvni;
+            bgm.SaiuDaCasaAposMeteoro();
             //playerBehav.HideLifeBar();
             playerBehav.DeveEsconderLifeBar1 = true;
         }        
@@ -476,11 +496,13 @@ public class GameController : MonoBehaviour
         {
             cenaAtual = Cenas.Quarentena;
             //playerBehav.HideLifeBar();
+            bgm.Quarentena();
             playerBehav.estaNaInstalacao = true;
             playerBehav.DeveEsconderLifeBar1 = true;
         }
         else if (SceneManager.GetActiveScene().name == "Cena6-Facility")
         {
+            bgm.Fugindo();
             playerBehav.estaNaInstalacao = true;
             cenaAtual = Cenas.Facility;
             //playerBehav.ShowLifeBar();
@@ -562,14 +584,14 @@ public class GameController : MonoBehaviour
                     DialogoInicialDentroCasa = true;
                     dialogManager.SetQuantidadeFalas(8);
                     //dialogManager.AdicionarFala(dialogManager.Filha.name, "PAPAI!");
-                    dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Filha.name, "PAPAI!",0.7f);
-                    dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Viktor.name, "Hahaha, boa noite filha, não deveria estar na sua cama?",0.7f);
-                    dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Filha.name, "Estávamos esperando você papai.", 0.6f);
-                    dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Esposa.name, "Oi querido. Foi tudo bem no trabalho?.", 0.6f);
-                    dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Viktor.name, "Olá, foi sim, mas, não precisavam me esperar até tão tarde.",0.8f);
-                    dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Esposa.name, "Tudo bem, a Emily queria te ver antes de dormir.", 0.7f);
-                    dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Esposa.name, "Leve ela pra cama mas antes traga um copo d’água pra mim amor. Estou com sede.",0.8f);
-                    dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Viktor.name, "Claro querida, só um minuto.",0.6f);
+                    dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Filha.name, "PAPAI!",1.0f);
+                    dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Viktor.name, "Hahaha, boa noite filha, não deveria estar na sua cama?", 1.3f);
+                    dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Filha.name, "Estávamos esperando você papai.", 1.2f);
+                    dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Esposa.name, "Oi querido. Foi tudo bem no trabalho?.", 1.0f);
+                    dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Viktor.name, "Olá, foi sim, mas, não precisavam me esperar até tão tarde.", 1.5f);
+                    dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Esposa.name, "Tudo bem, a Emily queria te ver antes de dormir.", 1.7f);
+                    dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Esposa.name, "Leve ela pra cama mas antes traga um copo d’água pra mim amor. Estou com sede.", 2.2f);
+                    dialogManager.AdicionarFalaSemConfirmacao(dialogManager.Viktor.name, "Claro querida, só um minuto.", 1.0f);
 
                     dialogManager.RealizarConversa();
                     DialogoInicialDentroCasa = true;

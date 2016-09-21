@@ -63,7 +63,7 @@ public class SoldierAI : MonoBehaviour
 
     [Header("Animações")]
     public Animator soldierAnimator;
-    private bool isAlive = true;
+    public bool isAlive = true;
 
     // Use this for initialization
     void Start()
@@ -459,6 +459,16 @@ public class SoldierAI : MonoBehaviour
 
     public void KillSoldier()
     {
+        if(player.transform.position.x < transform.position.x && isGoingRight)
+        {
+            Flip();
+        }
+
+        if (player.transform.position.x > transform.position.x && !isGoingRight)
+        {
+            Flip();
+        }
+
         Debug.LogWarning("Matar Soldado");
         isAlive = false;
         //desativar alertas

@@ -27,16 +27,34 @@ public class EnemyBehaviour : MonoBehaviour {
 	
 	}
 
+    void DesableAnimator()
+    {
+        GetComponent<Animator>().enabled = false;
+    }
+
     public void KillEnemy()
     {
-        if(doctor && doctorAi != null)
+        Debug.LogWarning("Kill enemy");
+
+        
+        GetComponent<Collider2D>().enabled = false;
+
+        if (doctor && doctorAi != null)
         {
+            Invoke("DesableAnimator", 1.8f);
+            //doctorAi.isAlive = false;
             doctorAi.KillDoctor();
+            doctorAi.enabled = false;
+            Destroy(doctorAi.gameObject.GetComponent("DoctorAI"));
         }
 
         if (soldier && soldierAi != null)
         {
+            Invoke("DesableAnimator", 1.0f);
+            soldierAi.isAlive = false;
             soldierAi.KillSoldier();
+            soldierAi.enabled = false;
+            Destroy(soldierAi.gameObject.GetComponent("SoldierAI"));
         }
     }
 }

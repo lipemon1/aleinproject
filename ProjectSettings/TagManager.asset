@@ -28,6 +28,8 @@ TagManager:
   - Pensamento/Panel
   - Enemy
   - PortaQuebravel
+  - SFX
+  - BGM
   layers:
   - Default
   - TransparentFX

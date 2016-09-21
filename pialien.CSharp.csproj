@@ -81,6 +81,9 @@
     <Compile Include="Assets\AI Pack\Scripts\DoctorAI.cs" />
     <Compile Include="Assets\AI Pack\Scripts\SoldierAI.cs" />
     <Compile Include="Assets\Dialogs\VoicesManager.cs" />
+    <Compile Include="Assets\Falar.cs" />
+    <Compile Include="Assets\Other Audios\Scripts\BackgroundMusicManager.cs" />
+    <Compile Include="Assets\Other Audios\Scripts\SfxManager.cs" />
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\ChangeCursorImage.cs" />
@@ -118,6 +121,7 @@
     <Compile Include="Assets\Scripts\Util\SphereGizmos.cs" />
     <Compile Include="Assets\Scripts\Util\SpriteOutline.cs" />
     <Compile Include="Assets\Scripts\bulletBehaviour.cs" />
+    <Compile Include="Assets\TriggerSoldados.cs" />
     <Compile Include="Assets\UnitySpritesAndBones-Tutorial\SpritesAndBones\Scripts\AnimationWindowUtils.cs" />
     <Compile Include="Assets\UnitySpritesAndBones-Tutorial\SpritesAndBones\Scripts\Bone.cs" />
     <Compile Include="Assets\UnitySpritesAndBones-Tutorial\SpritesAndBones\Scripts\ControlPoint.cs" />

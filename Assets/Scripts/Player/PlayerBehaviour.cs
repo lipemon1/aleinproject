@@ -59,6 +59,8 @@ public class PlayerBehaviour : MonoBehaviour
     public Transform punchLimit;
     public bool hitSomeEnemy;
     public Animator enemyAnimator;
+    public bool isAttacking = false;
+
     [Tooltip("controle para que só aplique dano no objeto dps do tempo da animação")]
     public bool podeLancarDano;
     public float tempoAnimacao;
@@ -195,9 +197,9 @@ public class PlayerBehaviour : MonoBehaviour
             PlayerMovement();
             if (estaNaInstalacao == true)
             {
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.Space) && !isAttacking)
                 {
-                    Attack();
+                        Attack();
                 }
             }
         }
@@ -235,8 +237,15 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+    void EnableAttack()
+    {
+        isAttacking = false;
+    }
+
     void Attack()
     {
+        isAttacking = true;
+        Invoke("EnableAttack", 1.5f);
         int punch;
         if (directionX != 0) //esta em movimento
         {

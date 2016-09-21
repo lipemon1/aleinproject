@@ -10,13 +10,23 @@ public class TriggerAcao : MonoBehaviour
     public Acoes acao;
     public bool jaFoiAtivado;
     GameController gm;
+    public SfxManager sfx;
+    public BackgroundMusicManager bgm;
 
     // Use this for initialization
     void Start()
     {
         jaFoiAtivado = false;
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        if (sfx == null)
+        {
+            sfx = GameObject.FindWithTag("SFX").GetComponent<SfxManager>();
+        }
 
+        if (bgm == null)
+        {
+            bgm = GameObject.FindWithTag("BGM").GetComponent<BackgroundMusicManager>();
+        }
     }
 
     // Update is called once per frame
@@ -39,6 +49,8 @@ public class TriggerAcao : MonoBehaviour
                     {
                         jaFoiAtivado = true;
                         gm.DerrubarOvni();
+                        sfx.PlaySfx(10, false);
+                        bgm.MeteoroCaiu();
                     }
                 }
 
@@ -49,7 +61,7 @@ public class TriggerAcao : MonoBehaviour
             if (jaFoiAtivado == false)
             {
                 jaFoiAtivado = true;
-                
+                bgm.StopAll();
                 gm.AproximouDoOvni();
                 Debug.LogWarning("AÇÃO DE QUANDO CHEGA PERTO DO OVNI CAI (CLIQUE DUAS VEZES NESSE AVISO PARA SABER ONDE ESTOU)");
             }

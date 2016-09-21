@@ -46,7 +46,7 @@ public class bulletBehaviour : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Eu bala, atingi ALGUMA COISA");
         if (other.gameObject.CompareTag("Player"))
@@ -64,7 +64,7 @@ public class bulletBehaviour : MonoBehaviour
 
     IEnumerator DestroyItSelf()
     {
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
 }

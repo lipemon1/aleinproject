@@ -20,6 +20,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000013456130664}
   - 212: {fileID: 212000013297075810}
+  - 61: {fileID: 61000010764482828}
+  - 114: {fileID: 114000012632827932}
   m_Layer: 0
   m_Name: PortaEnfeite
   m_TagString: Untagged
@@ -34,12 +36,41 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010415066878}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.54, y: 0.06, z: 1}
-  m_LocalScale: {x: 0.81646276, y: 0.81646276, z: 0.81646276}
+  m_LocalPosition: {x: 3.15, y: 0.59, z: 3}
+  m_LocalScale: {x: 0.81646276, y: 0.81646276, z: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!61 &61000010764482828
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010415066878}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0.013753276, y: -0.013752692}
+  serializedVersion: 2
+  m_Size: {x: 2.8680005, y: 5.190241}
+--- !u!114 &114000012632827932
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010415066878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b30f640b10486b4ea73f57fc97c4758, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myDescription: 
+  TemComentarioPlayer: 0
+  Comentarios:
+  - "N\xE3o preciso fazer nada la em cima"
 --- !u!212 &212000013297075810
 SpriteRenderer:
   m_ObjectHideFlags: 1

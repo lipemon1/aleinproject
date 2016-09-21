@@ -13,6 +13,10 @@ public class TextTyper : MonoBehaviour
     public bool onLoop = false;
     public bool clicouDnv = false;
 
+    public bool chamarVoz = false;
+    public bool burnedFirstVoice = false;
+    public VoicesManager vm;
+
 
     // Use this for initialization
     void Start()
@@ -44,7 +48,17 @@ public class TextTyper : MonoBehaviour
     IEnumerator TypeText()
     {
         //dialogManager.startTalk = false;
-
+        if (chamarVoz)
+        {
+            string fala = dialogManager.actualText;
+            if (!burnedFirstVoice)
+            {
+                vm.FalaSelecionada(fala);
+                burnedFirstVoice = true;
+                vm.FalaSelecionada(fala);
+            }
+            vm.FalaSelecionada(fala);
+        }
         foreach (char letter in dialogManager.actualText.ToCharArray())
         {
             if (onLoop == false)

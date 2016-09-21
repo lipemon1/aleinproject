@@ -88,6 +88,8 @@ public class DialogueBoxManager : MonoBehaviour
 
     public bool isConversa;
 
+    public VoicesManager vm;
+
     // Use this for initialization
     void Start()
     {
@@ -128,7 +130,7 @@ public class DialogueBoxManager : MonoBehaviour
 
     }
 
-    #region Gerar Falas
+    #region Gerar Falas Escrita
     /// QUANDO FOR CHAMAR ESSAS 3 FUNCOES PARA FALAR, CHAMAR NESSA ORDEM
     /// <summary>
     /// Seta a quantidade de falas que vai ter no dialogo
@@ -191,6 +193,7 @@ public class DialogueBoxManager : MonoBehaviour
 
     public void customComentary(Fala[] falas)
     {
+        int falaDublagem = indexBlocoConversas;
         actualText = "";
         //isComentary = true;
         Debug.LogWarning("Custom Comentary" + indexBlocoConversas);
@@ -232,12 +235,25 @@ public class DialogueBoxManager : MonoBehaviour
         }
 
         actualText = falas[indexBlocoConversas].texto; // o texto atual para ser falado recebe o texto da array
-        // o index dessa array é atualizado la pra baixo dentro da funcao OKPressed(), que é chamada quando o jogador clica no botao ok da UI
+                                                       // o index dessa array é atualizado la pra baixo dentro da funcao OKPressed(), que é chamada quando o jogador clica no botao ok da UI
+        if(falaDublagem != 7 && !gameController.mulherPediuAgua)
+        {
+            vm.PlayVoice(falaDublagem);
+        }
+
+        string sceneQuarto = "Cena4-QuartoFilha";
+
+        if(sceneQuarto != gameController.GetSceneName())
+        {
+            vm.FalaSelecionada(actualText);
+        }
+        
 
         textTyper.StartToSpeak();
         //Debug.LogWarning("MakeCUSTOMComentary()");
     }
 
+    
 
     public void MakeComentary(string texto, bool precisaConfirmacao, float tempoProximaFala)
     {
@@ -245,7 +261,6 @@ public class DialogueBoxManager : MonoBehaviour
         dialogObjects.CharacterNameText.text = playerDialog.name;
         //dialogObjects.characterSprite.sprite = iconPersonagem;
         //dialogObjects.CharacterNameText.text = namePersonagem;
-
 
         actualText = "";
         isComentary = true;

@@ -23,6 +23,7 @@ GameObject:
   - 61: {fileID: 61000010365693000}
   - 114: {fileID: 114000010949358914}
   - 114: {fileID: 114000013581777690}
+  - 114: {fileID: 114000012971734400}
   m_Layer: 0
   m_Name: Casa
   m_TagString: Untagged
@@ -69,9 +70,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myDescription: Entrada Casa
-  TemComentarioPlayer: 1
+  TemComentarioPlayer: 0
   Comentarios:
   - "\xC9 melhor eu entrar, esta ficando frio..."
+--- !u!114 &114000012971734400
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012660558664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df21e288e5b2e9d4f861d1aef3895cf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: Porta Entrada
+  spriteNeutral: {fileID: 0}
+  spriteHighlighted: {fileID: 0}
+  maxSize: 0
 --- !u!114 &114000013581777690
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -1,0 +1,18 @@
+Feito:
+sfx (mais ou menos)
+trilha sonora de fundo \o/
+dublagem \o/
+som de tiro \o/
+morrer quando chegar em 0 \o/
+quando morrer reiniciar cena \o/
+inteligencia soldado \o/
+medico chama soldado \o/
+só ataca um golpe de cada vez \o/
+colisao da cena da primeira casa \o/
+player tomar dano \o/
+
+A Fazer:
+nao consigo entrar no quarto da filha
+mudar pensamento nas cenas da instalação para escapar
+legendar mnsagem final do jogo
+na cena da sala médica mostrar que pode usar o ctrl e shift

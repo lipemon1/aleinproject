@@ -14,6 +14,8 @@ public class Cinematics : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+
         Cursor.visible = false;
         tempoCorrent = 0f;
 

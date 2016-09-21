@@ -862,7 +862,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 2b8b26994c9ee0844932c4f468f93067, type: 3}
   Eric:
     name: Eric
-    icon: {fileID: 21300000, guid: 522880b1c71427240b24e1224f67b86b, type: 3}
+    icon: {fileID: 21300000, guid: 05bc0f1ab109f2a429c88c93241a303a, type: 3}
   indexBlocoFala: 0
   indexBlocoConversas: 0
   falas: []
