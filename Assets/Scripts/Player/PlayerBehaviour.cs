@@ -82,6 +82,9 @@ public class PlayerBehaviour : MonoBehaviour
     public bool canSneak;
     public bool canAttack;
 
+
+    public AudioSource[] andarSfx;
+
     private bool readyToInteract;
     Vector2 clickedPosition;
     RaycastHit2D hit;
@@ -190,6 +193,8 @@ public class PlayerBehaviour : MonoBehaviour
             Life = 0;
             gameController.GameOver();
         }
+        AndarSfx();
+
     }
 
     // Update is called once per frame
@@ -585,5 +590,44 @@ public class PlayerBehaviour : MonoBehaviour
     public void GettinHit(bool hit)
     {
         gettinHit = hit;
+    }
+
+    void AndarSfx()
+    {
+        if (directionX != 0)
+        {
+            if (gameController.GetSceneName() == "Cena1-ChegadaEmCasa" || gameController.GetSceneName() == "Cena1.1-ChegadaEmCasa")
+            {
+                andarSfx[1].Stop();
+                if (!andarSfx[0].isPlaying)
+                {
+                    andarSfx[0].Play();
+                }
+            }
+            else
+            {
+                andarSfx[0].Stop();
+                if (!andarSfx[1].isPlaying)
+                {
+                    andarSfx[1].Play();
+                }
+            }
+        }
+        else
+        {
+            andarSfx[0].Stop();
+            andarSfx[1].Stop();
+        }
+
+        if (running)
+        {
+            andarSfx[0].pitch = 1.2f;
+            andarSfx[1].pitch = 1.2f;
+        }
+        else
+        {
+            andarSfx[0].pitch = 1.0f;
+            andarSfx[1].pitch = 1.0f;
+        }
     }
 }
